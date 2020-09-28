@@ -11,5 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //wieder normal
+        //das hier sind die Änderungen des recycling branches
     }
 }
