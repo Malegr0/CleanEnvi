@@ -1,12 +1,17 @@
 package com.example.cleanenvi;
 
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
+
+
 // JSON Einführung https://www.codeflow.site/de/article/java-org-json
 public class Openfoodfacts {
+
     public static void main(String EAN) {
         //String EAN;
 
@@ -39,11 +44,12 @@ public class Openfoodfacts {
             String[] Verpackung = splitInArray(Verpackungen);
 
 
-            System.out.println(Verpackungen);
-            System.out.println(EANCode);
-            System.out.println(Produktname);
-            System.out.println(Marke);
-            System.out.println("Verpackungen im Array ausgeben:");
+            //System.out.println(Verpackungen);
+            //System.out.println(EANCode);
+            //System.out.println(Produktname);
+            //System.out.println(Marke);
+            //System.out.println("Verpackungen im Array ausgeben:");
+
 
             for (int i = 0; i < (Verpackung.length); i++) {
 
@@ -52,6 +58,7 @@ public class Openfoodfacts {
             }
         }
     }
+
 
     public static String replaceResponse (String response) {
         char c = '%';
