@@ -1,6 +1,7 @@
 package com.example.cleanenvi;
 
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -111,16 +112,18 @@ public final class ProductSearchActivity extends AppCompatActivity {
             final String EANCode = splitResponse(ResponseMSt, "code");
             final String Produktname = splitResponse(ResponseMSt, "product_name");
             final String Marke = splitResponse(ResponseMSt, "brands");
+            final String Bild = splitResponse(ResponseMSt, "small%:{%en");
             final String[] Verpackung = splitInArray(Verpackungen);
 
 
-            //System.out.println(Verpackungen);
+            System.out.println(Bild);
             //System.out.println(EANCode);
             //System.out.println(Produktname);
             //System.out.println(Marke);
             //System.out.println("Verpackungen im Array ausgeben:");
             runOnUiThread(new Runnable() {
 
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
                     resultTxt.setText("Verpackungen: " + Verpackungen + "\n\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
