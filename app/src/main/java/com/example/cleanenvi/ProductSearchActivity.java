@@ -9,10 +9,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.cleanenvi.Openfoodfacts;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,6 +29,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
     String EAN;
     Button searchBtn;
     TextView resultTxt;
+    ImageView imageView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +43,15 @@ public final class ProductSearchActivity extends AppCompatActivity {
         TextEAN = findViewById(R.id.txtEAN);
 
         searchBtn = findViewById(R.id.searchbtn);
-
         watcher(productSearchEdit, searchBtn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
-                //TextEAN.setText(EAN);
                 setContentView(R.layout.product_show);
                 new OpenFoodFacts().execute();
             }
         });
     }
+
 
     void watcher(final EditText productSearchEdit, final Button searchBtn)
     {
@@ -81,11 +83,13 @@ public final class ProductSearchActivity extends AppCompatActivity {
             main(EAN);
             return null;
         }
-    }
-    public void main(String EAN) {
-        //String EAN;
 
-        //EAN = "4250350530047";
+    }
+
+
+    public void main(String EAN) {
+        imageView = findViewById(R.id.productImageView);
+
         //4008404001018
         resultTxt = findViewById(R.id.showResulttxt);
 
@@ -116,11 +120,11 @@ public final class ProductSearchActivity extends AppCompatActivity {
             final String[] Verpackung = splitInArray(Verpackungen);
 
 
-            System.out.println(Bild);
+            //System.out.println(Bild);
             //System.out.println(EANCode);
             //System.out.println(Produktname);
             //System.out.println(Marke);
-            //System.out.println("Verpackungen im Array ausgeben:");
+            //System.out.println("Verpackungen im Array ausgeben:")
             runOnUiThread(new Runnable() {
 
                 @SuppressLint("SetTextI18n")
@@ -128,9 +132,10 @@ public final class ProductSearchActivity extends AppCompatActivity {
                 public void run() {
                     resultTxt.setText("Verpackungen: " + Verpackungen + "\n\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
                     // Stuff that updates the UI
-
+                    Picasso.get().load("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Logo_BILD.svg/1000px-Logo_BILD.svg.png").resize(300,300).into(imageView);
                 }
             });
+
 
             for (int i = 0; i < (Verpackung.length); i++) {
 
