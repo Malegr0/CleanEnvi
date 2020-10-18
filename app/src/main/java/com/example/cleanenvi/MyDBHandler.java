@@ -7,30 +7,32 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHandler extends SQLiteOpenHelper {
+import androidx.appcompat.app.AppCompatActivity;
+
+
+public class MyDBHandler extends SQLiteOpenHelper {
+
+
+    // initialize the database
+
+    public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    }
 
     // information of database
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "ProduktDB.db";
-    public static final String TABLE_NAME = "Material";
-    public static final String COLUMN_ID = "prodname";
-    public static final String COLUMN_NAME = "entnum";
+    public static final String TABLE_NAME = "Student";
+    public static final String COLUMN_ID = "StudentID";
+    public static final String COLUMN_NAME = "StudentName";
 
-   /* private static final String DATABASE_NAME = "ProduktDB.db";
-    public static final String TABLE_NAME = "ProduktMat";
-    public static final String COLUMN_ID = "prodname";
-    public static final String COLUMN_NAME = "entnum";*/
-
-    // initialize the database
-    public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
-    }
 
     @Override
     /*Create a table
     column 1 datatype,
     column 2 dadatype,
     .... */
+
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE" + TABLE_NAME + "(" + COLUMN_ID + "INTEGER PRIMARYKEY," + COLUMN_NAME + "TEXT )";
         db.execSQL(CREATE_TABLE);
@@ -42,14 +44,14 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // select * from table
     public String loadHandler() {
-        String result = " ";
+        String result = "";
         String query = " Select * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             int result_0 = cursor.getInt(0);
             String result_1 = cursor.getString(1);
-            result += String.valueOf(result_0) + " " + result_1 + System.getProperty("line separator");
+            result = result + String.valueOf(result_0) + " " + result_1 + System.getProperty("line separator");
         }
         cursor.close();
         db.close();
@@ -57,32 +59,33 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addHandler(Produkt produkt) {
+    public void addHandler(Student student) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, produkt.getName());
-        values.put(COLUMN_NAME, produkt.getentnum());
+        values.put(COLUMN_ID, student.getID());
+        values.put(COLUMN_NAME, student.getStudentName());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
 
 
-    public Produkt findHandler(String entnum) {
+    public Student findHandler(String studentname) {
         String query = "Select * FROM " + TABLE_NAME + " WHERE "
-                + COLUMN_NAME + " = " + "'" + entnum + "'";
+                + COLUMN_NAME + " = " + "'" + studentname + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        Produkt produkt = new Produkt();
+        Student student = new Student();
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            produkt.setentnum(Integer.parseInt(cursor.getString(0)));
-            produkt.setName(cursor.getString(1));
+            String cursorpos = cursor.getString(0);
+            student.setID(Integer.parseInt(cursorpos));
+            student.setStudentName(cursor.getString(1));
             cursor.close();
         } else {
-            produkt = null;
+            student = null;
         }
         db.close();
-        return produkt;
+        return student;
     }
 
 
@@ -93,12 +96,12 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = " Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "= '" + String.valueOf(ID) + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        Produkt produkt = new Produkt();
+        Student student = new Student();
         if (cursor.moveToFirst()) {
-            produkt.setentnum(Integer.parseInt(cursor.getString(0)));
+            student.setID(Integer.parseInt(cursor.getString(0)));
             db.delete(TABLE_NAME, COLUMN_ID + "=?",
                     new String[]{
-                            String.valueOf(produkt.getentnum())
+                            String.valueOf(student.getID())
                     });
 
             cursor.close();
@@ -109,15 +112,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    /*public boolean updateHandler(int ID, String name) {
-        int gt;
+    public boolean updateHandler(int ID, String name) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put(COLUMN_ID, ID);
         args.put(COLUMN_NAME, name);
-                return db.update(TABLE_NAME, args, COLUMN_ID + "=" +ID, null)&gt; 0;
-    }*/
-
-
+        return db.update(TABLE_NAME, args, COLUMN_ID + "=" + ID, null) > 0;
+    }
 
 }
+
