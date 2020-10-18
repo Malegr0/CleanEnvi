@@ -6,23 +6,27 @@ public class Produkt {
     private int entnum;
 
     //constructors
-    public Produkt(){}
+
+
     public Produkt(String id, int entnum) {
         this.prodname = id;
         this.entnum = entnum;
     }
+
     //properties
     public void setName(String id) {
         this.prodname = id;
     }
-    public String getName(){
+
+    public String getName() {
         return this.prodname;
     }
 
     public void setentnum(int entnum) {
-        this.entnum= entnum;
+        this.entnum = entnum;
     }
-    public int getentnum () {
+
+    public int getentnum() {
         return this.entnum;
     }
 
