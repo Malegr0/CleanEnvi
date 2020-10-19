@@ -20,6 +20,9 @@
         <!--<activity android:name=".MainActivity" />-->
         <activity android:name=".ProductSearchActivity" />
         <activity android:name=".ProductShowActivity" />
+        <activity android:name=".DataMainActivity" />
+        <activity android:name=".EditDataActivity" />
+        <activity android:name=".ShowDataActivity" />
 
     </application>
 

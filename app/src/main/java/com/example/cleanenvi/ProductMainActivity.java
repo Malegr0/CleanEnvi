@@ -18,17 +18,18 @@ public final class ProductMainActivity extends AppCompatActivity {
         this.setContentView(R.layout.product_main);
         this.setTitle((CharSequence)"Produktsuche");
         Button searchproductbtn = findViewById(id.productSearchbtn);
-        Button databasebtn = findViewById(id.DatabaseBtn);
+        Button databasebtn = findViewById(id.databaseBtn);
 
         searchproductbtn.setOnClickListener(new OnClickListener() {
             public final void onClick(View it) {
                 ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, ProductSearchActivity.class));
             }
         });
-        /*databasebtn.setOnClickListener(new OnClickListener() {
+
+        databasebtn.setOnClickListener(new OnClickListener() {
             public final void onClick(View it) {
-                ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, SQLDatenbank.class));
+                ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, DataMainActivity.class));
             }
-        });*/
+        });
     }
 }

@@ -7,12 +7,12 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/EditFeld1"
+        android:id="@+id/column1Edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Verpackungsname"
         android:inputType="textPersonName"
-        android:text="Feld 1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -21,12 +21,12 @@
         app:layout_constraintVertical_bias="0.271" />
 
     <EditText
-        android:id="@+id/EditFeld2"
+        android:id="@+id/column2Edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Entsorgungsart"
         android:inputType="textPersonName"
-        android:text="Feld 2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -35,10 +35,10 @@
         app:layout_constraintVertical_bias="0.379" />
 
     <Button
-        android:id="@+id/buttonDel"
+        android:id="@+id/viewBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DELETE"
+        android:text="View Data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.687"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD"
@@ -58,14 +58,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
-    <TextView
-        android:id="@+id/Ausgabe1"
-        android:layout_width="279dp"
-        android:layout_height="168dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.721" />
 </androidx.constraintlayout.widget.ConstraintLayout>
