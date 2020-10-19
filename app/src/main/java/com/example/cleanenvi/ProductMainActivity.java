@@ -25,10 +25,10 @@ public final class ProductMainActivity extends AppCompatActivity {
                 ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, ProductSearchActivity.class));
             }
         });
-        databasebtn.setOnClickListener(new OnClickListener() {
+        /*databasebtn.setOnClickListener(new OnClickListener() {
             public final void onClick(View it) {
                 ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, SQLDatenbank.class));
             }
-        });
+        });*/
     }
 }
