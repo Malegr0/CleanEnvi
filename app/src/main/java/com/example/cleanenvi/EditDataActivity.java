@@ -16,12 +16,12 @@ public class EditDataActivity extends AppCompatActivity {
     private static final String TAG = "EditDataActivity";
 
     Button btnSave, btnDelete;
-    EditText editable_item;
+    EditText changeEdit;
 
-    DBHelper mDatabaseHelper;
+    DBHelper mDBHelper;
 
     private String selectedName;
-    String selectedeName;
+    String delName;
     private int selectedID;
 
 
@@ -32,8 +32,8 @@ public class EditDataActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.saveBtn);
         btnDelete = findViewById(R.id.delBtn);
-        editable_item = findViewById(R.id.changeEdit);
-        mDatabaseHelper = new DBHelper(this);
+        changeEdit = findViewById(R.id.changeEdit);
+        mDBHelper = new DBHelper(this);
 
         //get the intent extra from the ListDataActivity
         Intent receivedIntent = getIntent();
@@ -45,18 +45,18 @@ public class EditDataActivity extends AppCompatActivity {
         selectedName = receivedIntent.getStringExtra("name");
 
         //set the text to show the current selected name
-        editable_item.setText(selectedName);
+        changeEdit.setText(selectedName);
 
         //Testing own idea
 
-
+        //Button für das Ändern von Werten, nochmals überprüfen
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String item = editable_item.getText().toString();
-                if(!item.equals("")){
-                    mDatabaseHelper.updateName(item,selectedID,selectedName);
-                }else{
+                String change = changeEdit.getText().toString();
+                if(!change.equals("")){
+                    mDBHelper.updateName(change,selectedID,selectedName);
+                } else{
                     toastMessage("You must enter a name");
                 }
             }
@@ -65,21 +65,15 @@ public class EditDataActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //mDatabaseHelper.deleteName(selectedID,selectedName);
-                selectedeName = editable_item.getText().toString();
-                Log.d(TAG, "Delete: query: " + selectedeName);
-                mDatabaseHelper.deleteName(selectedeName);
-                editable_item.setText("");
+                delName = changeEdit.getText().toString();
+                Log.d(TAG, "Delete: query: " + delName);
+                mDBHelper.deleteName(delName);
+                changeEdit.setText("");
                 toastMessage("removed from database");
             }
         });
     }
 
-    /**
-     * customizable toast
-     * @param message
-     */
-    //public String testing2 = testing;
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }

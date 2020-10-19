@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,30 +15,30 @@ public class DataMainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    DBHelper mDatabaseHelper;
+    DBHelper mDBHelper;
     Button btnAdd, btnViewData, btnEdit;
-    EditText editText, editText2;
+    EditText nameEdit, idEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_main);
 
-        editText = findViewById(R.id.column1Edit);
-        editText2 = findViewById(R.id.column2Edit);
+        nameEdit = findViewById(R.id.column1Edit);
+        idEdit = findViewById(R.id.column2Edit);
         btnAdd = findViewById(R.id.addBtn);
         btnViewData = findViewById(R.id.viewBtn);
         btnEdit = findViewById(R.id.editBtn);
-        mDatabaseHelper = new DBHelper(this);
+        mDBHelper = new DBHelper(this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //String newEntry = editText.getText().toString();
-                if (editText.length() != 0) {
-                    AddData(editText.getText().toString(), editText2.getText().toString());
-                    editText.setText("");
-                    editText2.setText("");
+                if (nameEdit.length() != 0) {
+                    AddData(nameEdit.getText().toString(), idEdit.getText().toString());
+                    nameEdit.setText("");
+                    idEdit.setText("");
                 } else {
                     toastMessage("You must put something in the text field!");
                 }
@@ -49,8 +48,7 @@ public class DataMainActivity extends AppCompatActivity {
         btnViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DataMainActivity.this, ShowDataActivity.class);
-                startActivity(intent);
+                DataMainActivity.this.startActivity(new Intent((Context)DataMainActivity.this, ShowDataActivity.class));
             }
         });
 
@@ -62,8 +60,8 @@ public class DataMainActivity extends AppCompatActivity {
         });
     }
 
-    public void AddData(String newEntry, String newEntry2){
-        boolean insertData = mDatabaseHelper.addData(newEntry, newEntry2);
+    public void AddData(String Name, String ID){
+        boolean insertData = mDBHelper.addData(Name, ID);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");
@@ -71,11 +69,6 @@ public class DataMainActivity extends AppCompatActivity {
             toastMessage("Something went wrong");
         }
     }
-
-    /**
-     * customizable toast
-     * @param message
-     */
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
