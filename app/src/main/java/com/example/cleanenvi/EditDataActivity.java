@@ -3,6 +3,7 @@ package com.example.cleanenvi;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +15,15 @@ public class EditDataActivity extends AppCompatActivity {
 
     private static final String TAG = "EditDataActivity";
 
-    private Button btnSave, btnDelete;
-    private EditText editable_item;
+    Button btnSave, btnDelete;
+    EditText editable_item;
 
     DBHelper mDatabaseHelper;
 
     private String selectedName;
+    String selectedeName;
     private int selectedID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,9 @@ public class EditDataActivity extends AppCompatActivity {
         //set the text to show the current selected name
         editable_item.setText(selectedName);
 
+        //Testing own idea
+
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +65,10 @@ public class EditDataActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabaseHelper.deleteName(selectedID,selectedName);
+                //mDatabaseHelper.deleteName(selectedID,selectedName);
+                selectedeName = editable_item.getText().toString();
+                Log.d(TAG, "Delete: query: " + selectedeName);
+                mDatabaseHelper.deleteName(selectedeName);
                 editable_item.setText("");
                 toastMessage("removed from database");
             }
@@ -70,7 +79,7 @@ public class EditDataActivity extends AppCompatActivity {
      * customizable toast
      * @param message
      */
-
+    //public String testing2 = testing;
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }

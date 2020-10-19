@@ -1,5 +1,6 @@
 package com.example.cleanenvi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,8 +17,8 @@ public class DataMainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     DBHelper mDatabaseHelper;
-    private Button btnAdd, btnViewData;
-    private EditText editText, editText2;
+    Button btnAdd, btnViewData, btnEdit;
+    EditText editText, editText2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class DataMainActivity extends AppCompatActivity {
         editText2 = findViewById(R.id.column2Edit);
         btnAdd = findViewById(R.id.addBtn);
         btnViewData = findViewById(R.id.viewBtn);
+        btnEdit = findViewById(R.id.editBtn);
         mDatabaseHelper = new DBHelper(this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +51,13 @@ public class DataMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DataMainActivity.this, ShowDataActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataMainActivity.this.startActivity(new Intent((Context)DataMainActivity.this, EditDataActivity.class));
             }
         });
     }

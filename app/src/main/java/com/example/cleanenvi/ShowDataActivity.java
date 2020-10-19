@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class ShowDataActivity extends AppCompatActivity {
 
     TextView finalTxt;
@@ -23,13 +25,13 @@ public class ShowDataActivity extends AppCompatActivity {
 
     DBHelper mDatabaseHelper;
 
-    //private ListView mListView;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_ausgabe);
-        //mListView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.listing);
         mDatabaseHelper = new DBHelper(this);
 
         populateListView();
@@ -43,11 +45,11 @@ public class ShowDataActivity extends AppCompatActivity {
         Cursor data = mDatabaseHelper.getData();
 
         StringBuffer buffer = new StringBuffer();
-        //ArrayList<String> listData = new ArrayList<>();
+        ArrayList<String> listData = new ArrayList<>();
         while(data.moveToNext()){
             //get the value from the database in column 1
             //then add it to the ArrayList
-            //listData.add(data.getString(1));
+            listData.add(data.getString(1));
             buffer.append("Name: " + data.getString(0) + "\n");
             buffer.append("ReID: " + data.getString(1) + "\n\n");
         }

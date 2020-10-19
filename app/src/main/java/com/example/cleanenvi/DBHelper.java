@@ -7,6 +7,7 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.EditText;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -16,14 +17,19 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COL1 = "name";
     private static final String COL2 = "ReID";
 
+    EditText editable_item;
+
+
     public DBHelper(Context context){
         super(context, TABLE_NAME, null, 1);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (name TEXT PRIMARY KEY, " + COL2 + " TEXT)";
         db.execSQL(createTable);
+        //String testing = EditDataActivity.testing2;
     }
 
     @Override
@@ -100,13 +106,25 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param id
      * @param name
      */
-    public void deleteName(int id, String name){
+    /*public void deleteName(int id, String name){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME + " WHERE "
                 + COL1 + " = '" + id + "'" +
                 " AND " + COL2 + " = '" + name + "'";
         Log.d(TAG, "deleteName: query: " + query);
         Log.d(TAG, "deleteName: Deleting " + name + " from database.");
+        db.execSQL(query);
+    }*/
+
+
+
+
+    public void deleteName(String testing){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+                + COL1 + " = '" + testing + "'";
+        Log.d(TAG, "deleteName: query: " + query);
+        Log.d(TAG, "deleteName: Deleting " + testing + " from database.");
         db.execSQL(query);
     }
 }
