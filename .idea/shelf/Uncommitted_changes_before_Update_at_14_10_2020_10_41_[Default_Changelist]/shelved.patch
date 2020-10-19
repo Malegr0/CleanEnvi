@@ -1,0 +1,105 @@
+Index: app/src/main/java/com/example/cleanenvi/ProductSearchActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.cleanenvi;\r\n\r\n\r\nimport android.os.AsyncTask;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport com.example.cleanenvi.Openfoodfacts;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.InputStreamReader;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.URL;\r\n\r\n\r\npublic final class ProductSearchActivity extends AppCompatActivity {\r\n\r\n    EditText productSearchEdit;\r\n    TextView TextEAN;\r\n    String EAN;\r\n    Button searchBtn;\r\n    TextView resultTxt;\r\n\r\n\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n\r\n        super.onCreate(savedInstanceState);\r\n        this.setContentView(R.layout.product_search);\r\n        this.setTitle((CharSequence)\"Manuelle Produktsuche per Nummer\");\r\n\r\n\r\n        productSearchEdit =  findViewById(R.id.productSearchEdit);\r\n        TextEAN = findViewById(R.id.txtEAN);\r\n\r\n        searchBtn = findViewById(R.id.searchbtn);\r\n\r\n        watcher(productSearchEdit, searchBtn);\r\n        searchBtn.setOnClickListener(new View.OnClickListener() {\r\n            public final void onClick(View it) {\r\n                //TextEAN.setText(EAN);\r\n                setContentView(R.layout.product_show);\r\n                new OpenFoodFacts().execute();\r\n            }\r\n        });\r\n    }\r\n\r\n    void watcher(final EditText productSearchEdit, final Button searchBtn)\r\n    {\r\n        //final TextView txt = (TextView) findViewById(R.id.txtCounter);\r\n        productSearchEdit.addTextChangedListener(new TextWatcher()\r\n        {\r\n            public void afterTextChanged(Editable s)\r\n            {\r\n                //txt.setText(productSearchEdit.length() + \" / 160\"); //This is my textwatcher to update character left in my EditText\r\n                if(productSearchEdit.length() == 0)\r\n                    searchBtn.setEnabled(false); //Button disabled\r\n                else\r\n                    searchBtn.setEnabled(true);  //Button enabled\r\n                EAN = productSearchEdit.getText().toString();\r\n\r\n            }\r\n            public void beforeTextChanged(CharSequence s, int start, int count, int after){\r\n            }\r\n            public void onTextChanged(CharSequence s, int start, int before, int count){\r\n            }\r\n        });\r\n        if(productSearchEdit.length() == 0) searchBtn.setEnabled(false);//Am Anfang wird Button disabled\r\n    }\r\n\r\n    private class OpenFoodFacts extends AsyncTask<Void, Void, Void> {\r\n\r\n        @Override\r\n        protected Void doInBackground(Void... voids) {\r\n            main(EAN);\r\n            return null;\r\n        }\r\n    }\r\n    public void main(String EAN) {\r\n        //String EAN;\r\n\r\n        //EAN = \"4250350530047\";\r\n        //4008404001018\r\n        resultTxt = findViewById(R.id.showResulttxt);\r\n\r\n        //URL für Abfrage erstellen\r\n        String query_url = makeURL(EAN);\r\n\r\n        //URL an API senden und JSON empfangen\r\n        String JSONResponsevollstaendig = getJSON(query_url);\r\n\r\n        //JSON alle \" gegen % tauschen\r\n        String ResponseMSt = replaceResponse(JSONResponsevollstaendig);\r\n        System.out.println(ResponseMSt);\r\n\r\n        // JSON aufteilen in einzelne Strings mit den gewünschten Daten\r\n        // Wenn EAN nicht gefunden wurde, wird eine entsprechende Meldung gegeben. Dafür wird als erstes der \"Status\" in der JSON gesucht und ausgwertet.\r\n        String ProductAvailable = checkResponse(ResponseMSt);\r\n        System.out.println(\"Produkt vorhanden:_\" + ProductAvailable + \"_\");\r\n        if (ProductAvailable.equals(\"0\")) {\r\n            System.out.println(\"Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch.\");\r\n        }\r\n\r\n        else {\r\n            final String Verpackungen = splitResponse(ResponseMSt, \"packaging\");\r\n            final String EANCode = splitResponse(ResponseMSt, \"code\");\r\n            final String Produktname = splitResponse(ResponseMSt, \"product_name\");\r\n            final String Marke = splitResponse(ResponseMSt, \"brands\");\r\n            final String[] Verpackung = splitInArray(Verpackungen);\r\n\r\n\r\n            //System.out.println(Verpackungen);\r\n            //System.out.println(EANCode);\r\n            //System.out.println(Produktname);\r\n            //System.out.println(Marke);\r\n            //System.out.println(\"Verpackungen im Array ausgeben:\");\r\n            runOnUiThread(new Runnable() {\r\n\r\n                @Override\r\n                public void run() {\r\n                    resultTxt.setText(\"Verpackungen: \" + Verpackungen + \"\\n\\n\" + \"EANCode: \" + EANCode + \"\\n\\n\" + \"Produkt: \" + Produktname + \"\\n\\n\" + \"Marke: \" + Marke);\r\n                    // Stuff that updates the UI\r\n\r\n                }\r\n            });\r\n\r\n            for (int i = 0; i < (Verpackung.length); i++) {\r\n\r\n                System.out.println(Verpackung[i]);\r\n\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n    public static String replaceResponse (String response) {\r\n        char c = '%';\r\n        String ResponseMSt = response.replace('\"', c);\r\n        System.out.println(ResponseMSt);\r\n        return ResponseMSt;\r\n    }\r\n\r\n    public static String makeURL(String EAN) {\r\n        String url, openfoodfactsurl;\r\n        openfoodfactsurl = \"https://world.openfoodfacts.org/api/v0/product/\";\r\n        url = openfoodfactsurl.concat(EAN);\r\n        url = url.concat(\".json\");\r\n\r\n        System.out.println(\"query_url= \" + url);\r\n        return url;\r\n    }\r\n\r\n    public static String getJSON(String query_url) {\r\n        String JSONResponse = \" \";\r\n\r\n        try {\r\n            URL obj = new URL(query_url);\r\n            HttpURLConnection connget = (HttpURLConnection) obj.openConnection();\r\n\r\n            int responseCode = connget.getResponseCode();\r\n            System.out.println(\"Sending Get Request to URL: \" + query_url);\r\n            System.out.println(\"Response Code: \" + responseCode);\r\n            if (responseCode != 200) {\r\n                System.out.println(\"Es gab einen Fehler bei der Verbindung, Fehlercode:\" + responseCode);\r\n\r\n            } else {\r\n                BufferedReader in;\r\n                in = new BufferedReader(\r\n                        new InputStreamReader(connget.getInputStream()));\r\n                String inputLine;\r\n                StringBuffer response = new StringBuffer();\r\n                while ((inputLine = in.readLine()) != null) {\r\n                    response.append(inputLine);\r\n                }\r\n                in.close();\r\n                //System.out.println(response.toString());\r\n                JSONResponse = response.toString();\r\n                //System.out.println(JSONResponse);\r\n            }\r\n        } catch (Exception e) {\r\n            System.out.println(e);\r\n        }\r\n\r\n        return JSONResponse;\r\n    }\r\n\r\n    public static String checkResponse(String ResponseMSt) {\r\n\r\n        //Such String erstellen\r\n        String searchString = \"status%:\";\r\n\r\n        System.out.println(\"SearchString: \" + searchString);\r\n        System.out.println(ResponseMSt);\r\n        String Verpackung = \"#\";\r\n\r\n\r\n        //Vorne abschneiden\r\n\r\n        for (int i = 0; i < (ResponseMSt.indexOf(searchString)); i++) {\r\n            Verpackung = ResponseMSt.substring(ResponseMSt.indexOf(searchString) + searchString.length());\r\n        }\r\n        //System.out.println(Verpackung);\r\n        //hinten abschneiden\r\n\r\n        String[] arrOfStr = Verpackung.split(\",\");\r\n        Verpackung = arrOfStr[0];\r\n        //System.out.println(Verpackung);\r\n        return Verpackung;\r\n    }\r\n\r\n    public static String splitResponse(String ResponseMSt, String suchString) {\r\n\r\n        //Such String erstellen\r\n        String searchString = \"%\";\r\n        searchString = searchString.concat(suchString);\r\n        searchString = searchString.concat(\"%:%\");\r\n        String Verpackung = \"#\";\r\n\r\n\r\n        //Vorne abschneiden\r\n\r\n        for (int i = 0; i < (ResponseMSt.indexOf(searchString)); i++) {\r\n            Verpackung = ResponseMSt.substring(ResponseMSt.indexOf(searchString) + searchString.length());\r\n        }\r\n        //System.out.println(Verpackung);\r\n        //hinten abschneiden\r\n\r\n        String[] arrOfStr = Verpackung.split(\"%\");\r\n        Verpackung = arrOfStr[0];\r\n        //System.out.println(Verpackung);\r\n        return Verpackung;\r\n    }\r\n\r\n    public static String[] splitInArray(String verpackung_string) {\r\n        String[] verpackung_array;\r\n\r\n\r\n        verpackung_array = verpackung_string.split(\",\");\r\n\r\n        return verpackung_array;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/cleanenvi/ProductSearchActivity.java	(revision feb3afd1f5c847933b0eca0e5d0f2172e070dee3)
++++ app/src/main/java/com/example/cleanenvi/ProductSearchActivity.java	(date 1602664095652)
+@@ -1,6 +1,7 @@
+ package com.example.cleanenvi;
+ 
+ 
++import android.annotation.SuppressLint;
+ import android.os.AsyncTask;
+ import android.os.Bundle;
+ import android.text.Editable;
+@@ -82,9 +83,7 @@
+         }
+     }
+     public void main(String EAN) {
+-        //String EAN;
+ 
+-        //EAN = "4250350530047";
+         //4008404001018
+         resultTxt = findViewById(R.id.showResulttxt);
+ 
+@@ -121,6 +120,7 @@
+             //System.out.println("Verpackungen im Array ausgeben:");
+             runOnUiThread(new Runnable() {
+ 
++                @SuppressLint("SetTextI18n")
+                 @Override
+                 public void run() {
+                     resultTxt.setText("Verpackungen: " + Verpackungen + "\n\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nbuildscript {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n    dependencies {\r\n        classpath \"com.android.tools.build:gradle:4.0.1\"\r\n\r\n        // NOTE: Do not place your application dependencies here; they belong\r\n        // in the individual module build.gradle files\r\n    }\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        google()\r\n        jcenter()\r\n    }\r\n}\r\n\r\ntask clean(type: Delete) {\r\n    delete rootProject.buildDir\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision feb3afd1f5c847933b0eca0e5d0f2172e070dee3)
++++ build.gradle	(date 1602661754967)
+@@ -5,7 +5,7 @@
+         jcenter()
+     }
+     dependencies {
+-        classpath "com.android.tools.build:gradle:4.0.1"
++        classpath 'com.android.tools.build:gradle:4.1.0'
+ 
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision feb3afd1f5c847933b0eca0e5d0f2172e070dee3)
++++ .idea/gradle.xml	(date 1602661733811)
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Sep 24 14:48:11 CEST 2020\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.1.1-all.zip\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision feb3afd1f5c847933b0eca0e5d0f2172e070dee3)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1602661754989)
+@@ -1,6 +1,6 @@
+-#Thu Sep 24 14:48:11 CEST 2020
++#Wed Oct 14 09:49:14 CEST 2020
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision feb3afd1f5c847933b0eca0e5d0f2172e070dee3)
++++ .idea/misc.xml	(date 1602661733765)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
