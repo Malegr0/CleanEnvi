@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cleanenvi.DBHelper;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DataMainActivity extends AppCompatActivity {
@@ -48,6 +50,7 @@ public class DataMainActivity extends AppCompatActivity {
         btnViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDBHelper.addData("En-green-dot","6" );
                 DataMainActivity.this.startActivity(new Intent((Context)DataMainActivity.this, ShowDataActivity.class));
             }
         });
