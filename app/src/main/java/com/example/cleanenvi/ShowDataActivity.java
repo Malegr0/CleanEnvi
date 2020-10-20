@@ -35,11 +35,12 @@ public class ShowDataActivity extends AppCompatActivity {
         StringBuffer buffer = new StringBuffer();
         while(data.moveToNext()){
             buffer.append("Name: " + data.getString(0) + "\n");
-            buffer.append("ReID: " + data.getString(1) + "\n\n");
+            buffer.append("ReID: " + data.getString(1) + "\n");
         }
         dataTxt.setText(buffer.toString());
     }
 
+    //Nachrichten für den Nutzer
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }

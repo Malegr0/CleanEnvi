@@ -36,20 +36,20 @@ public class EditDataActivity extends AppCompatActivity {
         mDBHelper = new DBHelper(this);
 
         //get the intent extra from the ListDataActivity
-        Intent receivedIntent = getIntent();
+        //Intent receivedIntent = getIntent();
 
         //now get the itemID we passed as an extra
-        selectedID = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
+        //selectedID = receivedIntent.getIntExtra("id",-1); //NOTE: -1 is just the default value
 
         //now get the name we passed as an extra
-        selectedName = receivedIntent.getStringExtra("name");
+        //selectedName = receivedIntent.getStringExtra("name");
 
         //set the text to show the current selected name
         changeEdit.setText(selectedName);
 
         //Testing own idea
 
-        //Button für das Ändern von Werten, nochmals überprüfen
+        //Button für das Ändern von Werten, nochmals überprüfen, funktioniert nicht mehr
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +74,7 @@ public class EditDataActivity extends AppCompatActivity {
         });
     }
 
+    //Nachrichten für den Nutzer
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }

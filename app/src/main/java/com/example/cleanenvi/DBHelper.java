@@ -25,6 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    //Erstelle Datenabnk mit Spalten+Namen
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (name TEXT PRIMARY KEY, " + COL2 + " TEXT)";
         db.execSQL(createTable);
@@ -36,6 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //Füge Eintrag in Datenbank hinzu
     public boolean addData(String Name, String ReID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues dbValues = new ContentValues();
@@ -46,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_NAME, null, dbValues);
 
-        //if date as inserted incorrectly it will return -1
+        //if data is inserted incorrectly it will return -1
         if (result == -1) {
             return false;
         } else {
