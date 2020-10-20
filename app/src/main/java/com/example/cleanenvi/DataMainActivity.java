@@ -50,7 +50,6 @@ public class DataMainActivity extends AppCompatActivity {
         btnViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDBHelper.addData("En-green-dot","6" );
                 DataMainActivity.this.startActivity(new Intent((Context)DataMainActivity.this, ShowDataActivity.class));
             }
         });
