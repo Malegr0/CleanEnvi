@@ -30,14 +30,14 @@ public class ShowDataActivity extends AppCompatActivity {
         Log.d(TAG, "showData: Displaying data in the TextView.");
 
         //get the data and append to a buffer
-        Cursor data = mDBHelper.getData();
+        /*Cursor data = mDBHelper.getData();
 
         StringBuffer buffer = new StringBuffer();
         while(data.moveToNext()){
             buffer.append("Name: " + data.getString(0) + "\n");
             buffer.append("ReID: " + data.getString(1) + "\n");
         }
-        dataTxt.setText(buffer.toString());
+        dataTxt.setText(buffer.toString());*/
     }
 
     //Nachrichten für den Nutzer

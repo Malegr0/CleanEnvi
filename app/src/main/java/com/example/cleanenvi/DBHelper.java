@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    //Erstelle Datenabnk mit Spalten+Namen
+    //Erstelle Datenbank mit Spalten+Namen
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (name TEXT PRIMARY KEY, " + COL2 + " TEXT)";
         db.execSQL(createTable);
@@ -33,6 +33,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+
+    public void delTable(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
@@ -57,9 +62,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Daten von der Datenbank abfragen
-    public Cursor getData(){
+    public Cursor getData(String Name){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + Name + "'";
+        //
         Cursor data = db.rawQuery(query, null);
         return data;
     }

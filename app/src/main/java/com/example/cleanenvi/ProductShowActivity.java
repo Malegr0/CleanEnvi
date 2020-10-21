@@ -3,6 +3,7 @@ package com.example.cleanenvi;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -24,13 +25,21 @@ public class ProductShowActivity extends AppCompatActivity {
     String EAN;
     Button backBtn;
     TextView resultTxt;
+    TextView testingTxt;
     ImageView imageView;
+    DBHelper mDBHelper;
+
+    String reID;
+    String Entsorgung ="";
+
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_show);
         this.setTitle((CharSequence)"Manuelle Produktsuche per Nummer");
+        mDBHelper = new DBHelper(this);
+
 
         //speichert Ergebnis der Eingabe aus der anderen Activity
         EAN = ProductSearchActivity.EAN;
@@ -62,6 +71,7 @@ public class ProductShowActivity extends AppCompatActivity {
     //Methode für API-Anfrage
     public void main(String EAN) {
 
+
         imageView = findViewById(R.id.productImageView);
         resultTxt = findViewById(R.id.showResulttxt);
         backBtn = findViewById(R.id.back);
@@ -81,16 +91,24 @@ public class ProductShowActivity extends AppCompatActivity {
         String ProductAvailable = checkResponse(ResponseMSt);
         System.out.println("Produkt vorhanden:_" + ProductAvailable + "_");
         if (ProductAvailable.equals("0")) {
-            System.out.println("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch.");
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch.");
+                }
+            });
+
         }
 
         else {
             final String Verpackungen = splitResponse(ResponseMSt, "packaging");
+            final String Packung = Verpackungen.toUpperCase();
             final String EANCode = splitResponse(ResponseMSt, "code");
             final String Produktname = splitResponse(ResponseMSt, "product_name");
             final String Marke = splitResponse(ResponseMSt, "brands");
             final String Bild = splitResponse(ResponseMSt, "image_url");
-            final String[] Verpackung = splitInArray(Verpackungen);
+            final String[] Verpackung = splitInArray(Packung);
+
 
 
             /*System.out.println("String vom Bild: " + Bild);
@@ -100,6 +118,9 @@ public class ProductShowActivity extends AppCompatActivity {
             System.out.println("Verpackungen im Array ausgeben:")*/
 
             //Änderungen die im MainThread ausgeführt werden müssen
+                //foo(testName, testID);
+                //System.out.println("Dies ist ein Testlauf: " + testName.length + "Dies ein andere: " + testID.length);
+
             runOnUiThread(new Runnable() {
 
                 @SuppressLint("SetTextI18n")
@@ -107,18 +128,61 @@ public class ProductShowActivity extends AppCompatActivity {
                 public void run() {
 
                     //zeigt dem User Bild des Produkts  an
-                    Picasso.get().load(Bild).resize(300,300).into(imageView);
+                    Picasso.get().load(Bild).into(imageView);
+                    //resize(500,500).
                     imageView.setVisibility(View.VISIBLE);
-                    resultTxt.setText("Verpackungen: " + Verpackungen + "\n\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+
+                    for (int i = 0; i < (Verpackung.length); i++) {
+                        Cursor data = mDBHelper.getData(Verpackung[i]);
+                        StringBuilder buffer = new StringBuilder();
+                        while (data.moveToNext()) {
+                            buffer.append(data.getString(1));
+                        }
+                        reID = buffer.toString();
+
+                        switch (reID) {
+                            case "1":
+                                Entsorgung = Entsorgung + Verpackung[i] + "= Wertstofftonne oder Gelber Sack" + "\n";
+                                //System.out.println(Entsorgung);
+                                break;
+                            case "2":
+                                Entsorgung = Entsorgung + Verpackung[i] + "= Schwarze Tonne" + "\n";
+                                //System.out.println(Entsorgung);
+                                break;
+                            case "3":
+                                Entsorgung = Entsorgung + Verpackung[i] + "= Blaue Tonne" + "\n";
+                                //System.out.println(Entsorgung);
+                                break;
+                            case "4":
+                                Entsorgung = Entsorgung + Verpackung[i] + "= Glascontainer" + "\n";
+                                //System.out.println(Entsorgung);
+                                break;
+                            case "5":
+                                Entsorgung = Entsorgung + Verpackung[i] + "= Pfandannahmestellen im Handel" + "\n";
+                                //System.out.println(Entsorgung);
+                                break;
+                            case "6":
+                                Entsorgung = Entsorgung + Verpackung[i] + "= keinem Material zuordbar" + "\n";
+                                //System.out.println(Entsorgung);
+                                break;
+                            default:
+                                break;
+                        }
+                        reID ="";
+                    }
+
+                    resultTxt.setText("Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
                 }
             });
 
+
+
             //Verpackung im Array anzeigen lassen
-            for (int i = 0; i < (Verpackung.length); i++) {
+            /*for (int i = 0; i < (Verpackung.length); i++) {
 
                 System.out.println(Verpackung[i]);
 
-            }
+            }*/
         }
     }
 
@@ -226,7 +290,17 @@ public class ProductShowActivity extends AppCompatActivity {
 
         verpackung_array = verpackung_string.split(",");
 
+        for (int i = 0; i < (verpackung_array.length); i++) {
+            verpackung_array[i] = verpackung_array[i].trim();
+            //String test = verpackung_array[1];
+            //test= test.trim();
+            //System.out.println(test);
+            //System.out.println(verpackung_array[i]);
+            //System.out.println("This is a test");
+            }
+
         return verpackung_array;
     }
+
 
 }

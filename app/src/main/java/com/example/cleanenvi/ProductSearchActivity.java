@@ -19,6 +19,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
     EditText productSearchEdit;
     public static String EAN;
     Button searchBtn;
+    DBHelper mDBHelper;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public final class ProductSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_search);
         this.setTitle((CharSequence)"Manuelle Produktsuche per Nummer");
+        mDBHelper = new DBHelper(this);
+
+
 
 
         productSearchEdit =  findViewById(R.id.productSearchEdit);
