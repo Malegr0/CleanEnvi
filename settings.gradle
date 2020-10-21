@@ -1,2 +1,3 @@
+include ':mapbox-android-sdk-9.5.0'
 include ':app'
 rootProject.name = "CleanEnvi"

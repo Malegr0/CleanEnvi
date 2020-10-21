@@ -33,9 +33,7 @@ dependencies {
 
     //mapbox maps
     //implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
-    implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0') {
-        exclude group: 'debugUnitTest', module: 'app'
-    }
+    implementation project(':mapbox-android-sdk-9.5.0')
 
     //mapbox maps for user location access
     implementation 'com.mapbox.mapboxsdk:mapbox-android-core:3.1.0'
