@@ -126,6 +126,7 @@ public class ProductShowActivity extends AppCompatActivity {
         System.out.println("Produkt vorhanden:_" + ProductAvailable + "_");
         if (ProductAvailable.equals("0")) {
             runOnUiThread(new Runnable() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
                     resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch.");

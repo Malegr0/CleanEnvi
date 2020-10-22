@@ -91,6 +91,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
 
+
                     barcodeText.post(new Runnable() {
 
                         @Override
