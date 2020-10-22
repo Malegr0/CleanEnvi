@@ -29,13 +29,14 @@ public class CameraMainActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private TextView barcodeText;
     private String barcodeData;
-    public static String EANcam;
+    public static String EANcamera, EANcam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.camera_main);
         cameraView = findViewById(R.id.camera_view);
+        barcodeText = findViewById(R.id.barcode_text);
         initialiseDetectorsAndSources();
     }
 
@@ -90,28 +91,23 @@ public class CameraMainActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
 
-
                     barcodeText.post(new Runnable() {
 
                         @Override
                         public void run() {
 
-                            if (barcodes.valueAt(0).email != null) {
+                            if(barcodes.valueAt(0).email != null) {
                                 barcodeText.removeCallbacks(null);
                                 barcodeData = barcodes.valueAt(0).email.address;
-                                barcodeText.setText(barcodeData);
-                                EANcam = barcodeText.toString();
-                                EANcam = EANcam.trim();
-                                CameraMainActivity.this.startActivity(new Intent((Context)CameraMainActivity.this, ProductShowActivity.class));
                             } else {
 
                                 barcodeData = barcodes.valueAt(0).displayValue;
-                                barcodeText.setText(barcodeData);
-                                EANcam = barcodeText.toString();
-                                EANcam = EANcam.trim();
-                                CameraMainActivity.this.startActivity(new Intent((Context)CameraMainActivity.this, ProductShowActivity.class));
 
                             }
+                            barcodeText.setText(barcodeData);
+                            EANcam = barcodeData;
+                            EANcamera = EANcam.trim();
+                            CameraMainActivity.this.startActivity(new Intent((Context)CameraMainActivity.this, ProductShowActivity.class));
                         }
                     });
 
