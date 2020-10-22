@@ -23,7 +23,6 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".CameraMainActivity">
         <activity android:name=".ProductMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +36,7 @@
         <activity android:name=".DataMainActivity" />
         <activity android:name=".EditDataActivity" />
         <activity android:name=".ShowDataActivity" />
+        <activity android:name=".CameraMainActivity" />
 
     </application>
 
