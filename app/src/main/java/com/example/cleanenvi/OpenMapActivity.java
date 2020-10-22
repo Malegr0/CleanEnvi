@@ -20,7 +20,7 @@ public class OpenMapActivity extends AppCompatActivity {
 
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_openmap);
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
