@@ -1,6 +1,8 @@
 package com.example.cleanenvi;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -27,6 +29,7 @@ public class CameraMainActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private TextView barcodeText;
     private String barcodeData;
+    public static String EANcam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +101,14 @@ public class CameraMainActivity extends AppCompatActivity {
                                 barcodeText.removeCallbacks(null);
                                 barcodeData = barcodes.valueAt(0).email.address;
                                 barcodeText.setText(barcodeData);
+                                EANcam = barcodeText.toString();
+                                CameraMainActivity.this.startActivity(new Intent((Context)CameraMainActivity.this, ProductShowActivity.class));
                             } else {
 
                                 barcodeData = barcodes.valueAt(0).displayValue;
                                 barcodeText.setText(barcodeData);
+                                EANcam = barcodeText.toString();
+                                CameraMainActivity.this.startActivity(new Intent((Context)CameraMainActivity.this, ProductShowActivity.class));
 
                             }
                         }

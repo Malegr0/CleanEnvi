@@ -24,7 +24,7 @@ import java.net.URL;
 
 public class ProductShowActivity extends AppCompatActivity {
 
-    String EAN;
+    String EAN, EANcam;
     Button backBtn;
     TextView resultTxt;
     TextView testingTxt;
@@ -46,6 +46,7 @@ public class ProductShowActivity extends AppCompatActivity {
 
         //speichert Ergebnis der Eingabe aus der anderen Activity
         EAN = ProductSearchActivity.EAN;
+        EANcam = CameraMainActivity.EANcam;
         backBtn = findViewById(R.id.back);
 
 
@@ -66,7 +67,11 @@ public class ProductShowActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            main(EAN);
+            if (EAN == null){
+                main(EANcam);
+            } else {
+                main(EAN);
+            }
             return null;
         }
 
