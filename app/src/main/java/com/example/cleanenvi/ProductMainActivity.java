@@ -42,7 +42,6 @@ public final class ProductMainActivity extends AppCompatActivity {
         //Initalisierung der Datenbankeinträge
         mDBHelper.delTable(db);
         foo(testName, testID);
-        System.out.println(testName.length + ":" + testID.length);
 
         searchproductbtn.setOnClickListener(new OnClickListener() {
             public final void onClick(View it) {

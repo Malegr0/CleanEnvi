@@ -1,6 +1,7 @@
 package com.example.cleanenvi;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -26,9 +28,10 @@ public class ProductShowActivity extends AppCompatActivity {
     Button backBtn;
     TextView resultTxt;
     TextView testingTxt;
-    ImageView imageView;
+    ImageView proimageView;
     DBHelper mDBHelper;
 
+    ProgressDialog nDialog, mDialog;
     String reID;
     String Entsorgung ="";
 
@@ -44,6 +47,7 @@ public class ProductShowActivity extends AppCompatActivity {
         //speichert Ergebnis der Eingabe aus der anderen Activity
         EAN = ProductSearchActivity.EAN;
         backBtn = findViewById(R.id.back);
+
 
         // Methodenaufruf für API-Anfrage
         new OpenFoodFacts().execute();
@@ -71,8 +75,19 @@ public class ProductShowActivity extends AppCompatActivity {
     //Methode für API-Anfrage
     public void main(String EAN) {
 
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                nDialog = new ProgressDialog(ProductShowActivity.this);
+                nDialog.setMessage("Bitte warten..");
+                nDialog.setTitle("Anfrage senden");
+                nDialog.setIndeterminate(false);
+                nDialog.setCancelable(true);
+                nDialog.show();
+            }
+        });
 
-        imageView = findViewById(R.id.productImageView);
+        proimageView = findViewById(R.id.productImageView);
         resultTxt = findViewById(R.id.showResulttxt);
         backBtn = findViewById(R.id.back);
 
@@ -82,19 +97,35 @@ public class ProductShowActivity extends AppCompatActivity {
         //URL an API senden und JSON empfangen
         String JSONResponsevollstaendig = getJSON(query_url);
 
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mDialog = new ProgressDialog(ProductShowActivity.this);
+                mDialog.setMessage("Bitte warten (Ladezeit abhängig vom Produkt)..");
+                mDialog.setTitle("Daten verarbeiten");
+                mDialog.setIndeterminate(false);
+                mDialog.setCancelable(true);
+                mDialog.show();
+            }
+        });
+
         //JSON alle " gegen % tauschen
         String ResponseMSt = replaceResponse(JSONResponsevollstaendig);
         System.out.println(ResponseMSt);
 
         // JSON aufteilen in einzelne Strings mit den gewünschten Daten
-        // Wenn EAN nicht gefunden wurde, wird eine entsprechende Meldung gegeben. Dafür wird als erstes der "Status" in der JSON gesucht und ausgwertet.
+        // Wenn EAN nicht gefunden wurde, wird eine entsprechende Meldung gegeben. Dafür wird als erstes der "Status" in der JSON gesucht und ausgewertet.
         String ProductAvailable = checkResponse(ResponseMSt);
+
         System.out.println("Produkt vorhanden:_" + ProductAvailable + "_");
         if (ProductAvailable.equals("0")) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch.");
+                    nDialog.dismiss();
+                    mDialog.dismiss();
                 }
             });
 
@@ -128,9 +159,9 @@ public class ProductShowActivity extends AppCompatActivity {
                 public void run() {
 
                     //zeigt dem User Bild des Produkts  an
-                    Picasso.get().load(Bild).into(imageView);
+                    Picasso.get().load(Bild).into(proimageView);
                     //resize(500,500).
-                    imageView.setVisibility(View.VISIBLE);
+                    proimageView.setVisibility(View.VISIBLE);
 
                     for (int i = 0; i < (Verpackung.length); i++) {
                         Cursor data = mDBHelper.getData(Verpackung[i]);
@@ -171,7 +202,9 @@ public class ProductShowActivity extends AppCompatActivity {
                         reID ="";
                     }
 
-                    resultTxt.setText("Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+                    nDialog.dismiss();
+                    mDialog.dismiss();
+                    resultTxt.setText("Bei PET bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
                 }
             });
 
@@ -242,6 +275,7 @@ public class ProductShowActivity extends AppCompatActivity {
     public static String checkResponse(String ResponseMSt) {
 
         //Such String erstellen
+        //String searchString = "status%:";
         String searchString = "status%:";
 
         System.out.println("SearchString: " + searchString);
