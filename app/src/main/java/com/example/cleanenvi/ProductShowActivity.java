@@ -25,7 +25,7 @@ import java.net.URL;
 public class ProductShowActivity extends AppCompatActivity {
 
     String EAN, EANcamera;
-    Button backBtn;
+    Button backBtn, backCameraBtn;
     TextView resultTxt;
     TextView testingTxt;
     ImageView proimageView;
@@ -48,7 +48,14 @@ public class ProductShowActivity extends AppCompatActivity {
         EAN = ProductSearchActivity.EAN;
         EANcamera = CameraMainActivity.EANcamera;
         backBtn = findViewById(R.id.back);
+        backCameraBtn = findViewById(R.id.backCamera);
 
+        nDialog = new ProgressDialog(ProductShowActivity.this);
+        nDialog.setMessage("Bitte warten (Ladezeit abhängig von Internetverbindung)..");
+        nDialog.setTitle("Anfrage senden");
+        nDialog.setIndeterminate(false);
+        nDialog.setCancelable(true);
+        nDialog.show();
 
         // Methodenaufruf für API-Anfrage
         new OpenFoodFacts().execute();
@@ -59,6 +66,14 @@ public class ProductShowActivity extends AppCompatActivity {
                 ProductShowActivity.this.startActivity(new Intent((Context)ProductShowActivity.this, ProductSearchActivity.class));
             }
         });
+
+        //setzt User beim Betätigen des ZurückCamera-Buttons wieder zur Kamera
+        backCameraBtn.setOnClickListener(new View.OnClickListener() {
+            public final void onClick(View it) {
+                ProductShowActivity.this.startActivity(new Intent((Context)ProductShowActivity.this, CameraMainActivity.class));
+            }
+        });
+
 
     }
 
@@ -72,6 +87,8 @@ public class ProductShowActivity extends AppCompatActivity {
             } else {
                 main(EAN);
             }
+            EAN = null;
+            EANcamera = null;
             return null;
         }
 
@@ -79,18 +96,6 @@ public class ProductShowActivity extends AppCompatActivity {
 
     //Methode für API-Anfrage
     public void main(String EAN) {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                nDialog = new ProgressDialog(ProductShowActivity.this);
-                nDialog.setMessage("Bitte warten..");
-                nDialog.setTitle("Anfrage senden");
-                nDialog.setIndeterminate(false);
-                nDialog.setCancelable(true);
-                nDialog.show();
-            }
-        });
 
         proimageView = findViewById(R.id.productImageView);
         resultTxt = findViewById(R.id.showResulttxt);
@@ -107,7 +112,7 @@ public class ProductShowActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mDialog = new ProgressDialog(ProductShowActivity.this);
-                mDialog.setMessage("Bitte warten (Ladezeit abhängig vom Produkt)..");
+                mDialog.setMessage("Bitte warten (Ladezeit variiert nach Produkt)..");
                 mDialog.setTitle("Daten verarbeiten");
                 mDialog.setIndeterminate(false);
                 mDialog.setCancelable(true);
@@ -298,7 +303,7 @@ public class ProductShowActivity extends AppCompatActivity {
 
         String[] arrOfStr = Verpackung.split(",");
         Verpackung = arrOfStr[0];
-        return Verpackung;
+            return Verpackung;
     }
 
     //besondere Ergebnisse mit Such-Strings erhalten können
@@ -320,7 +325,11 @@ public class ProductShowActivity extends AppCompatActivity {
 
         String[] arrOfStr = Verpackung.split("%");
         Verpackung = arrOfStr[0];
-        return Verpackung;
+        if(Verpackung.contentEquals("#")) {
+            return "Keine Angaben verfügbar";
+        } else {
+            return Verpackung;
+        }
     }
 
     //Verpackung als Array speichern

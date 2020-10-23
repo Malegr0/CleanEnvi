@@ -105,7 +105,9 @@ public class CameraMainActivity extends AppCompatActivity {
                                 barcodeData = barcodes.valueAt(0).displayValue;
 
                             }
-                            barcodeText.setText(barcodeData);
+                            // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
+                            // barcodeText.setText(barcodeData);
+
                             EANcam = barcodeData;
                             EANcamera = EANcam.trim();
                             CameraMainActivity.this.startActivity(new Intent((Context)CameraMainActivity.this, ProductShowActivity.class));
