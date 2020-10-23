@@ -217,7 +217,7 @@ public class ProductShowActivity extends AppCompatActivity {
                     EANmanuell = null;
                     EANcamera = null;
                     ProductSearchActivity.EAN = null;
-                    CameraMainActivity.EANcam = null;
+                    CameraMainActivity.EANcamera = null;
                 }
             });
 
