@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CleanEnvi</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoieW9qbyIsImEiOiJja2dtcWhkdWQwOHhsMnRtd2Mya3E4OHpyIn0.mbz4DKZmw8fryWGo2lztHA</string>
 </resources>
