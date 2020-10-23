@@ -24,7 +24,7 @@ import java.net.URL;
 
 public class ProductShowActivity extends AppCompatActivity {
 
-    String EAN, EANcamera;
+    String EANmanuell, EANcamera;
     Button backBtn, backCameraBtn;
     TextView resultTxt;
     TextView testingTxt;
@@ -45,7 +45,7 @@ public class ProductShowActivity extends AppCompatActivity {
 
 
         //speichert Ergebnis der Eingabe aus der anderen Activity
-        EAN = ProductSearchActivity.EAN;
+        EANmanuell = ProductSearchActivity.EAN;
         EANcamera = CameraMainActivity.EANcamera;
         backBtn = findViewById(R.id.back);
         backCameraBtn = findViewById(R.id.backCamera);
@@ -82,13 +82,11 @@ public class ProductShowActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            if(EAN == null) {
+            if(EANmanuell == null) {
                 main(EANcamera);
             } else {
-                main(EAN);
+                main(EANmanuell);
             }
-            EAN = null;
-            EANcamera = null;
             return null;
         }
 
@@ -216,6 +214,10 @@ public class ProductShowActivity extends AppCompatActivity {
                     nDialog.dismiss();
                     mDialog.dismiss();
                     resultTxt.setText("Bei PET bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+                    EANmanuell = null;
+                    EANcamera = null;
+                    ProductSearchActivity.EAN = null;
+                    CameraMainActivity.EANcam = null;
                 }
             });
 
