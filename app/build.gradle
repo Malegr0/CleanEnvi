@@ -32,11 +32,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //mapbox maps
-    //implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
+    //mapbox dependencies
     implementation project(':mapbox-android-sdk-9.5.0')
-
-    //mapbox maps for user location access
     implementation 'com.mapbox.mapboxsdk:mapbox-android-core:3.1.0'
-
 }
