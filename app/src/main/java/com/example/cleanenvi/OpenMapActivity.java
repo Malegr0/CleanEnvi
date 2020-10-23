@@ -42,9 +42,6 @@ public class OpenMapActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -86,5 +83,6 @@ public class OpenMapActivity extends AppCompatActivity {
         super.onDestroy();
         mapView.onDestroy();
     }
+
 }
 
