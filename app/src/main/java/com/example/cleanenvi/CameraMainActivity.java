@@ -38,6 +38,7 @@ public class CameraMainActivity extends AppCompatActivity {
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text);
         initialiseDetectorsAndSources();
+        ActivityCompat.requestPermissions(CameraMainActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
     }
 
     private void initialiseDetectorsAndSources() {
