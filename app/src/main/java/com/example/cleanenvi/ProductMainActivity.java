@@ -59,7 +59,7 @@ public final class ProductMainActivity extends AppCompatActivity {
         codeScannerbtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, CameraMainActivity.class));
+                ProductMainActivity.this.startActivity(new Intent((Context)ProductMainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
             }
         });
     }

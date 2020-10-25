@@ -38,13 +38,13 @@ public class CameraMainActivity extends AppCompatActivity {
         this.setContentView(R.layout.camera_main);
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text);
-        /*if(ActivityCompat.checkSelfPermission(CameraMainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if(ActivityCompat.checkSelfPermission(CameraMainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             initialiseDetectorsAndSources();
         } else {
             ActivityCompat.requestPermissions(CameraMainActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
             this.recreate();
-        }*/
-        initialiseDetectorsAndSources();
+        }
+        //initialiseDetectorsAndSources();
     }
 
     private void initialiseDetectorsAndSources() {
