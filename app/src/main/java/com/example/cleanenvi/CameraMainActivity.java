@@ -1,7 +1,6 @@
 package com.example.cleanenvi;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -137,5 +135,4 @@ public class CameraMainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         initialiseDetectorsAndSources();
     }
-
 }
