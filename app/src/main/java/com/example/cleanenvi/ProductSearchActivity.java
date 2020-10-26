@@ -29,9 +29,6 @@ public final class ProductSearchActivity extends AppCompatActivity {
         this.setTitle((CharSequence)"Manuelle Produktsuche per Nummer");
         mDBHelper = new DBHelper(this);
 
-
-
-
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
 
