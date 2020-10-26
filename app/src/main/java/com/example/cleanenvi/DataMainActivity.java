@@ -1,6 +1,5 @@
 package com.example.cleanenvi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,14 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.cleanenvi.DBHelper;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DataMainActivity extends AppCompatActivity {
-
-    private static final String TAG = "MainActivity";
-
     DBHelper mDBHelper;
     Button btnAdd, btnViewData, btnEdit;
     EditText nameEdit, idEdit;
@@ -25,7 +19,6 @@ public class DataMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_main);
-
         nameEdit = findViewById(R.id.column1Edit);
         idEdit = findViewById(R.id.column2Edit);
         btnAdd = findViewById(R.id.addBtn);
@@ -36,8 +29,7 @@ public class DataMainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String newEntry = editText.getText().toString();
-                if (nameEdit.length() != 0) {
+                if(nameEdit.length() != 0) {
                     AddData(nameEdit.getText().toString(), idEdit.getText().toString());
                     nameEdit.setText("");
                     idEdit.setText("");
@@ -50,14 +42,14 @@ public class DataMainActivity extends AppCompatActivity {
         btnViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataMainActivity.this.startActivity(new Intent((Context)DataMainActivity.this, ShowDataActivity.class));
+                DataMainActivity.this.startActivity(new Intent(DataMainActivity.this, ShowDataActivity.class));
             }
         });
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataMainActivity.this.startActivity(new Intent((Context)DataMainActivity.this, EditDataActivity.class));
+                DataMainActivity.this.startActivity(new Intent(DataMainActivity.this, EditDataActivity.class));
             }
         });
     }
@@ -65,14 +57,13 @@ public class DataMainActivity extends AppCompatActivity {
     public void AddData(String Name, String ID){
         boolean insertData = mDBHelper.addData(Name, ID);
 
-        if (insertData) {
+        if(insertData) {
             toastMessage("Data Successfully Inserted!");
         } else {
             toastMessage("Something went wrong");
         }
     }
 
-    //Nachrichten für den Nutzer
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }

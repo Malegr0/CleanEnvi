@@ -5,14 +5,11 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ShowDataActivity extends AppCompatActivity {
-
     private static final String TAG = "ShowDataActivity";
-
     DBHelper mDBHelper;
     TextView dataTxt;
 
@@ -21,27 +18,19 @@ public class ShowDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_ausgabe);
         mDBHelper = new DBHelper(this);
-
         showData();
     }
 
     private void showData(){
         dataTxt = findViewById(R.id.dataTxt);
         Log.d(TAG, "showData: Displaying data in the TextView.");
+        Cursor data = mDBHelper.getAllData();
 
-        //get the data and append to a buffer
-        /*Cursor data = mDBHelper.getData();
-
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         while(data.moveToNext()){
-            buffer.append("Name: " + data.getString(0) + "\n");
-            buffer.append("ReID: " + data.getString(1) + "\n");
+            buffer.append("Name: ").append(data.getString(0)).append("\n");
+            buffer.append("ReID: ").append(data.getString(1)).append("\n");
         }
-        dataTxt.setText(buffer.toString());*/
-    }
-
-    //Nachrichten für den Nutzer
-    private void toastMessage(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+        dataTxt.setText(buffer.toString());
     }
 }
