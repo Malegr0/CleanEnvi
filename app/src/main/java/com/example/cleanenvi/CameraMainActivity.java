@@ -35,7 +35,6 @@ public class CameraMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(0,0);
         this.setContentView(R.layout.camera_main);
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text);
@@ -45,7 +44,7 @@ public class CameraMainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(CameraMainActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
             finish();
             overridePendingTransition(0, 0);
-            startActivity(getIntent());
+            this.recreate();
             overridePendingTransition(0, 0);
         }
         //initialiseDetectorsAndSources();
@@ -129,7 +128,6 @@ public class CameraMainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(0,0);
         getSupportActionBar().hide();
         cameraSource.release();
     }
@@ -137,7 +135,6 @@ public class CameraMainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        overridePendingTransition(0,0);
         getSupportActionBar().hide();
         initialiseDetectorsAndSources();
     }
