@@ -43,8 +43,10 @@ public class CameraMainActivity extends AppCompatActivity {
             initialiseDetectorsAndSources();
         } else {
             ActivityCompat.requestPermissions(CameraMainActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-            this.recreate();
-            overridePendingTransition(0,0);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
         }
         //initialiseDetectorsAndSources();
     }
