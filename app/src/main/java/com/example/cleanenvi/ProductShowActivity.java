@@ -40,6 +40,7 @@ public class ProductShowActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.back);
         backCameraBtn = findViewById(R.id.backCamera);
 
+        //Ladebildschirm für den Nutzer
         nDialog = new ProgressDialog(ProductShowActivity.this);
         nDialog.setMessage("Bitte warten (Ladezeit abhängig von Internetverbindung)..");
         nDialog.setTitle("Anfrage senden");
@@ -47,17 +48,15 @@ public class ProductShowActivity extends AppCompatActivity {
         nDialog.setCancelable(true);
         nDialog.show();
 
-        // Methodenaufruf für API-Anfrage
+        // Methodenaufruf für die API-Anfrage
         new OpenFoodFacts().execute();
 
-        //setzt User beim Betätigen des Zurück-Buttons wieder zur Eingabe
         backBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
                 ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class));
             }
         });
 
-        //setzt User beim Betätigen des ZurückCamera-Buttons wieder zur Kamera
         backCameraBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
                 ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, CameraMainActivity.class));
@@ -65,7 +64,7 @@ public class ProductShowActivity extends AppCompatActivity {
         });
     }
 
-    //Hintergrund-Thread für API-Aufruf
+    //Hintergrund-Thread für den API-Aufruf
     private class OpenFoodFacts extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
@@ -78,7 +77,7 @@ public class ProductShowActivity extends AppCompatActivity {
         }
     }
 
-    //Methode für API-Anfrage
+    //Gesamtmethode für die API-Anfrage (besteht aus einzelnen kleineren Funktionen)
     public void api(String EAN) {
         proimageView = findViewById(R.id.productImageView);
         resultTxt = findViewById(R.id.showResulttxt);
@@ -87,7 +86,7 @@ public class ProductShowActivity extends AppCompatActivity {
         //URL für Abfrage erstellen
         String query_url = makeURL(EAN);
 
-        //URL an API senden und JSON empfangen
+        //URL an API senden und JSON-Datei empfangen
         String JSONResponsevollstaendig = getJSON(query_url);
 
         runOnUiThread(new Runnable() {
@@ -102,12 +101,10 @@ public class ProductShowActivity extends AppCompatActivity {
             }
         });
 
-        //JSON alle " gegen % tauschen
         String ResponseMSt = replaceResponse(JSONResponsevollstaendig);
-        System.out.println(ResponseMSt);
+        System.out.println("JSON: " + ResponseMSt);
 
-        // JSON aufteilen in einzelne Strings mit den gewünschten Daten
-        // Wenn EAN nicht gefunden wurde, wird eine entsprechende Meldung gegeben. Dafür wird als erstes der "Status" in der JSON gesucht und ausgewertet.
+        // Überprüfung ob Produkt vorhanden ist
         String ProductAvailable = checkResponse(ResponseMSt);
         System.out.println("Produkt vorhanden:_" + ProductAvailable + "_");
         if(ProductAvailable.equals("0")) {
@@ -121,6 +118,7 @@ public class ProductShowActivity extends AppCompatActivity {
                 }
             });
         } else {
+            //Wenn das Produkt vorhanden ist, werden wichtige Daten aus der JSON-Datei herausgefiltert
             final String Verpackungen = splitResponse(ResponseMSt, "packaging");
             final String Packung = Verpackungen.toUpperCase();
             final String EANCode = splitResponse(ResponseMSt, "code");
@@ -133,7 +131,7 @@ public class ProductShowActivity extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
-                    //zeigt dem User Bild des Produkts  an
+                    //Zeigt dem User ein Bild des Produkts an
                     Picasso.get().load(Bild).into(proimageView);
                     proimageView.setVisibility(View.VISIBLE);
 
@@ -145,6 +143,7 @@ public class ProductShowActivity extends AppCompatActivity {
                         }
                         reID = buffer.toString();
 
+                        //Unterscheidung der Entsorgung abhängig von Recyclingnummer
                         switch (reID) {
                             case "1":
                                 Entsorgung = Entsorgung + s + "= Wertstofftonne oder Gelber Sack" + "\n";
@@ -162,7 +161,7 @@ public class ProductShowActivity extends AppCompatActivity {
                                 Entsorgung = Entsorgung + s + "= Pfandannahmestellen im Handel" + "\n";
                                 break;
                             case "6":
-                                Entsorgung = Entsorgung + s + "= keinem Material zuordbar" + "\n";
+                                Entsorgung = Entsorgung + s + "= nicht genau zuordenbar" + "\n";
                                 break;
                             default:
                                 if (Packung.equals("KEINE ANGABEN VERFÜGBAR")) {
@@ -183,29 +182,23 @@ public class ProductShowActivity extends AppCompatActivity {
                     CameraMainActivity.EANcamera = null;
                 }
             });
-
-            //Verpackung im Array anzeigen lassen
-            for (String s : Verpackung) {
-                System.out.println(s);
-            }
         }
     }
 
-    //Gänsefüßchen ersetzen für bessere Weiterverarbeitung
+    //Gänsefüßchen ersetzen für bessere Weiterverarbeitung der Strings
     public static String replaceResponse (String response) {
         char c = '%';
         String ResponseMSt = response.replace('"', c);
-        System.out.println(ResponseMSt);
         return ResponseMSt;
     }
 
-    //URL für Anfrage zusammensetzen
+    //URL für API-Anfrage zusammensetzen
     public static String makeURL(String EAN) {
         String url, openfoodfactsurl;
         openfoodfactsurl = "https://world.openfoodfacts.org/api/v0/product/";
         url = openfoodfactsurl.concat(EAN);
         url = url.concat(".json");
-        System.out.println("query_url= " + url);
+        System.out.println("api_url= " + url);
         return url;
     }
 
@@ -239,12 +232,10 @@ public class ProductShowActivity extends AppCompatActivity {
         return JSONResponse;
     }
 
-    //Ergebnis der Anfrage überprüfen
+    //Ergebnis der API-Anfrage auf Vorhandensein des Produkts überprüfen
     public static String checkResponse(String ResponseMSt) {
         //Such String erstellen
         String searchString = "status%:";
-        System.out.println("SearchString: " + searchString);
-        System.out.println(ResponseMSt);
         String Verpackung = "#";
 
         //Vorne abschneiden
@@ -258,9 +249,8 @@ public class ProductShowActivity extends AppCompatActivity {
         return Verpackung;
     }
 
-    //besondere Ergebnisse mit Such-Strings erhalten können
+    //Herausfiltern von gewünschten Daten aus der JSON-Datei
     public static String splitResponse(String ResponseMSt, String suchString) {
-        //Such String erstellen
         String searchString = "%";
         searchString = searchString.concat(suchString);
         searchString = searchString.concat("%:%");

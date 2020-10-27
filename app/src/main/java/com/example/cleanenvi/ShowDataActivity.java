@@ -18,9 +18,11 @@ public class ShowDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.database_ausgabe);
         mDBHelper = new DBHelper(this);
+
         showData();
     }
 
+    //Zeigt alle Daten die in der Datenbank stehen an
     private void showData(){
         dataTxt = findViewById(R.id.dataTxt);
         Log.d(TAG, "showData: Displaying data in the TextView.");

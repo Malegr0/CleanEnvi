@@ -24,7 +24,6 @@ public final class ProductSearchActivity extends AppCompatActivity {
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
 
-        //Aktiviert Button bei Eingabe und speichert Eingabe für später
         watcher(productSearchEdit, searchBtn);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +33,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
         });
     }
 
+    //Aktiviert Button bei Texteingabe und speichert Eingabe für spätere Verarbeitung
     void watcher(final EditText productSearchEdit, final Button searchBtn) {
         productSearchEdit.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {

@@ -20,7 +20,6 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 public class CameraMainActivity extends AppCompatActivity {
-    //Variablen für Barcode Scanner
     private SurfaceView cameraView;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
@@ -35,6 +34,7 @@ public class CameraMainActivity extends AppCompatActivity {
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text);
 
+        //Wenn Kameraberechtigung erteilt -> initialisieren des Kamerabilds etc., ansonsten wird User nach Berechtigung gefragt
         if(ActivityCompat.checkSelfPermission(CameraMainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             initialiseDetectorsAndSources();
         } else {
@@ -46,6 +46,7 @@ public class CameraMainActivity extends AppCompatActivity {
         }
     }
 
+    //Initialisierung des BarcodeDetectors
     private void initialiseDetectorsAndSources() {
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build();
         cameraSource = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1920, 1080).setAutoFocusEnabled(true).build();
@@ -79,6 +80,7 @@ public class CameraMainActivity extends AppCompatActivity {
             public void release() {
             }
 
+            //Verarbeitung des erkannten Bilds/Barcodes
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
@@ -93,12 +95,12 @@ public class CameraMainActivity extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                             }
-                            // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
-                            // barcodeText.setText(barcodeData);
-
                             EANcam = barcodeData;
                             EANcamera = EANcam.trim();
                             CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductShowActivity.class));
+
+                            // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
+                            // barcodeText.setText(barcodeData);
                         }
                     });
                 }

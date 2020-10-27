@@ -54,6 +54,7 @@ public class DataMainActivity extends AppCompatActivity {
         });
     }
 
+    //Hinzufügen von Daten in Datenbank (nur für Testzwecke, eigentliches Hinzufügen in ProductMainActivity automatisch)
     public void AddData(String Name, String ID){
         boolean insertData = mDBHelper.addData(Name, ID);
 
