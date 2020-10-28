@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
-// not there
-//import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
@@ -22,8 +20,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
-public class MapActivity extends AppCompatActivity implements
-        OnMapReadyCallback, PermissionsListener{
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener{
 
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
@@ -39,35 +36,20 @@ public class MapActivity extends AppCompatActivity implements
 
         mapView = (MapView) findViewById(R.id.mapView); //MapView in JKlammern weg?
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {                  //all zhis instead of "this"
-
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-
-                        // Map is set up and the style has loaded. Now you can add data or make other map adjustments
-
-
-                    }
-                });
-
-            }
-        });
+        mapView.getMapAsync(this);
     }
 
     @Override
-    public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+    public void onMapReady(@NonNull MapboxMap mapboxMap) {//all zhis instead of "this"
         MapActivity.this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"), new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+                // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+                enableLocationComponent(style);
+            }
+        });
 
-        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"),
-                new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-                        enableLocationComponent(style);
-                    }
-                });
     }
 
     @SuppressWarnings( {"MissingPermission"})
