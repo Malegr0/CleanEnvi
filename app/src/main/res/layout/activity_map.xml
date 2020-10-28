@@ -19,8 +19,8 @@
             mapbox:mapbox_cameraZoomMax="12.41"
             mapbox:mapbox_cameraZoomMin="6"
             mapbox:mapbox_uiRotateGestures="false"
-
         />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
