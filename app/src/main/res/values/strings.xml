@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">CleanEnvi</string>
     <string name="mapbox_access_token">pk.eyJ1IjoieW9qbyIsImEiOiJja2dtcWhkdWQwOHhsMnRtd2Mya3E4OHpyIn0.mbz4DKZmw8fryWGo2lztHA</string>
+    <string name="user_location_permission_explanation">Permission granted</string>
+    <string name="user_location_permission_not_granted">Permission not granted</string>
 </resources>
