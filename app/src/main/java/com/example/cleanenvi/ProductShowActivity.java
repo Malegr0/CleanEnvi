@@ -112,7 +112,7 @@ public class ProductShowActivity extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
-                    resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch.");
+                    resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch eingegeben/eingescannt worden.");
                     nDialog.dismiss();
                     mDialog.dismiss();
                 }
