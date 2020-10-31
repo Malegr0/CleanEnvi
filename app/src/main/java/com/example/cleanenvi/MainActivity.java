@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Button 1 Clicked");
-                //Intent activity2Intent = new Intent(getApplicationContext(), Activity2.class);
-                //startActivity(activity2Intent);
             }
         });
 
@@ -34,11 +32,5 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_main);
             }
         });
-
-
-
-
-
-
     }
 }
