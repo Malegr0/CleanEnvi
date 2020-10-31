@@ -19,7 +19,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_search);
-        this.setTitle("Manuelle Produktsuche");
+        this.setTitle("Produktsuche");
         mDBHelper = new DBHelper(this);
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
