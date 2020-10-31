@@ -1,23 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cleanenvi">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--Barcode permission-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapActivity">
+    
+        <!--Barcode meta-data-->
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+      
+        <activity android:name=".MainActivity" android:configChanges="orientation" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ProductSearchActivity" />
+        <activity android:name=".ProductShowActivity" />
+        <activity android:name=".DataMainActivity" />
+        <activity android:name=".EditDataActivity" />
+        <activity android:name=".ShowDataActivity" />
+        <activity android:name=".CameraMainActivity" />
+        <activity android:name=".ProductMainActivity" />
+        <activity android:name=".MapActivity" />
     </application>
-
 </manifest>
