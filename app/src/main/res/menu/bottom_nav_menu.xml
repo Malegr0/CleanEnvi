@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_recents"
+        android:id="@+id/action_recent"
         android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search_button_bar_name"

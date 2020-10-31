@@ -7,6 +7,15 @@
     <string name="main_menu_button1_name">Suche nach einem Produkt für Entsorgungstipps!</string>
     <string name="main_menu_button2_name">Nutze die Handykamera für die Produktsuche!</string>
     <string name="main_menu_button3_name">Finde Recyclinghöfe über die Karte!</string>
-    <string name="main_menu_button4_name">Newsfeedplatzhalter... umdesignen, denke ich.</string>
+
+    <string name="newsfeed_title">Newsfeed</string>
+
+    <string name="newsfeed_product_name">Produktname:</string>
+    <string name="newsfeed_producer_name">Marke:</string>
+    <string name="newsfeed_picture_name">Bild:</string> <!-- Probably not needed. -->
+
+    <string name="newsfeed_additive_name">Zusatzstoffe:</string>
+    <string name="newsfeed_nutri_score_name">Nutri-Score:</string>
+    <string name="newsfeed_packaging_name">Verpackung:</string>
 
 </resources>
