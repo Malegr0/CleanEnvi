@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_main);
+                MainActivity.this.startActivity(new Intent(MainActivity.this, MapActivity.class));
             }
         });
     }
