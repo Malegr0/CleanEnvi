@@ -33,7 +33,7 @@ public class ProductShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_show);
-        this.setTitle("Manuelle Produktsuche per Nummer");
+        this.setTitle("Produktsuche");
         mDBHelper = new DBHelper(this);
         EANmanuell = ProductSearchActivity.EAN;
         EANcamera = CameraMainActivity.EANcamera;
@@ -175,7 +175,7 @@ public class ProductShowActivity extends AppCompatActivity {
 
                     nDialog.dismiss();
                     mDialog.dismiss();
-                    resultTxt.setText("Bei PET bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
                     EANmanuell = null;
                     EANcamera = null;
                     ProductSearchActivity.EAN = null;

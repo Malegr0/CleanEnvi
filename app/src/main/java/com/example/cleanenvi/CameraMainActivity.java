@@ -31,6 +31,7 @@ public class CameraMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.camera_main);
+        this.setTitle("Produktsuche");
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text);
 
