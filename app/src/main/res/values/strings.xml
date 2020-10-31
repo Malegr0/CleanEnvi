@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">CleanEnvi</string>
+    <string name="search_button_bar_name">Suche</string>
+    <string name="camera_button_bar_name">Kamerasuche</string>
+    <string name="map_button_bar_name">Recylinghofkarte</string>
+
+    <string name="main_menu_button1_name">Suche nach einem Produkt für Entsorgungstipps!</string>
+    <string name="main_menu_button2_name">Nutze die Handykamera für die Produktsuche!</string>
+    <string name="main_menu_button3_name">Finde Recyclinghöfe über die Karte!</string>
+
+    <string name="newsfeed_title">Newsfeed</string>
+
+    <string name="newsfeed_product_name">Produktname:</string>
+    <string name="newsfeed_producer_name">Marke:</string>
+    <string name="newsfeed_picture_name">Bild:</string> <!-- Probably not needed. -->
+
+    <string name="newsfeed_additive_name">Zusatzstoffe:</string>
+    <string name="newsfeed_nutri_score_name">Nutri-Score:</string>
+    <string name="newsfeed_packaging_name">Verpackung:</string>
+
 </resources>
