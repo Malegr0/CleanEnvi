@@ -54,6 +54,9 @@ public class CameraMainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.action_home:
+                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MainActivity.class));
+                        break;
                     case R.id.action_search:
                         CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductSearchActivity.class));
                         break;

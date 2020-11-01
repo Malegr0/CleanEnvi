@@ -47,6 +47,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.action_home:
+                        MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class));
+                        break;
                     case R.id.action_search:
                         MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class));
                         break;

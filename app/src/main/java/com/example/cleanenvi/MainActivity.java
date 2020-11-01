@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.action_home:
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        break;
                     case R.id.action_search:
                         MainActivity.this.startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
                         break;

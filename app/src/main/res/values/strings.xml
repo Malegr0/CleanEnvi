@@ -8,6 +8,7 @@
     <string name="search_button_bar_name">Suche</string>
     <string name="camera_button_bar_name">Kamerasuche</string>
     <string name="map_button_bar_name">Recylinghofkarte</string>
+    <string name="home_button_bar_name">Home</string>
 
     <string name="main_menu_button1_name">Suche nach einem Produkt für Entsorgungstipps!</string>
     <string name="main_menu_button2_name">Nutze die Handykamera für die Produktsuche!</string>
