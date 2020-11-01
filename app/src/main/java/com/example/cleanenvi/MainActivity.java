@@ -1,12 +1,17 @@
 package com.example.cleanenvi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSearch = findViewById(R.id.button_search);
         Button buttonCameraSearch = findViewById(R.id.button_camera_search);
         Button buttonMap = findViewById(R.id.button_map);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_main);
         mDBHelper = new DBHelper(this);
         SQLiteDatabase db= mDBHelper.getWritableDatabase();
 
@@ -53,6 +59,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, MapActivity.class));
+            }
+        });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_search:
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
+                        break;
+                    case R.id.action_camera:
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        break;
+                    case R.id.action_hofkarte:
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, MapActivity.class));
+                        break;
+                }
+                return true;
             }
         });
     }

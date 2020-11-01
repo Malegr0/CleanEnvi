@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
@@ -22,7 +25,6 @@ import java.net.URL;
 
 public class ProductShowActivity extends AppCompatActivity {
     String EANmanuell, EANcamera;
-    Button backBtn, backCameraBtn;
     TextView resultTxt;
     ImageView proimageView;
     DBHelper mDBHelper;
@@ -37,8 +39,7 @@ public class ProductShowActivity extends AppCompatActivity {
         mDBHelper = new DBHelper(this);
         EANmanuell = ProductSearchActivity.EAN;
         EANcamera = CameraMainActivity.EANcamera;
-        backBtn = findViewById(R.id.back);
-        backCameraBtn = findViewById(R.id.backCamera);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_show);
 
         //Ladebildschirm für den Nutzer
         nDialog = new ProgressDialog(ProductShowActivity.this);
@@ -51,15 +52,21 @@ public class ProductShowActivity extends AppCompatActivity {
         // Methodenaufruf für die API-Anfrage
         new OpenFoodFacts().execute();
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            public final void onClick(View it) {
-                ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class));
-            }
-        });
-
-        backCameraBtn.setOnClickListener(new View.OnClickListener() {
-            public final void onClick(View it) {
-                ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, CameraMainActivity.class));
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_search:
+                        ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class));
+                        break;
+                    case R.id.action_camera:
+                        ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        break;
+                    case R.id.action_hofkarte:
+                        ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MapActivity.class));
+                        break;
+                }
+                return true;
             }
         });
     }
@@ -81,7 +88,6 @@ public class ProductShowActivity extends AppCompatActivity {
     public void api(String EAN) {
         proimageView = findViewById(R.id.productImageView);
         resultTxt = findViewById(R.id.showResulttxt);
-        backBtn = findViewById(R.id.back);
 
         //URL für Abfrage erstellen
         String query_url = makeURL(EAN);
@@ -175,7 +181,7 @@ public class ProductShowActivity extends AppCompatActivity {
 
                     nDialog.dismiss();
                     mDialog.dismiss();
-                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EANCode: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EAN-Code: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
                     EANmanuell = null;
                     EANcamera = null;
                     ProductSearchActivity.EAN = null;

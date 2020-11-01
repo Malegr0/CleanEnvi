@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -16,6 +18,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 
@@ -33,7 +36,8 @@ public class CameraMainActivity extends AppCompatActivity {
         this.setContentView(R.layout.camera_main);
         this.setTitle("Produktsuche");
         cameraView = findViewById(R.id.camera_view);
-        barcodeText = findViewById(R.id.barcode_text);
+        barcodeText = findViewById(R.id.barcode_text); //Textfeld für spätere Fehlersuche
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_camera);
 
         //Wenn Kameraberechtigung erteilt -> initialisieren des Kamerabilds etc., ansonsten wird User nach Berechtigung gefragt
         if(ActivityCompat.checkSelfPermission(CameraMainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -45,6 +49,24 @@ public class CameraMainActivity extends AppCompatActivity {
             this.recreate();
             overridePendingTransition(0, 0);
         }
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_search:
+                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductSearchActivity.class));
+                        break;
+                    case R.id.action_camera:
+                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        break;
+                    case R.id.action_hofkarte:
+                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MapActivity.class));
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     //Initialisierung des BarcodeDetectors
