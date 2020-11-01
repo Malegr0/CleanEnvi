@@ -1,11 +1,15 @@
 package com.example.cleanenvi;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -33,10 +37,29 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
         setContentView(R.layout.activity_map);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_map);
 
         mapView = (MapView) findViewById(R.id.mapView); //MapView in JKlammern weg?
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_search:
+                        MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class));
+                        break;
+                    case R.id.action_camera:
+                        MapActivity.this.startActivity(new Intent(MapActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                        break;
+                    case R.id.action_hofkarte:
+                        MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class));
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
