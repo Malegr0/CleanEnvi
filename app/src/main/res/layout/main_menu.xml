@@ -37,7 +37,7 @@
     <Button
         android:id="@+id/button_search"
         android:layout_width="372dp"
-        android:layout_height="47dp"
+        android:layout_height="56dp"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/ic_search"
         android:text="@string/main_menu_button1_name"
@@ -52,7 +52,7 @@
     <Button
         android:id="@+id/button_camera_search"
         android:layout_width="372dp"
-        android:layout_height="47dp"
+        android:layout_height="56dp"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/camera_search_3754_weiss_small"
         android:text="@string/main_menu_button2_name"
@@ -67,7 +67,7 @@
     <Button
         android:id="@+id/button_map"
         android:layout_width="372dp"
-        android:layout_height="47dp"
+        android:layout_height="56dp"
         android:layout_marginTop="452dp"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/ic_map_foreground_small"

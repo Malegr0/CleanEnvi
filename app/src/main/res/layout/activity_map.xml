@@ -22,7 +22,7 @@
         mapbox:mapbox_cameraTargetLng="13.40"
         mapbox:mapbox_cameraTilt="50.25"
         mapbox:mapbox_cameraZoom="12"
-        mapbox:mapbox_cameraZoomMax="12.41"
+        mapbox:mapbox_cameraZoomMax="16"
         mapbox:mapbox_cameraZoomMin="6"
         mapbox:mapbox_uiRotateGestures="false"
         tools:layout_editor_absoluteX="0dp" />
