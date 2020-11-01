@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -35,40 +36,38 @@
 
     <Button
         android:id="@+id/button_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="372dp"
+        android:layout_height="47dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_search"
         android:text="@string/main_menu_button1_name"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        android:backgroundTint="@color/colorPrimary"
-        android:drawableStart="@drawable/ic_search"
         app:layout_constraintBottom_toTopOf="@+id/button_camera_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <Button
         android:id="@+id/button_camera_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="372dp"
+        android:layout_height="47dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/camera_search_3754_weiss_small"
         android:text="@string/main_menu_button2_name"
         android:textColor="@android:color/white"
         android:textSize="12sp"
-        android:backgroundTint="@color/colorPrimary"
-        android:drawableStart="@drawable/camera_search_3754_weiss_small"
         app:layout_constraintBottom_toTopOf="@+id/button_map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.903" />
 
     <Button
         android:id="@+id/button_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="372dp"
+        android:layout_height="47dp"
         android:layout_marginTop="452dp"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/ic_map_foreground_small"
@@ -76,7 +75,6 @@
         android:textColor="@android:color/white"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -84,52 +82,54 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="48dp"
         android:text="@string/newsfeed_product_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle"
+        app:layout_constraintTop_toTopOf="@+id/newsfeed_rectangle" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="68dp"
         android:text="@string/newsfeed_producer_name"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle"
+        app:layout_constraintTop_toTopOf="@+id/newsfeed_rectangle" />
 
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="23dp"
         android:text="@string/newsfeed_nutri_score_name"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
-
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="53dp"
         android:text="@string/newsfeed_packaging_name"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="144dp"
         android:text="@string/newsfeed_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle"
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
