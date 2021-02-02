@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     DBHelper mDBHelper ;
     String tName1,tName2,tName3,tName4,tName5,tName6, tNameGes, tID;
+
+    //Newsfeed Declarations:
+    TextView newsTitle, newsMainText;
+    String[] newsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Button buttonCameraSearch = findViewById(R.id.button_camera_search);
         Button buttonMap = findViewById(R.id.button_map);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_main);
+        newsTitle =  findViewById(R.id.newsTitle);
+        newsMainText =  findViewById(R.id.newsMainText);
         mDBHelper = new DBHelper(this);
         SQLiteDatabase db= mDBHelper.getWritableDatabase();
 
@@ -82,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        //Newsfeed Initialization:
+        newsfeedSetup();
     }
 
     //Hinzufügen aller Datenbankeinträge mithilfe eines Arrays
@@ -101,5 +110,12 @@ public class MainActivity extends AppCompatActivity {
         tName6 = ("CRISTAL,SZKŁOS,ПЛАСТИКОВЫЕ,FR OPERCULE EN PLASTIQUE,PLASTIKTUTE,PET FLASCHE,PET-FLASCHE,PLASTIKBECHER,KUNSTSTOFFFOLIE,ПАКЕТ,PLASTIKBEUTEL,METALL,СТЕКЛО,BOITE DE CONSERVE ACIER");
         tNameGes = (tName1 + tName2 + tName3 + tName4 + tName5 + tName6);
         tID = ("1,3,1,6,4,6,6,6,1,4,1,1,6,6,6,4,1,1,3,3,1,1,6,6,6,6,1,6,6,1,1,1,1,6,6,1,6,6,1,1,6,1,4,1,1,1,6,1,1,6,1,4,1,1,1,1,1,6,1,3,6,3,6,4,6,6,6,6,6,1,3,1,4,6,6,3,6,1,6,4,4,4,1,3,6,3,1,6,5,4,6,1,4,6,3,6,2,6,6,6,1,4,1,1,1,6,1,3,3,1,1,1,6,6,1,1,1,1,1,6,6,1,1,6,1,6,6,3,1,1,1,1,6,6,6,6,4,1,1,6,6,6,1,1,6,1,4,3,1,4,6,1,6,1,1,3,5,1,4,6,4,4,3,6,6,6,1,1,6,4,1,6,6,6,6,1,6,1,1,1,1,4,1,6,1,1,1,1,1,3,6,6,4,6,4,1,1,4,1,6,6,6,1,6,6,6,6,1,6,6,1,6,1,1,1,6,4,4,4,1,1,1,1,1,1,1,1,1,1,4,1");
+    }
+
+    void newsfeedSetup() {
+        Newsfeed NewsfeedInstance = new Newsfeed();
+        newsArray = NewsfeedInstance.chooseRandomNews();
+        newsTitle.setText(newsArray[0]);
+        newsMainText.setText(newsArray[1]);
     }
 }
