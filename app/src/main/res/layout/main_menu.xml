@@ -78,7 +78,9 @@
         android:text=""
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
-        tools:layout_editor_absoluteX="205dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintTop_toBottomOf="@+id/newsfeedTitle" />
 
     <TextView
         android:id="@+id/newsfeedTitle"
