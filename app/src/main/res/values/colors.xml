@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#61a30a</color>
-    <color name="colorPrimaryDark">#61a30a</color>
-    <color name="colorPrimaryDarker">#0598a3</color>
+    <color name="colorPrimary">#76ff03</color>
+    <color name="colorPrimaryDark">#32cb00</color>
+    <color name="colorPrimaryDarker">#32cb00</color>
     <color name="colorNavigationBar">#047c85</color>
 
     <color name="colorPrimary_Alt">#80d60f</color>
@@ -10,8 +10,8 @@
     <color name="colorPrimaryDarker_Alt">#457308</color>
     <color name="colorNavigationBar_Alt">#2c4a05</color>
 
-    <color name="colorTextWhite">#FFFFFF</color>
-    <color name="colorMainBackground">#9cf1f7</color>
+    <color name="colorTextWhite">#FF268F</color>
+    <color name="colorMainBackground">#BFE8BC</color>
     <color name="colorMainBackground_Alt">#d5db5c</color>
     <color name="colorTextDark">#035754</color>
     <color name="colorTextDarker">#024240</color>

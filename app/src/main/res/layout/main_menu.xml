@@ -7,15 +7,14 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@android:color/white">
+    android:background="@color/colorMainBackground"    >
 
 
     <Button
         android:id="@+id/button_search"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:drawableStart="@drawable/ic_search"
         android:scaleX="1"
         android:scaleY="1"
@@ -32,7 +31,7 @@
         android:id="@+id/button_camera_search"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:drawableStart="@drawable/camera_search_3754_weiss_small"
         android:text="@string/main_menu_button2_name"
         android:textColor="@android:color/white"
@@ -47,7 +46,7 @@
         android:id="@+id/button_map"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:drawableStart="@drawable/ic_map_foreground_small"
         android:text="@string/main_menu_button3_name"
         android:textColor="@android:color/white"

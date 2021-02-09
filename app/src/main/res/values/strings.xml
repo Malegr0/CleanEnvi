@@ -10,11 +10,11 @@
     <string name="map_button_bar_name">Recylinghofkarte</string>
     <string name="home_button_bar_name">Home</string>
 
-    <string name="main_menu_button1_name">Suche nach einem Produkt für Entsorgungstipps!</string>
-    <string name="main_menu_button2_name">Nutze die Handykamera für die Produktsuche!</string>
-    <string name="main_menu_button3_name">Finde Recyclinghöfe über die Karte!</string>
+    <string name="main_menu_button1_name">Suche mit der EAN nach einem Produkt!</string>
+    <string name="main_menu_button2_name">Scanne das Produkt!</string>
+    <string name="main_menu_button3_name">Finde Recycling- höfe in deiner Nähe!</string>
 
-    <string name="newsfeed_title">Newsfeed</string>
+    <string name="newsfeed_title">Wusstest du schon?</string>
 
     <string name="newsfeed_product_name">Produktname:</string>
     <string name="newsfeed_producer_name">Marke:</string>

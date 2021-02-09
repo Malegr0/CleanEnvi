@@ -35,6 +35,7 @@ public class CameraMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.camera_main);
         this.setTitle("Produktsuche");
+
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text); //Textfeld für spätere Fehlersuche
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_camera);
