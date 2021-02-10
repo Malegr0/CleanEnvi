@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public final class ProductSearchActivity extends AppCompatActivity {
     EditText productSearchEdit;
     public static String EAN;
-    Button searchBtn;
+    ImageButton searchBtn;
     DBHelper mDBHelper;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
     }
 
     //Aktiviert Button bei Texteingabe und speichert Eingabe für spätere Verarbeitung
-    void watcher(final EditText productSearchEdit, final Button searchBtn) {
+    void watcher(final EditText productSearchEdit, final ImageButton searchBtn) {
         productSearchEdit.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 searchBtn.setEnabled(productSearchEdit.length() != 0);
