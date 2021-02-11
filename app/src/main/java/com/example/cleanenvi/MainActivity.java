@@ -11,7 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.cleanenvi.urlmanager.URLManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
+                /*try {
+                    URLManager.getRecID("KUNSTSTOFF");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
             }
         });
 
