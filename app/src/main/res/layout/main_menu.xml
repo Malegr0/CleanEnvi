@@ -7,30 +7,34 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBackground"    >
+    android:background="@color/colorMainBackground">
 
 
     <Button
         android:id="@+id/button_search"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:drawableStart="@drawable/ic_search"
         android:scaleX="1"
         android:scaleY="1"
         android:text="@string/main_menu_button1_name"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorTextBlack"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/newsfeed_rectangle3"
         app:layout_constraintEnd_toStartOf="@+id/button_camera_search"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_camera_search"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:drawableStart="@drawable/camera_search_3754_weiss_small"
         android:text="@string/main_menu_button2_name"
@@ -40,12 +44,14 @@
         app:layout_constraintEnd_toStartOf="@+id/button_map"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_search"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_map"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimaryDark"
         android:drawableStart="@drawable/ic_map_foreground_small"
         android:text="@string/main_menu_button3_name"
@@ -55,18 +61,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_camera_search"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/newsfeed_rectangle3"
-        android:layout_width="wrap_content"
-        android:layout_height="480dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
-        android:background="#19D3B6"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/box_shape_filled"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_main"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_camera_search" />
 
     <TextView
         android:id="@+id/newsMainText"
@@ -85,10 +98,15 @@
         android:id="@+id/newsfeedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
         android:gravity="center"
         android:text="@string/newsfeed_title"
-        app:layout_constraintEnd_toEndOf="@+id/newsTitle"
-        app:layout_constraintStart_toStartOf="@+id/newsTitle"
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
         app:layout_constraintTop_toTopOf="@+id/newsfeed_rectangle3" />
 
     <TextView
@@ -98,10 +116,10 @@
         android:layout_marginTop="140dp"
         android:layout_marginBottom="140dp"
         android:gravity="center"
-        android:text=""
+        android:text="Überschrift"
         app:layout_constraintBottom_toTopOf="@+id/newsMainText"
-        app:layout_constraintEnd_toEndOf="@+id/newsMainText"
-        app:layout_constraintStart_toStartOf="@+id/newsMainText"
+        app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
         app:layout_constraintTop_toBottomOf="@+id/newsfeedTitle" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -109,7 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@android:color/white"
+        app:itemIconTint="@color/colorTextBlack"
         app:itemTextColor="@android:color/white"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
