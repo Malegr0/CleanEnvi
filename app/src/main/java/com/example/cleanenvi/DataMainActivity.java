@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+//TODO: Diese Activitykann komplett entfernt werden
 public class DataMainActivity extends AppCompatActivity {
     DBHelper mDBHelper;
     Button btnAdd, btnViewData, btnEdit;

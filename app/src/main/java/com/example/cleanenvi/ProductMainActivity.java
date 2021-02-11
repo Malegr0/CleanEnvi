@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.cleanenvi.R.id;
-
+//TODO: Diese Activity kann komplett entfernt werden, redundant zu MainActivity
 public final class ProductMainActivity extends AppCompatActivity {
     DBHelper mDBHelper ;
     String tName1,tName2,tName3,tName4,tName5,tName6, tNameGes, tID;

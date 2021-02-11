@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+//TODO: Diese Activity kann komplett entfernt werden
 public class EditDataActivity extends AppCompatActivity {
     private static final String TAG = "EditDataActivity";
     Button btnSave, btnDelete;
