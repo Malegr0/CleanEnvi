@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.main_menu);
         Button buttonSearch = findViewById(R.id.button_search);
         Button buttonCameraSearch = findViewById(R.id.button_camera_search);
