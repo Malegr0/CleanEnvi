@@ -33,6 +33,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Map");
 
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 

@@ -25,6 +25,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_search);
         this.setTitle("Produktsuche");
+
         mDBHelper = new DBHelper(this);
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);

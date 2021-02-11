@@ -25,5 +25,12 @@
     <string name="newsfeed_packaging_name">Verpackung:</string>
     <string name="ean">Hier suchen nach EAN/Produkt</string>
     <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
-    <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
+
+    <string name="textview">TextView</string>
+    <string name="disposal">Entsorgung:</string>
+    <string name="produkt">Produkt:</string>
+    <string name="tvEAN">EAN::</string>
+    <string name="brand">Marke:</string>
+    <string name="packung">Verpackung:</string>
+    <string name="txt"> </string>
 </resources>

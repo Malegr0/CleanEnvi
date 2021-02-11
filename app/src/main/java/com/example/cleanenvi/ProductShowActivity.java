@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
@@ -25,12 +26,12 @@ import java.net.URL;
 
 public class ProductShowActivity extends AppCompatActivity {
     String EANmanuell, EANcamera;
-    TextView resultTxt;
-    ImageView proimageView;
+    TextView resultTxt, result_packaging, result_disposal, result_brand, result_EAN, result_product;
+    ImageView proimageView, imageViewRest, imageViewGlas, imageViewWert, imageViewPapier, imageViewOther;
     DBHelper mDBHelper;
     ProgressDialog nDialog, mDialog;
     String reID;
-    String Entsorgung ="";
+    String Entsorgung = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,7 @@ public class ProductShowActivity extends AppCompatActivity {
     private class OpenFoodFacts extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            if(EANmanuell == null) {
+            if (EANmanuell == null) {
                 api(EANcamera);
             } else {
                 api(EANmanuell);
@@ -90,7 +91,17 @@ public class ProductShowActivity extends AppCompatActivity {
     //Gesamtmethode für die API-Anfrage (besteht aus einzelnen kleineren Funktionen)
     public void api(String EAN) {
         proimageView = findViewById(R.id.productImageView);
+        imageViewRest = findViewById(R.id.imageViewRest);
+        imageViewGlas = findViewById(R.id.imageViewGlas);
+        imageViewWert = findViewById(R.id.imageViewWert);
+        imageViewPapier = findViewById(R.id.imageViewPapier);
+        imageViewOther = findViewById(R.id.imageViewPfand);
         resultTxt = findViewById(R.id.showResulttxt);
+        result_packaging = findViewById(R.id.result_packaging);
+        result_brand = findViewById(R.id.result_brand);
+        result_disposal = findViewById(R.id.result_disposal);
+        result_EAN = findViewById(R.id.result_EAN);
+        result_product = findViewById(R.id.result_product);
 
         //URL für Abfrage erstellen
         String query_url = makeURL(EAN);
@@ -116,7 +127,7 @@ public class ProductShowActivity extends AppCompatActivity {
         // Überprüfung ob Produkt vorhanden ist
         String ProductAvailable = checkResponse(ResponseMSt);
         System.out.println("Produkt vorhanden:_" + ProductAvailable + "_");
-        if(ProductAvailable.equals("0")) {
+        if (ProductAvailable.equals("0")) {
             runOnUiThread(new Runnable() {
                 @SuppressLint("SetTextI18n")
                 @Override
@@ -137,12 +148,19 @@ public class ProductShowActivity extends AppCompatActivity {
             final String[] Verpackung = splitInArray(Packung);
 
             runOnUiThread(new Runnable() {
-                @SuppressLint("SetTextI18n")
+                @SuppressLint({"SetTextI18n", "ResourceType"})
                 @Override
                 public void run() {
                     //Zeigt dem User ein Bild des Produkts an
                     Picasso.get().load(Bild).into(proimageView);
                     proimageView.setVisibility(View.VISIBLE);
+
+                    // ImageView mit "grauer Tonne" starten
+                    imageViewRest.setImageResource(R.drawable.ic_graue_tonne);
+                    imageViewGlas.setImageResource(R.drawable.ic_graue_tonne);
+                    imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
+                    imageViewPapier.setImageResource(R.drawable.ic_graue_tonne);
+
 
                     for (String s : Verpackung) {
                         Cursor data = mDBHelper.getData(s);
@@ -156,21 +174,31 @@ public class ProductShowActivity extends AppCompatActivity {
                         switch (reID) {
                             case "1":
                                 Entsorgung = Entsorgung + s + "= Wertstofftonne oder Gelber Sack" + "\n";
+                                imageViewWert.setImageResource(R.mipmap.ic_wert_2_foreground);
+                                resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                 break;
                             case "2":
                                 Entsorgung = Entsorgung + s + "= Schwarze Tonne" + "\n";
+                                imageViewRest.setImageResource(R.mipmap.ic_rest_2_foreground);
+                                resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                 break;
                             case "3":
                                 Entsorgung = Entsorgung + s + "= Blaue Tonne" + "\n";
+                                imageViewPapier.setImageResource(R.mipmap.ic_papier_2_foreground);
+                                resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                 break;
                             case "4":
                                 Entsorgung = Entsorgung + s + "= Glascontainer" + "\n";
+                                imageViewGlas.setImageResource(R.mipmap.ic_glas_2_foreground);
+                                resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                 break;
                             case "5":
                                 Entsorgung = Entsorgung + s + "= Pfandannahmestellen im Handel" + "\n";
+                                imageViewOther.setImageResource(R.mipmap.ic_pfand_foreground);
                                 break;
                             case "6":
                                 Entsorgung = Entsorgung + s + "= nicht genau zuordenbar" + "\n";
+                                resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                 break;
                             default:
                                 if (Packung.equals("KEINE ANGABEN VERFÜGBAR")) {
@@ -184,7 +212,16 @@ public class ProductShowActivity extends AppCompatActivity {
 
                     nDialog.dismiss();
                     mDialog.dismiss();
-                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n" + "Verpackungen: " + Packung + "\n\n" + "Entsorgung: " + "\n" + Entsorgung + "\n" + "EAN-Code: " + EANCode + "\n\n" + "Produkt: " + Produktname + "\n\n" + "Marke: " + Marke);
+                    result_packaging.setText(Packung);
+                    result_disposal.setText(Entsorgung);
+                    result_brand.setText(Marke);
+                    result_product.setText(Produktname);
+                    result_EAN.setText(EANCode);
+
+
+
+
+
                     EANmanuell = null;
                     EANcamera = null;
                     ProductSearchActivity.EAN = null;
@@ -195,7 +232,7 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     //Gänsefüßchen ersetzen für bessere Weiterverarbeitung der Strings
-    public static String replaceResponse (String response) {
+    public static String replaceResponse(String response) {
         char c = '%';
         String ResponseMSt = response.replace('"', c);
         return ResponseMSt;
@@ -222,7 +259,7 @@ public class ProductShowActivity extends AppCompatActivity {
             System.out.println("Sending Get Request to URL: " + query_url);
             System.out.println("Response Code: " + responseCode);
 
-            if(responseCode != 200) {
+            if (responseCode != 200) {
                 System.out.println("Es gab einen Fehler bei der Verbindung, Fehlercode:" + responseCode);
             } else {
                 BufferedReader in;
@@ -273,7 +310,7 @@ public class ProductShowActivity extends AppCompatActivity {
         //hinten abschneiden
         String[] arrOfStr = Verpackung.split("%");
         Verpackung = arrOfStr[0];
-        if(Verpackung.contentEquals("#")) {
+        if (Verpackung.contentEquals("#")) {
             return "Keine Angaben verfügbar";
         } else {
             return Verpackung;
@@ -287,7 +324,7 @@ public class ProductShowActivity extends AppCompatActivity {
 
         for (int i = 0; i < (verpackung_array.length); i++) {
             verpackung_array[i] = verpackung_array[i].trim();
-            }
+        }
         return verpackung_array;
     }
 }
