@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+//TODO: Diese Activity kann komplett entfernt werden
 public class ShowDataActivity extends AppCompatActivity {
     private static final String TAG = "ShowDataActivity";
     DBHelper mDBHelper;
