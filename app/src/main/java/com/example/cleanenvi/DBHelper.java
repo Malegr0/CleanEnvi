@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues dbValues = new ContentValues();
         dbValues.put(COL1, Name);
         dbValues.put(COL2, ReID);
-        Log.d(TAG, "addData: Adding " + Name + " to " + TABLE_NAME);
+        //Log.d(TAG, "addData: Adding " + Name + " to " + TABLE_NAME);
         long result = db.insert(TABLE_NAME, null, dbValues);
 
         //Wenn Daten falsch eingetragen werden, wird -1 zurückgegeben
@@ -74,8 +74,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void updateName(String newName, int id, String oldName){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE " + TABLE_NAME + " SET " + COL2 + " = '" + newName + "' WHERE " + COL1 + " = '" + id + "'" + " AND " + COL2 + " = '" + oldName + "'";
-        Log.d(TAG, "updateName: query: " + query);
-        Log.d(TAG, "updateName: Setting name to " + newName);
+        //Log.d(TAG, "updateName: query: " + query);
+        //Log.d(TAG, "updateName: Setting name to " + newName);
         db.execSQL(query);
     }
 
@@ -83,8 +83,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteName(String Name){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = '" + Name + "'";
-        Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + Name + " from database.");
+        //Log.d(TAG, "deleteName: query: " + query);
+        //Log.d(TAG, "deleteName: Deleting " + Name + " from database.");
         db.execSQL(query);
     }
 }
