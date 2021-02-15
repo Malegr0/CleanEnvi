@@ -27,7 +27,7 @@ import java.net.URL;
 public class ProductShowActivity extends AppCompatActivity {
     String EANmanuell, EANcamera;
     TextView resultTxt, result_packaging, result_disposal, result_brand, result_EAN, result_product;
-    ImageView proimageView, imageViewRest, imageViewGlas, imageViewWert, imageViewPapier, imageViewOther;
+    ImageView proimageView, imageViewRest, imageViewGlas, imageViewWert, imageViewPapier;
     DBHelper mDBHelper;
     ProgressDialog nDialog, mDialog;
     String reID;
@@ -49,6 +49,7 @@ public class ProductShowActivity extends AppCompatActivity {
         nDialog.setIndeterminate(false);
         nDialog.setCancelable(true);
         nDialog.show();
+
 
         // Methodenaufruf für die API-Anfrage
         new OpenFoodFacts().execute();
@@ -95,13 +96,13 @@ public class ProductShowActivity extends AppCompatActivity {
         imageViewGlas = findViewById(R.id.imageViewGlas);
         imageViewWert = findViewById(R.id.imageViewWert);
         imageViewPapier = findViewById(R.id.imageViewPapier);
-        imageViewOther = findViewById(R.id.imageViewPfand);
         resultTxt = findViewById(R.id.showResulttxt);
         result_packaging = findViewById(R.id.result_packaging);
         result_brand = findViewById(R.id.result_brand);
         result_disposal = findViewById(R.id.result_disposal);
         result_EAN = findViewById(R.id.result_EAN);
         result_product = findViewById(R.id.result_product);
+
 
         //URL für Abfrage erstellen
         String query_url = makeURL(EAN);
@@ -161,14 +162,20 @@ public class ProductShowActivity extends AppCompatActivity {
                     imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
                     imageViewPapier.setImageResource(R.drawable.ic_graue_tonne);
 
-
+                    boolean pfand=false;
                     for (String s : Verpackung) {
+
+
                         Cursor data = mDBHelper.getData(s);
                         StringBuilder buffer = new StringBuilder();
                         while (data.moveToNext()) {
                             buffer.append(data.getString(1));
                         }
                         reID = buffer.toString();
+
+                        if (reID.equals("5")){
+                            pfand =true;
+                        }
 
                         //Unterscheidung der Entsorgung abhängig von Recyclingnummer
                         switch (reID) {
@@ -189,12 +196,16 @@ public class ProductShowActivity extends AppCompatActivity {
                                 break;
                             case "4":
                                 Entsorgung = Entsorgung + s + "= Glascontainer" + "\n";
-                                imageViewGlas.setImageResource(R.mipmap.ic_glas_2_foreground);
+                                if (!pfand){
+                                    imageViewGlas.setImageResource(R.mipmap.ic_glas_2_foreground);
+                                }
+
                                 resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                 break;
                             case "5":
                                 Entsorgung = Entsorgung + s + "= Pfandannahmestellen im Handel" + "\n";
-                                imageViewOther.setImageResource(R.mipmap.ic_pfand_foreground);
+                                imageViewGlas.setImageResource(R.mipmap.ic_pfand_foreground);
+                                imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
                                 break;
                             case "6":
                                 Entsorgung = Entsorgung + s + "= nicht genau zuordenbar" + "\n";
@@ -207,6 +218,7 @@ public class ProductShowActivity extends AppCompatActivity {
                                     break;
                                 }
                         }
+
                         reID = "";
                     }
 
@@ -217,9 +229,6 @@ public class ProductShowActivity extends AppCompatActivity {
                     result_brand.setText(Marke);
                     result_product.setText(Produktname);
                     result_EAN.setText(EANCode);
-
-
-
 
 
                     EANmanuell = null;

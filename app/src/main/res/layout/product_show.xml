@@ -6,46 +6,46 @@
     android:layout_height="match_parent"
     android:background="@color/colorMainBackground">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="283dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewPapier"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewPfand"
-        app:layout_constraintHorizontal_bias="0.388"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_packaging" />
-
-    <ImageView
-        android:id="@+id/imageViewPfand"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_camera_search_background"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="561dp"
-        tools:srcCompat="@mipmap/ic_main_foreground" />
-
     <TextView
         android:id="@+id/resulttxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
         android:gravity="center"
         android:text="Infos zum Produkt: "
-        tools:layout_editor_absoluteX="23dp"
-        tools:layout_editor_absoluteY="47dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/productImageView"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.067" />
+
+    <TextView
+        android:id="@+id/showResulttxt"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resulttxt"
+        app:layout_constraintVertical_bias="0.055" />
 
     <ImageView
         android:id="@+id/productImageView"
-        android:layout_width="176dp"
-        android:layout_height="144dp"
+        android:layout_width="190dp"
+        android:layout_height="169dp"
         android:adjustViewBounds="true"
+        android:contentDescription="TODO"
         android:visibility="invisible"
-        app:srcCompat="@drawable/ic_launcher_background"
-        tools:layout_editor_absoluteX="214dp"
-        tools:layout_editor_absoluteY="29dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.031"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_show"
@@ -56,151 +56,142 @@
         app:itemTextColor="@android:color/white"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu" />
 
     <TextView
-        android:id="@+id/showResulttxt"
-        android:layout_width="212dp"
-        android:layout_height="wrap_content"
-        android:text="@string/txt"
-
-        tools:layout_editor_absoluteY="89dp" />
-
-    <TextView
-        android:id="@+id/result_brand"
-        android:layout_width="31dp"
-        android:layout_height="wrap_content"
-
-        android:text=""
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="242dp" />
-
-    <TextView
-        android:id="@+id/result_EAN"
-        android:layout_width="31dp"
-        android:layout_height="wrap_content"
-
-        android:text=""
-        tools:layout_editor_absoluteX="125dp"
-        tools:layout_editor_absoluteY="318dp" />
-
-    <TextView
-        android:id="@+id/result_product"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:text=""
-
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="134dp" />
-
-    <TextView
-        android:id="@+id/result_packaging"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-
-        android:text=""
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="492dp" />
-
-    <TextView
-        android:id="@+id/textViewPackage"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="@string/packung"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="492dp" />
-
-    <TextView
         android:id="@+id/textViewEntsorgung"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/disposal"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/spinner"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/result_disposal"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewEntsorgung"
-        app:layout_constraintTop_toTopOf="@+id/spinner"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textViewProdukt"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="@string/produkt"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553" />
 
     <TextView
         android:id="@+id/textViewBrand"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/brand"
-        tools:layout_editor_absoluteX="12dp"
-        tools:layout_editor_absoluteY="235dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379" />
+
+    <TextView
+        android:id="@+id/textViewPackage"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/packung"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.467" />
 
     <TextView
         android:id="@+id/textViewEan"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="@string/tvEAN"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="318dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.435" />
 
-    <ImageView
-        android:id="@+id/imageViewWert"
+    <TextView
+        android:id="@+id/textViewProdukt"
         android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_show"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewRest"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageViewPapier"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:srcCompat="@drawable/ic_camera_search_background"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@mipmap/ic_main_foreground" />
+        android:layout_height="wrap_content"
+        android:text="@string/produkt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31" />
+
+    <TextView
+        android:id="@+id/result_disposal"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewEntsorgung"
+        app:layout_constraintTop_toTopOf="@+id/textViewEntsorgung"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_packaging"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewPackage"
+        app:layout_constraintTop_toTopOf="@+id/textViewPackage"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_product"
+        android:layout_width="286dp"
+        android:layout_height="20dp"
+        android:text=""
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewProdukt"
+        app:layout_constraintTop_toTopOf="@+id/textViewProdukt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_brand"
+        android:layout_width="286dp"
+        android:layout_height="20dp"
+
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewBrand"
+        app:layout_constraintTop_toTopOf="@+id/textViewBrand"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_EAN"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewEan"
+        app:layout_constraintTop_toTopOf="@+id/textViewEan" />
 
     <ImageView
         android:id="@+id/imageViewRest"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_show"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewWert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageViewWert"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewPfand"
-        app:srcCompat="@drawable/ic_camera_search_background"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@mipmap/ic_main_foreground" />
-
-    <ImageView
-        android:id="@+id/imageViewPapier"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_show"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewWert"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageViewGlas"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/imageViewWert"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_camera_search_background"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@mipmap/ic_main_foreground" />
@@ -209,20 +200,42 @@
         android:id="@+id/imageViewGlas"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_show"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageViewPapier"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.883"
         app:srcCompat="@drawable/ic_camera_search_background"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@mipmap/ic_main_foreground" />
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="424dp" />
+    <ImageView
+        android:id="@+id/imageViewPapier"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewGlas"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewWert"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewGlas"
+        app:layout_constraintTop_toTopOf="@+id/imageViewGlas"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_camera_search_background"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@mipmap/ic_main_foreground" />
+
+    <ImageView
+        android:id="@+id/imageViewWert"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPapier"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewRest"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPapier"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPapier"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_camera_search_background"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@mipmap/ic_main_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
