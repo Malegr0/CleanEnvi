@@ -31,7 +31,7 @@ public class URLManager {
         return response;
     }
 
-    public static String getProduct(String ean) throws IOException{
+    public static String getProduct(String ean) throws IOException {
         URL url = new URL(PRODUCTS_ADDRESS + ean);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
