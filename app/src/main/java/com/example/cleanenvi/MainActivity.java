@@ -46,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.this.startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
-                /*try {
-                    URLManager.getRecID("KUNSTSTOFF");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
             }
         });
 
