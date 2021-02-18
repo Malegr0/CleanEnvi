@@ -1,4 +1,4 @@
-package com.example.cleanenvi.urlmanager;
+package com.example.cleanenvi.helpers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
