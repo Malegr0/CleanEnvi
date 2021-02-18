@@ -86,6 +86,7 @@ public class ProductShowActivity extends AppCompatActivity {
             } else {
                 api(EANmanuell);
             }
+            //TODO: delete try and catch, was just needed for testing
             try {
                 System.out.println("--------------------------------");
                 ResponseManager.getProductData("4004980506206");

@@ -19,9 +19,6 @@ public class ResponseManager {
         response[3] = jObj.getString("packaging");
         response[4] = jObj.getString("brand");
         response[5] = jObj.getString("recnumber");
-        for(String r: response) {
-            System.out.println(r);
-        }
         return response;
     }
 
