@@ -11,13 +11,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cleanenvi.helpers.ResponseManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -81,6 +85,15 @@ public class ProductShowActivity extends AppCompatActivity {
                 api(EANcamera);
             } else {
                 api(EANmanuell);
+            }
+            try {
+                System.out.println("--------------------------------");
+                ResponseManager.getProductData("4004980506206");
+                System.out.println("--------------------------------");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
             return null;
         }
