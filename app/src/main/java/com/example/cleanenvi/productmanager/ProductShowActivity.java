@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProductShowActivity extends AppCompatActivity {
 
@@ -88,11 +89,20 @@ public class ProductShowActivity extends AppCompatActivity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
+            String[] packages = productData[3].split(",");
+            final ArrayList<String> recID = new ArrayList();
+            for(String s: packages) {
+                try {
+                    recID.add(URLManager.getRecID(s.toUpperCase()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
             //TODO: add check if product is available/if something is in response
             if(true) {
                 final String[] finalProductData = productData;
-                final String[] packages = productData[3].split(",");
+                //final String[] packages = productData[3].split(",");
                 runOnUiThread(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     @Override
@@ -103,13 +113,8 @@ public class ProductShowActivity extends AppCompatActivity {
                         productImageView.setVisibility(View.VISIBLE);
                         String recOutput = "";
 
-                        for(String s: packages) {
-                            String reID = "";
-                            try {
-                                reID = URLManager.getRecID(s.toUpperCase());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                        for(String s: recID) {
+                            String reID = s;
                             switch (reID) {
                                 case "1":
                                     recOutput = recOutput + s + "= Wertstofftonne oder Gelber Sack" + "\n";

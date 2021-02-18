@@ -41,5 +41,6 @@
         <activity android:name=".CameraMainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ProductMainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".MapActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".productmanager.ProductShowActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>

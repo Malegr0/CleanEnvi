@@ -33,7 +33,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, ProductShowActivity.class));
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
             }
         });
 
