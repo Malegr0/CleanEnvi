@@ -1,6 +1,7 @@
 package com.example.cleanenvi.productmanager;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class ProductShowActivity extends AppCompatActivity {
     String ean;
     TextView resultTxt;
     ImageView productImageView;
+    ProgressDialog waitingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,11 +73,26 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     //background thread for api call
+    @SuppressLint("StaticFieldLeak")
     private class APICall extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             productImageView = findViewById(R.id.productImageView);
             resultTxt = findViewById(R.id.showResulttxt);
+
+            //set and show dialog for web call
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    waitingDialog = new ProgressDialog(ProductShowActivity.this);
+                    waitingDialog.setMessage("Bitte warten (Ladezeit variiert nach Produkt)..");
+                    waitingDialog.setTitle("Daten verarbeiten");
+                    waitingDialog.setIndeterminate(false);
+                    waitingDialog.setCancelable(true);
+                    waitingDialog.show();
+                }
+            });
+
             String[] productData = null;
             try {
                 productData = ResponseManager.getProductData(ean);
@@ -133,15 +150,11 @@ public class ProductShowActivity extends AppCompatActivity {
                                     recOutput = recOutput + finalPackages[i] + "= nicht genau zuordenbar" + "\n";
                                     break;
                                 default:
-                                    /*if (Packung.equals("KEINE ANGABEN VERFÜGBAR")) {
-                                        recOutput = "KEINE ANGABEN VERFÜGBAR" + "\n";
-                                    } else {
-                                        break;
-                                    }*/
+                                    recOutput = "KEINE ANGABEN VERFÜGBAR" + "\n";
                                     break;
                             }
                         }
-
+                        waitingDialog.dismiss();
                         resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n"
                                 + "Verpackungen: " + finalProductData[3] + "\n\n"
                                 + "Entsorgung: " + "\n" + recOutput + "\n"
@@ -154,6 +167,7 @@ public class ProductShowActivity extends AppCompatActivity {
                     }
                 });
             } else {
+                waitingDialog.dismiss();
                 runOnUiThread(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     @Override
