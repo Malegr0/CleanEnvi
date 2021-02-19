@@ -100,16 +100,22 @@ public class ProductShowActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             if(productData != null) {
-                String[] packages = productData[3].split(",");
-                ArrayList<String> recID = new ArrayList();
-                for(String s: packages) {
-                    try {
-                        recID.add(ResponseManager.getRecIDData(s.toUpperCase()));
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
+                String[] packages;
+                ArrayList<String> recID = new ArrayList<String>();
+                if(productData[3] != null) {
+                    packages = productData[3].split(",");
+                    for (String s : packages) {
+                        try {
+                            recID.add(ResponseManager.getRecIDData(s.toUpperCase()));
+                        } catch (IOException | JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
+                } else {
+                    recID.add("0");
+                    packages = new String[1];
+                    productData[3] = "Keine Angaben verfügbar.";
                 }
-
                 //TODO: add check if product is available/if something is in response, with response code
                 final String[] finalProductData = productData;
                 final ArrayList<String> packaging = recID;
@@ -146,7 +152,7 @@ public class ProductShowActivity extends AppCompatActivity {
                                     recOutput = recOutput + finalPackages[i] + "= nicht genau zuordenbar" + "\n";
                                     break;
                                 default:
-                                    recOutput = "KEINE ANGABEN VERFÜGBAR" + "\n";
+                                    recOutput = "Keine Angaben verfügbar" + "\n";
                                     break;
                             }
                         }

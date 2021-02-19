@@ -18,7 +18,11 @@ public class ResponseManager {
             response[0] = jObj.getString("ean");
             response[1] = jObj.getString("name");
             response[2] = jObj.getString("imageurl");
-            response[3] = jObj.getString("packaging");
+            if(!jObj.getString("packaging").equals("")) {
+                response[3] = jObj.getString("packaging");
+            } else {
+                response[3] = null;
+            }
             response[4] = jObj.getString("brand");
             response[5] = jObj.getString("recnumber");
             return response;
