@@ -54,23 +54,15 @@ public class ProductShowActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        com.example.cleanenvi.productmanager.ProductShowActivity.this
-                                .startActivity(new Intent(com.example.cleanenvi.productmanager.ProductShowActivity.this, MainActivity.class));
-                        break;
-                    case R.id.action_search:
-                        com.example.cleanenvi.productmanager.ProductShowActivity.this
-                                .startActivity(new Intent(com.example.cleanenvi.productmanager.ProductShowActivity.this, ProductSearchActivity.class));
-                        break;
-                    case R.id.action_camera:
-                        com.example.cleanenvi.productmanager.ProductShowActivity.this
-                                .startActivity(new Intent(com.example.cleanenvi.productmanager.ProductShowActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        break;
-                    case R.id.action_hofkarte:
-                        com.example.cleanenvi.productmanager.ProductShowActivity.this
-                                .startActivity(new Intent(com.example.cleanenvi.productmanager.ProductShowActivity.this, MapActivity.class));
-                        break;
+                int id = item.getItemId();
+                if (id == R.id.action_home) {
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MainActivity.class));
+                } else if(id == R.id.action_search) {
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class));
+                } else if(id == R.id.action_camera) {
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_hofkarte) {
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MapActivity.class));
                 }
                 return true;
             }
