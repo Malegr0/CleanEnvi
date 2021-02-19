@@ -9,8 +9,9 @@ public class ResponseManager {
 
     public static String[] getProductData(String ean) throws IOException, JSONException {
         //shorten response to fit JSONObject
-        String responseStr = URLManager.getProduct(ean).replaceAll("[\\[\\]]", "");
-        if(!responseStr.equals("-1")) {
+        String responseStr = URLManager.getProduct(ean);
+        if(responseStr != null) {
+            responseStr = responseStr.replaceAll("[\\[\\]]", "");
             JSONObject jObj = new JSONObject(responseStr);
             //put jObj values into response array
             String[] response = new String[6];
@@ -19,9 +20,10 @@ public class ResponseManager {
             response[2] = jObj.getString("imageurl");
             response[3] = jObj.getString("packaging");
             response[4] = jObj.getString("brand");
-            response[5] = jObj.getString("recnumber");return response;
+            response[5] = jObj.getString("recnumber");
+            return response;
         } else {
-            return new String[]{"-1"};
+            return null;
         }
     }
 

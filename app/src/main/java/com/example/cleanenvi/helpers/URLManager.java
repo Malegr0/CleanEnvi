@@ -43,7 +43,7 @@ public class URLManager {
             }
             bf.close();
         } else if(conn.getResponseCode() == 404) {
-            response = "-1";
+            response = null;
         }
         conn.disconnect();
         return response;
