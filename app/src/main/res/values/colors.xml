@@ -13,5 +13,6 @@
     <color name="colorMainBackground_Alt">#d5db5c</color>
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="colorTextBlack">#000000</color>
+    <color name="colorIconBlack">#000000</color>
 </resources>
 
