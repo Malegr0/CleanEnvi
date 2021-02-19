@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,14 +29,13 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//TODO: delete TextView "Infos zum Produkt"
 public class ProductShowActivity extends AppCompatActivity {
-
-    //TODO: check for rest in old ProductShowActivity which need to be added
 
     String ean;
     TextView resultTxt;
     ImageView productImageView;
-    ProgressDialog waitingDialog;
+    ProgressBar processingBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +48,8 @@ public class ProductShowActivity extends AppCompatActivity {
         } else if(CameraMainActivity.EANcamera != null) {
             ean = CameraMainActivity.EANcamera;
         }
+        processingBar = findViewById(R.id.processingBar);
+        processingBar.setVisibility(View.VISIBLE);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_show);
 
         //make api call
@@ -80,19 +82,6 @@ public class ProductShowActivity extends AppCompatActivity {
             productImageView = findViewById(R.id.productImageView);
             resultTxt = findViewById(R.id.showResulttxt);
 
-            //set and show dialog for web call
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    waitingDialog = new ProgressDialog(ProductShowActivity.this);
-                    waitingDialog.setMessage("Bitte warten (Ladezeit variiert nach Produkt)..");
-                    waitingDialog.setTitle("Daten verarbeiten");
-                    waitingDialog.setIndeterminate(false);
-                    waitingDialog.setCancelable(true);
-                    waitingDialog.show();
-                }
-            });
-
             String[] productData = null;
             try {
                 productData = ResponseManager.getProductData(ean);
@@ -116,7 +105,6 @@ public class ProductShowActivity extends AppCompatActivity {
                     packages = new String[1];
                     productData[3] = "Keine Angaben verfügbar.";
                 }
-                //TODO: add check if product is available/if something is in response, with response code
                 final String[] finalProductData = productData;
                 final ArrayList<String> packaging = recID;
                 final String[] finalPackages = packages;
@@ -156,7 +144,7 @@ public class ProductShowActivity extends AppCompatActivity {
                                     break;
                             }
                         }
-                        waitingDialog.dismiss();
+                        processingBar.setVisibility(View.INVISIBLE);
                         resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n"
                                 + "Verpackungen: " + finalProductData[3] + "\n\n"
                                 + "Entsorgung: " + "\n" + recOutput + "\n"
@@ -169,14 +157,12 @@ public class ProductShowActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                waitingDialog.dismiss();
+                processingBar.setVisibility(View.INVISIBLE);
                 runOnUiThread(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
                         resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch eingegeben/eingescannt worden.");
-                        //nDialog.dismiss();
-                        //mDialog.dismiss();
                     }
                 });
             }
