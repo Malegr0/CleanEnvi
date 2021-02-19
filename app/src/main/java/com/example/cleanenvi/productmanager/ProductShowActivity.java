@@ -19,7 +19,6 @@ import com.example.cleanenvi.MapActivity;
 import com.example.cleanenvi.ProductSearchActivity;
 import com.example.cleanenvi.R;
 import com.example.cleanenvi.helpers.ResponseManager;
-import com.example.cleanenvi.helpers.URLManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +28,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductShowActivity extends AppCompatActivity {
+
+    //TODO: check for rest in old ProductShowActivity which need to be added
 
     String ean;
     TextView resultTxt;
@@ -90,19 +91,24 @@ public class ProductShowActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             String[] packages = productData[3].split(",");
-            final ArrayList<String> recID = new ArrayList();
+            ArrayList<String> recID = new ArrayList();
             for(String s: packages) {
                 try {
-                    recID.add(URLManager.getRecID(s.toUpperCase()));
-                } catch (IOException e) {
+                    recID.add(ResponseManager.getRecIDData(s.toUpperCase()));
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
+            System.out.println("-------------------");
+            System.out.println(recID);
+            System.out.println(recID.get(0));
+            System.out.println("-------------------");
 
             //TODO: add check if product is available/if something is in response
             if(true) {
                 final String[] finalProductData = productData;
-                //final String[] packages = productData[3].split(",");
+                final ArrayList<String> packaging = recID;
+                final String[] finalPackages = packages;
                 runOnUiThread(new Runnable() {
                     @SuppressLint("SetTextI18n")
                     @Override
@@ -113,26 +119,26 @@ public class ProductShowActivity extends AppCompatActivity {
                         productImageView.setVisibility(View.VISIBLE);
                         String recOutput = "";
 
-                        for(String s: recID) {
-                            String reID = s;
+                        for(int i = 0; i < finalPackages.length; i++) {
+                            String reID = packaging.get(i);
                             switch (reID) {
                                 case "1":
-                                    recOutput = recOutput + s + "= Wertstofftonne oder Gelber Sack" + "\n";
+                                    recOutput = recOutput + finalPackages[i] + "= Wertstofftonne oder Gelber Sack" + "\n";
                                     break;
                                 case "2":
-                                    recOutput = recOutput + s + "= Schwarze Tonne" + "\n";
+                                    recOutput = recOutput + finalPackages[i] + "= Schwarze Tonne" + "\n";
                                     break;
                                 case "3":
-                                    recOutput = recOutput + s + "= Blaue Tonne" + "\n";
+                                    recOutput = recOutput + finalPackages[i] + "= Blaue Tonne" + "\n";
                                     break;
                                 case "4":
-                                    recOutput = recOutput + s + "= Glascontainer" + "\n";
+                                    recOutput = recOutput + finalPackages[i] + "= Glascontainer" + "\n";
                                     break;
                                 case "5":
-                                    recOutput = recOutput + s + "= Pfandannahmestellen im Handel" + "\n";
+                                    recOutput = recOutput + finalPackages[i] + "= Pfandannahmestellen im Handel" + "\n";
                                     break;
                                 case "6":
-                                    recOutput = recOutput + s + "= nicht genau zuordenbar" + "\n";
+                                    recOutput = recOutput + finalPackages[i] + "= nicht genau zuordenbar" + "\n";
                                     break;
                                 default:
                                     /*if (Packung.equals("KEINE ANGABEN VERFÜGBAR")) {

@@ -22,4 +22,10 @@ public class ResponseManager {
         return response;
     }
 
+    public static String getRecIDData(String packaging) throws IOException, JSONException {
+        String responseStr = URLManager.getRecID(packaging).replaceAll("[\\[\\]]", "");
+        JSONObject jObj = new JSONObject(responseStr);
+        return jObj.getString("recid");
+    }
+
 }
