@@ -99,6 +99,7 @@ public class ProductShowActivity extends AppCompatActivity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
+
             String[] packages = productData[3].split(",");
             ArrayList<String> recID = new ArrayList();
             for(String s: packages) {
@@ -108,12 +109,8 @@ public class ProductShowActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            System.out.println("-------------------");
-            System.out.println(recID);
-            System.out.println(recID.get(0));
-            System.out.println("-------------------");
 
-            //TODO: add check if product is available/if something is in response
+            //TODO: add check if product is available/if something is in response, with response code
             if(true) {
                 final String[] finalProductData = productData;
                 final ArrayList<String> packaging = recID;

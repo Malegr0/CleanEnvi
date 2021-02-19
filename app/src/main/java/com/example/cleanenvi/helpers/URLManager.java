@@ -42,6 +42,8 @@ public class URLManager {
                 response = response + inputLine;
             }
             bf.close();
+        } else if(conn.getResponseCode() == 404) {
+            response = "-1";
         }
         conn.disconnect();
         return response;
