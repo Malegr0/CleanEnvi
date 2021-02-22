@@ -112,7 +112,6 @@ public class ProductShowActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
-                        //TODO: test performance without picasso
                         //render picture
                         Picasso.get().load(finalProductData[2]).into(productImageView);
                         productImageView.setVisibility(View.VISIBLE);
