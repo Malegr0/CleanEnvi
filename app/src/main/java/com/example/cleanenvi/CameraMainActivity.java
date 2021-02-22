@@ -28,7 +28,7 @@ public class CameraMainActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private TextView barcodeText;
     private String barcodeData;
-    public static String EANcamera, EANcam;
+    public static String EAN_CAMERA, EAN_CAM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +121,9 @@ public class CameraMainActivity extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                             }
-                            EANcam = barcodeData;
-                            EANcamera = EANcam.trim();
-                            CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductShowActivity.class));
+                            EAN_CAM = barcodeData;
+                            EAN_CAMERA = EAN_CAM.trim();
+                            CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
 
                             // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
                             // barcodeText.setText(barcodeData);

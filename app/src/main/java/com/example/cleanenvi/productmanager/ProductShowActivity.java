@@ -1,7 +1,6 @@
 package com.example.cleanenvi.productmanager;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,8 +44,8 @@ public class ProductShowActivity extends AppCompatActivity {
         //set ean
         if(ProductSearchActivity.EAN != null) {
             ean = ProductSearchActivity.EAN;
-        } else if(CameraMainActivity.EANcamera != null) {
-            ean = CameraMainActivity.EANcamera;
+        } else if(CameraMainActivity.EAN_CAMERA != null) {
+            ean = CameraMainActivity.EAN_CAMERA;
         }
         processingBar = findViewById(R.id.processingBar);
         processingBar.setVisibility(View.VISIBLE);
@@ -151,7 +150,7 @@ public class ProductShowActivity extends AppCompatActivity {
                                 + "Produkt: " + finalProductData[1] + "\n\n"
                                 + "Marke: " + finalProductData[4]);
                         ProductSearchActivity.EAN = null;
-                        CameraMainActivity.EANcamera = null;
+                        CameraMainActivity.EAN_CAMERA = null;
                         ean = null;
                     }
                 });

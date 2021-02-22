@@ -18,13 +18,11 @@ public final class ProductSearchActivity extends AppCompatActivity {
     EditText productSearchEdit;
     public static String EAN;
     Button searchBtn;
-    DBHelper mDBHelper;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_search);
         this.setTitle("Produktsuche");
-        mDBHelper = new DBHelper(this);
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
