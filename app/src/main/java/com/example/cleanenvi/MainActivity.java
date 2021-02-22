@@ -12,9 +12,8 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 //TODO: bottomNavigationBar change from switch to if-else in all classes
+//TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity {
-
-    String tName1,tName2,tName3,tName4,tName5,tName6, tNameGes, tID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
