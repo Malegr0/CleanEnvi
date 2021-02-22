@@ -37,4 +37,19 @@ public class ResponseManager {
         return jObj.getString("recid");
     }
 
+    //TODO: check response code handling
+    public static String[] getNewsfeedData(int id) throws JSONException, IOException {
+        String responseStr = URLManager.getNewsfeed(id);
+        if(responseStr != null) {
+            responseStr = responseStr.replaceAll("[\\[\\]]", "");
+            JSONObject jObj = new JSONObject(responseStr);
+            String[] response = new String[2];
+            response[0] = jObj.getString("title");
+            response[1] = jObj.getString("description");
+            return response;
+        } else {
+            return null;
+        }
+    }
+
 }
