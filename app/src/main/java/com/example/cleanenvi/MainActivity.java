@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 //TODO: bottomNavigationBar change from switch to if-else in all classes
+//TODO: add newsfeed handling
 //TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity {
 
