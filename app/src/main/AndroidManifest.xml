@@ -34,12 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductSearchActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ProductShowActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".DataMainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".EditDataActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ShowDataActivity" android:screenOrientation="portrait"/>
         <activity android:name=".CameraMainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ProductMainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".MapActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".productmanager.ProductShowActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>
