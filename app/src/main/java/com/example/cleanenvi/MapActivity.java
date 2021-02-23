@@ -64,19 +64,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class));
-                        break;
-                    case R.id.action_search:
-                        MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class));
-                        break;
-                    case R.id.action_camera:
-                        MapActivity.this.startActivity(new Intent(MapActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        break;
-                    case R.id.action_hofkarte:
-                        MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class));
-                        break;
+                int id = item.getItemId();
+                if (id == R.id.action_home) {
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class));
+                } else if(id == R.id.action_search) {
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class));
+                } else if(id == R.id.action_camera) {
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_hofkarte) {
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class));
                 }
                 return true;
             }
