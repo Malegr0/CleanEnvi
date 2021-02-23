@@ -4,14 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-//TODO: bottomNavigationBar change from switch to if-else in all classes
+//TODO: add newsfeed handling
 //TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity {
 
@@ -51,19 +50,15 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
-                        break;
-                    case R.id.action_search:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
-                        break;
-                    case R.id.action_camera:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        break;
-                    case R.id.action_hofkarte:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, MapActivity.class));
-                        break;
+                int id = item.getItemId();
+                if (id == R.id.action_home) {
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
+                } else if(id == R.id.action_search) {
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, ProductSearchActivity.class));
+                } else if(id == R.id.action_camera) {
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_hofkarte) {
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, MapActivity.class));
                 }
                 return true;
             }
