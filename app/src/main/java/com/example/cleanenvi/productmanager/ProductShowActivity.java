@@ -27,7 +27,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //TODO: delete TextView "Infos zum Produkt"
 public class ProductShowActivity extends AppCompatActivity {
