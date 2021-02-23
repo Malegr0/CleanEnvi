@@ -2,7 +2,6 @@ package com.example.cleanenvi.helpers;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 
 public class ResponseManager {
@@ -37,7 +36,6 @@ public class ResponseManager {
         return jObj.getString("recid");
     }
 
-    //TODO: check response code handling
     public static String[] getNewsfeedData(int id) throws JSONException, IOException {
         String responseStr = URLManager.getNewsfeed(id);
         if(responseStr != null) {
@@ -49,6 +47,19 @@ public class ResponseManager {
             return response;
         } else {
             return null;
+        }
+    }
+
+    //output number of rows or if database is empty or something went wrong -1 for catching an error
+    public static int getNewsfeedRows() throws IOException, JSONException {
+        String responseStr = URLManager.getNewsfeedRows();
+        if(responseStr != null) {
+            responseStr = responseStr.replaceAll("[\\[\\]]", "");
+            JSONObject jObj = new JSONObject(responseStr);
+            String response = jObj.getString("count(id)");
+            return Integer.parseInt(response);
+        } else {
+            return -1;
         }
     }
 

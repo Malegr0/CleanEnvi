@@ -50,8 +50,6 @@ public class URLManager {
         return response;
     }
 
-    //TODO: check response code handling
-    //TODO: add method for getting current number of newsfeed database rows
     public static String getNewsfeed(int id) throws IOException {
         URL url = new URL(NEWSFEED_ADDRESS + id);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -65,6 +63,25 @@ public class URLManager {
             }
             bf.close();
         } else if(conn.getResponseCode() == 404) {
+            response = null;
+        }
+        conn.disconnect();
+        return response;
+    }
+
+    public static String getNewsfeedRows() throws IOException {
+        URL url = new URL(NEWSFEED_ADDRESS);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        String response = "";
+        if(conn.getResponseCode() == 200) {
+            BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            while((inputLine = bf.readLine()) != null) {
+                response = response + inputLine;
+            }
+            bf.close();
+        } else if(conn.getResponseCode() == 204) {
             response = null;
         }
         conn.disconnect();
