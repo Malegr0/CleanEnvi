@@ -20,7 +20,7 @@
         mapbox:mapbox_cameraBearing="34.33"
         mapbox:mapbox_cameraTargetLat="52.52"
         mapbox:mapbox_cameraTargetLng="13.40"
-        mapbox:mapbox_cameraTilt="50.25"
+        mapbox:mapbox_cameraTilt="0"
         mapbox:mapbox_cameraZoom="12"
         mapbox:mapbox_cameraZoomMax="16"
         mapbox:mapbox_cameraZoomMin="6"

@@ -28,6 +28,11 @@ import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import android.graphics.BitmapFactory;
 
 import java.util.ArrayList;
 
@@ -40,6 +45,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private MapView mapView;
 
     private static final String SOURCE_ID = "SOURCE_ID";
+    private static final String ICON_ID = "ICON_ID";
+    private static final String LAYER_ID = "LAYER_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +100,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         symbolLayerIconFeatureList.add(Feature.fromGeometry(
                 Point.fromLngLat(13.435893058776855, 52.581480840538504)));
 
-        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7")
-                .withSource(new GeoJsonSource(SOURCE_ID,
-                        FeatureCollection.fromFeatures(symbolLayerIconFeatureList)))
+        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjf4m44iw0uza2spb3q0a7s41")
+                // Add the SymbolLayer icon image to the map style
+                .withImage(ICON_ID, BitmapFactory.decodeResource(
+                        MapActivity.this.getResources(), R.drawable.mapbox_marker_icon_default))
+                // Adding a GeoJson source for the SymbolLayer icons.
+                .withSource(new GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(symbolLayerIconFeatureList)))
+                .withLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
+                    .withProperties(
+                            iconImage(ICON_ID),
+                            iconAllowOverlap(true),
+                            iconIgnorePlacement(true)
+                    ))
                 , new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
