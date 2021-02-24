@@ -32,8 +32,8 @@ import java.util.ArrayList;
 public class ProductShowActivity extends AppCompatActivity {
 
     String ean;
-    TextView resultTxt;
-    ImageView productImageView;
+    TextView resultTxt, result_packaging, result_disposal, result_brand, result_EAN, result_product;
+    ImageView productImageView, imageViewRest, imageViewGlas, imageViewWert, imageViewPapier;
     ProgressBar processingBar;
 
     @Override
@@ -79,7 +79,16 @@ public class ProductShowActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             productImageView = findViewById(R.id.productImageView);
+            imageViewRest = findViewById(R.id.imageViewRest);
+            imageViewGlas = findViewById(R.id.imageViewGlas);
+            imageViewWert = findViewById(R.id.imageViewWert);
+            imageViewPapier = findViewById(R.id.imageViewPapier);
             resultTxt = findViewById(R.id.showResulttxt);
+            result_packaging = findViewById(R.id.result_packaging);
+            result_brand = findViewById(R.id.result_brand);
+            result_disposal = findViewById(R.id.result_disposal);
+            result_EAN = findViewById(R.id.result_EAN);
+            result_product = findViewById(R.id.result_product);
 
             String[] productData = null;
             try {
@@ -114,28 +123,52 @@ public class ProductShowActivity extends AppCompatActivity {
                         //render picture
                         Picasso.get().load(finalProductData[2]).into(productImageView);
                         productImageView.setVisibility(View.VISIBLE);
+
+                        // ImageView mit "grauer Tonne" starten
+                        imageViewRest.setImageResource(R.drawable.ic_graue_tonne);
+                        imageViewGlas.setImageResource(R.drawable.ic_graue_tonne);
+                        imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
+                        imageViewPapier.setImageResource(R.drawable.ic_graue_tonne);
+
                         String recOutput = "";
+                        boolean pfand=false;
 
                         for(int i = 0; i < finalPackages.length; i++) {
                             String reID = packaging.get(i);
+                            if (reID.equals("5")){
+                                pfand =true;
+                            }
                             switch (reID) {
                                 case "1":
                                     recOutput = recOutput + finalPackages[i] + "= Wertstofftonne oder Gelber Sack" + "\n";
+                                    imageViewWert.setImageResource(R.mipmap.ic_wert_2_foreground);
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "2":
                                     recOutput = recOutput + finalPackages[i] + "= Schwarze Tonne" + "\n";
+                                    imageViewRest.setImageResource(R.mipmap.ic_rest_2_foreground);
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "3":
                                     recOutput = recOutput + finalPackages[i] + "= Blaue Tonne" + "\n";
+                                    imageViewPapier.setImageResource(R.mipmap.ic_papier_2_foreground);
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "4":
                                     recOutput = recOutput + finalPackages[i] + "= Glascontainer" + "\n";
+                                    if (!pfand){
+                                        imageViewGlas.setImageResource(R.mipmap.ic_glas_2_foreground);
+                                    }
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "5":
                                     recOutput = recOutput + finalPackages[i] + "= Pfandannahmestellen im Handel" + "\n";
+                                    imageViewGlas.setImageResource(R.mipmap.ic_pfand_foreground);
+                                    imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
                                     break;
                                 case "6":
                                     recOutput = recOutput + finalPackages[i] + "= nicht genau zuordenbar" + "\n";
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 default:
                                     recOutput = "Keine Angaben verfügbar" + "\n";
@@ -143,12 +176,11 @@ public class ProductShowActivity extends AppCompatActivity {
                             }
                         }
                         processingBar.setVisibility(View.INVISIBLE);
-                        resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n"
-                                + "Verpackungen: " + finalProductData[3] + "\n\n"
-                                + "Entsorgung: " + "\n" + recOutput + "\n"
-                                + "EAN-Code: " + finalProductData[0] + "\n\n"
-                                + "Produkt: " + finalProductData[1] + "\n\n"
-                                + "Marke: " + finalProductData[4]);
+                        result_packaging.setText(finalProductData[3]);
+                        result_disposal.setText(recOutput);
+                        result_brand.setText(finalProductData[4]);
+                        result_product.setText(finalProductData[1]);
+                        result_EAN.setText(finalProductData[0]);
                         ProductSearchActivity.EAN = null;
                         CameraMainActivity.EAN_CAMERA = null;
                         ean = null;
