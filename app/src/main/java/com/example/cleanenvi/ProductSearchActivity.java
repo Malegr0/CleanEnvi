@@ -19,14 +19,11 @@ public final class ProductSearchActivity extends AppCompatActivity {
     EditText productSearchEdit;
     public static String EAN;
     ImageButton searchBtn;
-    DBHelper mDBHelper;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.product_search);
         this.setTitle("Produktsuche");
-
-        mDBHelper = new DBHelper(this);
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
@@ -35,26 +32,22 @@ public final class ProductSearchActivity extends AppCompatActivity {
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, ProductShowActivity.class));
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
             }
         });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MainActivity.class));
-                        break;
-                    case R.id.action_search:
-                        ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, ProductSearchActivity.class));
-                        break;
-                    case R.id.action_camera:
-                        ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        break;
-                    case R.id.action_hofkarte:
-                        ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MapActivity.class));
-                        break;
+                int id = item.getItemId();
+                if (id == R.id.action_home) {
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MainActivity.class));
+                } else if(id == R.id.action_search) {
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, ProductSearchActivity.class));
+                } else if(id == R.id.action_camera) {
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_hofkarte) {
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MapActivity.class));
                 }
                 return true;
             }

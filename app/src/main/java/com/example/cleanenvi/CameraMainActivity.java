@@ -29,7 +29,7 @@ public class CameraMainActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private TextView barcodeText;
     private String barcodeData;
-    public static String EANcamera, EANcam;
+    public static String EAN_CAMERA, EAN_CAM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +56,15 @@ public class CameraMainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MainActivity.class));
-                        break;
-                    case R.id.action_search:
-                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductSearchActivity.class));
-                        break;
-                    case R.id.action_camera:
-                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                        break;
-                    case R.id.action_hofkarte:
-                        CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MapActivity.class));
-                        break;
+                int id = item.getItemId();
+                if (id == R.id.action_home) {
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MainActivity.class));
+                } else if(id == R.id.action_search) {
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductSearchActivity.class));
+                } else if(id == R.id.action_camera) {
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_hofkarte) {
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MapActivity.class));
                 }
                 return true;
             }
@@ -126,9 +122,9 @@ public class CameraMainActivity extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                             }
-                            EANcam = barcodeData;
-                            EANcamera = EANcam.trim();
-                            CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductShowActivity.class));
+                            EAN_CAM = barcodeData;
+                            EAN_CAMERA = EAN_CAM.trim();
+                            CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
 
                             // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
                             // barcodeText.setText(barcodeData);
