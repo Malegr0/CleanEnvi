@@ -14,5 +14,6 @@
     <color name="colorTextWhite">#FFFFFF</color>
     <color name="colorTextBlack">#000000</color>
     <color name="colorIconBlack">#000000</color>
+    <color name="colorIconSecondaryDark">@color/colorPrimaryDark_Alt</color>
 </resources>
 

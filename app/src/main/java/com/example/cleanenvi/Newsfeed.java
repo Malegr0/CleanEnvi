@@ -83,15 +83,12 @@ public class Newsfeed {
                     "-\tdas Entleeren der dieser Tonnen/Säcke erschweren \n"},
             //fett machen
             {"Das kommt in den Sperrmüll: ","Metall-Schrott: Dreirad, Fahrrad, Lattenroste mit Metallfedern, Kinderwagen, Ölofen (erkennbar ölfrei), Rasenmäher (Öl-/Benzinfrei), Metallregale\n" +
+                    "\n" +
                     "Sperrmüll-Altholz: Holzmöbel defekt\n" +
+                    "\n" +
                     "Elektro-Schrott: Bildschirme, Computer, Fernsehgeräte, Monitore, Cerankochfeld, Kühl-/Gefriergeräte, Geschirrspüler, Waschmaschinen, Elektroherde, Wäschetrockner\n" +
+                    "\n" +
                     "Rest-Sperrmüll: Feder/Daunenbetten zerschlissen, Fußmatten (Auto), sperrige Haushaltskunststoffe, Gartenmöbel, große Kinderspielsachen, Kindersitz (Auto), Koffer, Matratzen, Polstermöbel defekt, Ski, Skibox, Teppiche, Teppichböden\n"},
-            {"Das gehört NICHT zum Sperrmüll:","-\tanderweitig entsorgbare Wertstoffe\n" +
-                    "-\tBaustellenabfälle, Farbe, Bauholz, Fenster, Styrodur, Gipsplatten, Holzzaun\n" +
-                    "-\tBauschutt, Steine, Waschbecken, Toilettenschüsseln\n" +
-                    "-\tAutoteile\n" +
-                    "-\tGewerbe- Landwirtschafts- oder Industrieabfälle\n" +
-                    "-\tNachtspeicheröfen\n"},
 
             //Mythen
             {"Mythos 1: ","Der in gelbe Tonnen oder Säcke geworfene Hausmüll könne dank innovativer Technik einfach wieder aussortiert werden. \n" +

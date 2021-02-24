@@ -94,21 +94,6 @@
         app:layout_constraintTop_toBottomOf="@+id/button_camera_search" />
 
     <TextView
-        android:id="@+id/newsMainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:foregroundTint="#A81919"
-        android:foregroundTintMode="add"
-        android:text="der Text"
-        android:textColor="@color/colorTextBlack"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
-        app:layout_constraintTop_toBottomOf="@+id/newsfeedTitle" />
-
-    <TextView
         android:id="@+id/newsfeedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,6 +123,54 @@
         app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle3"
         app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
         app:layout_constraintTop_toBottomOf="@+id/newsfeedTitle" />
+
+    <TextView
+        android:id="@+id/newsMainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:foregroundTint="#A81919"
+        android:foregroundTintMode="add"
+        android:text="der Text"
+        android:textColor="@color/colorTextBlack"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintTop_toBottomOf="@+id/newsfeedTitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/leftArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintEnd_toStartOf="@id/middleCircle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/middleCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintEnd_toStartOf="@id/rightArrow"
+        app:layout_constraintStart_toEndOf="@+id/leftArrow"
+        app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/rightArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/middleCircle"
+        app:srcCompat="@drawable/ic_arrow_right" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_main"
