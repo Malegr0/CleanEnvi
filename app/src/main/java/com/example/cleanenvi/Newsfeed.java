@@ -32,16 +32,16 @@ public class Newsfeed {
                     "-\tz.B. Deospray, \n" +
                     "-\tgiftige oder Aerosol enthaltende Verpackungen\n" +
                     "-\tz.B. Reinigungsmittel, Farbe, Lacke, Textilreiniger\n"},
-            {"Das kommt in die Wertstofftonne:", "- alles was in den gelben Sack könnte\n" +
+            {"Das kommt in die Wertstofftonne:", "-\talles was in den gelben Sack könnte\n" +
                     "  +\n" +
-                    "- Plastik, Metall, Naturmaterialien die keine Verpackung sind\n" +
-                    "- CDs, DVDs, Blue-Rays\n" +
-                    "- Draht, Kabelreste, Nägel, Schrauben, Türgriff, Werkzeug\n" +
-                    "- Blumentöpfe, Kochtöpfe\n" +
-                    "- Backbleche, Backformen, Besteck\n" +
-                    "- Duschvorhänge, Eimer, Haarbürste, Zahnbürste\n" +
-                    "- Plastikspielzeug, Kleiderbügel, Locher\n" +
-                    "- Klarsichtfolie, Spraydosen\n"},
+                    "-\tPlastik, Metall, Naturmaterialien die keine Verpackung sind\n" +
+                    "-\tCDs, DVDs, Blue-Rays\n" +
+                    "-\tDraht, Kabelreste, Nägel, Schrauben, Türgriff, Werkzeug\n" +
+                    "-\tBlumentöpfe, Kochtöpfe\n" +
+                    "-\tBackbleche, Backformen, Besteck\n" +
+                    "-\tDuschvorhänge, Eimer, Haarbürste, Zahnbürste\n" +
+                    "-\tPlastikspielzeug, Kleiderbügel, Locher\n" +
+                    "-\tKlarsichtfolie, Spraydosen\n"},
             {"Das gehört NICHT in die Wertstofftonne:","-\tGlas, Papier, Pappe, Bioabfall\n" +
                     "\n" +
                     "-\tzu große Teile für die Tonne \n" +
@@ -72,7 +72,7 @@ public class Newsfeed {
                     "-\tRasierklingen, Watte, Taschentücher, verschmutzte Papiere\n" +
                     "-\tKohle, Streichhölzer, Asche, Zigaretten\n" +
                     "-\tBehandeltes Holz (Reste)\n"},
-            {"Das gehört nicht in den Restmüll:","-\tChemikalien\n" +
+            {"Das gehört NICHT in den Restmüll:","-\tChemikalien\n" +
                     "-\tBauschutt\n" +
                     "-\tElektroschrott, Batterien, Energiesparlampen\n" +
                     "-\tSperrmüll\n"},
@@ -97,10 +97,10 @@ public class Newsfeed {
             //Tipps
             {"Tipp: Verpackungsteile einzeln wegwerfen","Viele Verpackungsteile sind aus verschiedenen Materialien und können nur getrennt von der Maschine sortiert werden.\n" +
                     "\n" +
-                    "z.B.\n" +
-                    "- Tetrapack und Deckel\n" +
-                    "- Plastikbecher und Deckel\n" +
-                    "- Foliendeckel und Verpackung von Wurst, Käse etc.\n"},
+                    "\tz.B.\n" +
+                    "-\tTetrapack und Deckel\n" +
+                    "-\tPlastikbecher und Deckel\n" +
+                    "-\tFoliendeckel und Verpackung von Wurst, Käse etc.\n"},
             {"Tipp: Bioabfall in Papiertüten oder Zeitung einwickeln oder sammeln.","Biologisch abbaubare Plastiktüten sollten Sie NICHT verwenden. Diese bauen sich zu langsam ab."}
 
 
