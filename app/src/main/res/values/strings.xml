@@ -10,9 +10,9 @@
     <string name="map_button_bar_name">Recylinghofkarte</string>
     <string name="home_button_bar_name">Home</string>
 
-    <string name="main_menu_button1_name">Suche mit der EAN nach einem Produkt!</string>
+    <string name="main_menu_button1_name">Suche ein Produkt!</string>
     <string name="main_menu_button2_name">Scanne das Produkt!</string>
-    <string name="main_menu_button3_name">Finde<br/> Recycling-"<br/>" höfe in deiner<br/> Nähe!</string>
+    <string name="main_menu_button3_name">Finde Recyclinghöfe!</string>
 
     <string name="newsfeed_title">Schon gewusst?</string>
 
