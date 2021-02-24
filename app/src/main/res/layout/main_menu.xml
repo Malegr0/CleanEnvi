@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <View
+        <View
         android:id="@+id/newsfeed_rectangle3"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -97,9 +97,11 @@
         android:id="@+id/newsMainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="20dp"
         android:foregroundTint="#A81919"
         android:foregroundTintMode="add"
-        android:text=""
+        android:text="der Text"
+        android:textColor="@color/colorTextBlack"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +117,9 @@
         android:layout_marginEnd="150dp"
         android:gravity="center"
         android:text="@string/newsfeed_title"
+        android:textStyle="bold"
         android:textColor="@color/colorTextBlack"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle3"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
@@ -129,6 +133,7 @@
         android:layout_marginBottom="140dp"
         android:gravity="center"
         android:text="Überschrift"
+        android:textColor="@color/colorTextBlack"
         app:layout_constraintBottom_toTopOf="@+id/newsMainText"
         app:layout_constraintEnd_toEndOf="@+id/newsfeed_rectangle3"
         app:layout_constraintStart_toStartOf="@+id/newsfeed_rectangle3"
@@ -152,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="140dp" />
+        app:layout_constraintGuide_begin="142dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
