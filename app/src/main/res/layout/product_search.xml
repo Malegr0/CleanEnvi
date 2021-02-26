@@ -9,20 +9,41 @@
 
     <EditText
         android:id="@+id/productSearchEdit"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="2dp"
+        android:layout_width="331dp"
+        android:layout_height="60dp"
         android:autofillHints=""
-        android:background="@color/colorPrimaryDark_Alt"
+        android:background="@drawable/box_shape_filled"
         android:ems="10"
         android:hint="@string/ean"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_search"
-        app:layout_constraintEnd_toStartOf="@+id/searchbtn"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.00999999" />
+
+    <ImageButton
+        android:id="@+id/searchbtn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/box_shape_filled"
+        android:drawableTop="@drawable/ic_search"
+        android:paddingStart="5dp"
+        android:paddingTop="25dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="15dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:text="@string/main_menu_button1_name"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/productSearchEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toEndOf="@+id/productSearchEdit"
+        app:layout_constraintTop_toTopOf="@+id/productSearchEdit"
+        app:srcCompat="@drawable/ic_search_bigger" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_search"
@@ -42,21 +63,5 @@
         app:barrierDirection="top"
         tools:layout_editor_absoluteX="174dp"
         tools:layout_editor_absoluteY="156dp" />
-
-    <ImageButton
-        android:id="@+id/searchbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-
-        android:layout_marginEnd="2dp"
-        android:background="@color/colorPrimaryDark_Alt"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productSearchEdit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_search_bigger" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
