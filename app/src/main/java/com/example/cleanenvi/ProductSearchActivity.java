@@ -9,16 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public final class ProductSearchActivity extends AppCompatActivity {
     EditText productSearchEdit;
     public static String EAN;
     ImageButton searchBtn;
+    ImageView HisPro1, HisPro2, HisPro3, HisPro4, HisPro5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,21 @@ public final class ProductSearchActivity extends AppCompatActivity {
         this.setTitle("Produktsuche");
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
+        HisPro1 = findViewById(R.id.historyImage1);
+        HisPro2 = findViewById(R.id.historyImage2);
+        HisPro3 = findViewById(R.id.historyImage3);
+        HisPro4 = findViewById(R.id.historyImage4);
+        HisPro5 = findViewById(R.id.historyImage5);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
 
         watcher(productSearchEdit, searchBtn);
+
+        // Nutella https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg
+        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro1);
+        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro2);
+        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro3);
+        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro4);
+        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro5);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {

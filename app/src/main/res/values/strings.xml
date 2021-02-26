@@ -23,6 +23,7 @@
     <string name="newsfeed_additive_name">Zusatzstoffe:</string>
     <string name="newsfeed_nutri_score_name">Nutri-Score:</string>
     <string name="newsfeed_packaging_name">Verpackung:</string>
+    <string name="historie">Dein Sucherverlauf:</string>
     <string name="ean">Hier suchen nach EAN/Produkt</string>
     <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
 
