@@ -9,16 +9,18 @@
 
     <EditText
         android:id="@+id/productSearchEdit"
-        android:layout_width="331dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:autofillHints=""
         android:background="@drawable/box_shape_filled"
         android:ems="10"
         android:hint="@string/ean"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingStart="5dp"
+        android:paddingEnd="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00999999" />
@@ -38,11 +40,11 @@
         android:text="@string/main_menu_button1_name"
         android:textColor="@color/colorTextBlack"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/productSearchEdit"
+        app:layout_constraintBottom_toTopOf="@+id/productSearchEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toEndOf="@+id/productSearchEdit"
-        app:layout_constraintTop_toTopOf="@+id/productSearchEdit"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/productSearchEdit"
+        app:layout_constraintTop_toBottomOf="@+id/productSearchEdit"
         app:srcCompat="@drawable/ic_search_bigger" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
