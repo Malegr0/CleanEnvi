@@ -181,27 +181,21 @@
         app:layout_constraintTop_toBottomOf="@+id/historyText4"
         app:layout_constraintVertical_bias="0.969" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/historyImage1"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/box_shape_filled"
-        android:drawableTop="@android:drawable/ic_menu_help"
         android:padding="6dp"
         android:scaleType="fitCenter"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="@string/main_menu_button1_name"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/historyText1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/historyText1"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_help"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/historyImage2"
@@ -232,45 +226,35 @@
         app:layout_constraintTop_toTopOf="@+id/historyText3"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/historyImage4"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/box_shape_filled"
-        android:drawableTop="@android:drawable/ic_menu_help"
         android:padding="6dp"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="@string/main_menu_button1_name"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/historyText4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/historyText4"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/historyImage5"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/box_shape_filled"
-        android:drawableTop="@android:drawable/ic_menu_help"
         android:padding="6dp"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="@string/main_menu_button1_name"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/historyText5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/historyText5"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/productSearchEdit"
