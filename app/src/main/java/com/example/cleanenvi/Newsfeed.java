@@ -82,17 +82,17 @@ public class Newsfeed {
                     "-\tinfolge ihrer Größe oder ihres Gewichts nicht in die zugelassenen Abfallbehältnisse aufgenommen werden können \n" +
                     "-\tdas Entleeren der dieser Tonnen/Säcke erschweren \n"},
             //fett machen
-            {"Das kommt in den Sperrmüll: ","Metall-Schrott: Dreirad, Fahrrad, Lattenroste mit Metallfedern, Kinderwagen, Ölofen (erkennbar ölfrei), Rasenmäher (Öl-/Benzinfrei), Metallregale\n" +
+            {"Das kommt in den Sperrmüll: ","Metall-Schrott: Fahrrad, Lattenroste mit Metallfedern, Kinderwagen, Ölofen (erkennbar ölfrei), Rasenmäher (Öl-/Benzinfrei), Metallregale\n" +
                     "\n" +
                     "Sperrmüll-Altholz: Holzmöbel defekt\n" +
                     "\n" +
-                    "Elektro-Schrott: Bildschirme, Computer, Fernsehgeräte, Monitore, Cerankochfeld, Kühl-/Gefriergeräte, Geschirrspüler, Waschmaschinen, Elektroherde, Wäschetrockner\n" +
+                    "Elektro-Schrott: Bildschirme, Computer, Fernsehgeräte, Herd, Kühl-/Gefriergeräte, Geschirrspüler, Waschmaschinen, Wäschetrockner\n" +
                     "\n" +
-                    "Rest-Sperrmüll: Feder/Daunenbetten zerschlissen, Fußmatten (Auto), sperrige Haushaltskunststoffe, Gartenmöbel, große Kinderspielsachen, Kindersitz (Auto), Koffer, Matratzen, Polstermöbel defekt, Ski, Skibox, Teppiche, Teppichböden\n"},
+                    "Rest-Sperrmüll: Feder/Daunenbetten, Autofußmatten, sperrige Haushaltskunststoffe, Gartenmöbel, große Kinderspielsachen, Kindersitz, Koffer, Matratzen, Polstermöbel, Ski, Skibox, Teppiche\n"},
 
             //Mythen
             {"Mythos 1: ","Der in gelbe Tonnen oder Säcke geworfene Hausmüll könne dank innovativer Technik einfach wieder aussortiert werden. \n" +
-                    "Dem ist nicht so. \n" +
+                    "Dem ist nicht so. \n\n" +
                     "Mit Störstoffen kontaminierte Leichtverpackungsabfälle sind in den allermeisten Fällen für das Recycling verloren und können nur noch verbrannt werden\n"},
             //Tipps
             {"Tipp: Verpackungsteile einzeln wegwerfen","Viele Verpackungsteile sind aus verschiedenen Materialien und können nur getrennt von der Maschine sortiert werden.\n" +
