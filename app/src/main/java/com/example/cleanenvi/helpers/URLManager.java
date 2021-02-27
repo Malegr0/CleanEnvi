@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class URLManager {
 
-    private static final String  SERVER_ADDRESS = "http://5764b88d1e78.ngrok.io";
+    private static final String  SERVER_ADDRESS = "http://4e49f597b226.ngrok.io";
     private static final String  PRODUCTS_ADDRESS = SERVER_ADDRESS + "/products/";
     private static final String  PACKAGES_ADDRESS = SERVER_ADDRESS + "/packages/";
     private static final String  NEWSFEED_ADDRESS = SERVER_ADDRESS + "/newsfeed/";
