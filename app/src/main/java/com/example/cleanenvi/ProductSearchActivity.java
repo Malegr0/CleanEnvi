@@ -40,8 +40,8 @@ public final class ProductSearchActivity extends AppCompatActivity {
 
         // Nutella https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg
         Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro1);
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro2);
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro3);
+        Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSebbILIsbkl0u52kWQxmBofyJcYhoCWq5_qA&usqp=CAU").into(HisPro2);
+        Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Md53AHlyPg5COqwMdgQsDjuVX3ScetOucg&usqp=CAU").into(HisPro3);
         Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro4);
         Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro5);
 
