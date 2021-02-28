@@ -35,6 +35,11 @@ public final class ProductSearchActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        Varianten zum Verhindern des Layoutflackerns
+        bottomNavigationView.getMenu().getItem(1).setEnabled(false);
+        bottomNavigationView.getMenu().getItem(1).setVisible(false);
+        */
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

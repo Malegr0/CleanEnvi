@@ -57,9 +57,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_map);
 
-        mapView = (MapView) findViewById(R.id.mapView); //MapView in JKlammern weg?
+        mapView = (MapView) findViewById(R.id.mapView); //MapView in Klammern weg?
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        /*
+        Varianten zum Verhindern des Layoutflackerns
+        bottomNavigationView.getMenu().getItem(3).setEnabled(false);
+        bottomNavigationView.getMenu().getItem(3).setVisible(false);
+        */
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
