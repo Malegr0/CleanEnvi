@@ -1,5 +1,6 @@
 package com.example.cleanenvi.helpers;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -60,6 +61,15 @@ public class ResponseManager {
             return Integer.parseInt(response);
         } else {
             return -1;
+        }
+    }
+
+    public static JSONArray getAllMarkers() throws IOException, JSONException {
+        String responseStr = URLManager.getAllMarkers();
+        if(responseStr != null) {
+            return new JSONArray(responseStr);
+        } else {
+            return null;
         }
     }
 
