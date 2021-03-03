@@ -119,16 +119,16 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
                     //detect left to right swipe
                     if(x2>x1){
-                        //display already loaded newsfeed array index-1
-                        //load newsfeed array index-2 from database (on index+1 or shift all before)
+                        //TODO display already loaded newsfeed array index-1
+                        //TODO load newsfeed array index-2 from database (on index+1 or shift all before)
 
                         //toast to see if it works
                         Toast.makeText(this,"Right is swiped",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         //detects right to left swipe
-                        //display already loaded newsfeed array index+1
-                        //load newsfeed array index+2 from database (on index-1 or shift all before)
+                        //TODO display already loaded newsfeed array index+1
+                        //TODO load newsfeed array index+2 from database (on index-1 or shift all before)
 
                         //toast to see if it works
                         Toast.makeText(this,"Left is swiped",Toast.LENGTH_SHORT).show();
