@@ -314,7 +314,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/box_shape_filled"
-        android:drawableTop="@drawable/ic_search"
+        android:drawableTop="@drawable/ic_search_bigger"
         android:paddingStart="5dp"
         android:paddingTop="20dp"
         android:paddingEnd="5dp"
@@ -325,11 +325,11 @@
         android:text="@string/main_menu_button1_name"
         android:textColor="@color/colorTextBlack"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/productSearchEdit"
+        app:layout_constraintBottom_toBottomOf="@+id/productSearchEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/productSearchEdit"
-        app:layout_constraintTop_toBottomOf="@+id/productSearchEdit"
+        app:layout_constraintTop_toTopOf="@+id/productSearchEdit"
         app:srcCompat="@drawable/ic_search_bigger" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
