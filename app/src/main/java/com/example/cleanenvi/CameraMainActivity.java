@@ -50,11 +50,9 @@ public class CameraMainActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         }
 
-        /*
-        Varianten zum Verhindern des Layoutflackerns
+
+        //Varianten zum Verhindern des Layoutflackerns
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
-        bottomNavigationView.getMenu().getItem(2).setVisible(false);
-        */
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

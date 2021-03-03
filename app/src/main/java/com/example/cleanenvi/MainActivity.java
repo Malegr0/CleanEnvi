@@ -51,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Varianten zum Verhindern des Layoutflackerns
+
+        //Verhindern des Layoutflackerns
         bottomNavigationView.getMenu().getItem(0).setEnabled(false);
-        bottomNavigationView.getMenu().getItem(0).setVisible(false);
-        */
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
