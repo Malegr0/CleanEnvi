@@ -27,6 +27,7 @@
     <string name="ean">Hier suchen nach EAN/Produkt</string>
     <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
 
+    <string name="noDisposal">Klicke hier, um trotzdem herauszufinden, wie du dein Produkt richtig entsorgst!</string>
     <string name="textview">TextView</string>
     <string name="disposal">Entsorgung:</string>
     <string name="produkt">Produkt:</string>
