@@ -24,7 +24,7 @@
         mapbox:mapbox_cameraZoom="12"
         mapbox:mapbox_cameraZoomMax="16"
         mapbox:mapbox_cameraZoomMin="6"
-        mapbox:mapbox_uiRotateGestures="false"
+        mapbox:mapbox_uiRotateGestures="true"
         tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -72,13 +72,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.action_home) {
-                    MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class));
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_search) {
-                    MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class));
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_camera) {
                     MapActivity.this.startActivity(new Intent(MapActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_hofkarte) {
-                    MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class));
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 }
                 return true;
             }

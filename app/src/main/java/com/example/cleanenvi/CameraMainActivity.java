@@ -59,13 +59,13 @@ public class CameraMainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.action_home) {
-                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MainActivity.class));
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_search) {
-                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductSearchActivity.class));
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, ProductSearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_camera) {
                     CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_hofkarte) {
-                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MapActivity.class));
+                    CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 }
                 return true;
             }
@@ -123,7 +123,7 @@ public class CameraMainActivity extends AppCompatActivity {
                             }
                             EAN_CAM = barcodeData;
                             EAN_CAMERA = EAN_CAM.trim();
-                            CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                            CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
 
                             // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
                             // barcodeText.setText(barcodeData);
