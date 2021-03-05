@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
 
 //TODO: delete TextView "Infos zum Produkt"
 public class ProductShowActivity extends AppCompatActivity {
@@ -92,6 +94,9 @@ public class ProductShowActivity extends AppCompatActivity {
 
     }
 
+
+
+
     //background thread for api call
     @SuppressLint("StaticFieldLeak")
     private class APICall extends AsyncTask<Void, Void, Void> {
@@ -114,6 +119,9 @@ public class ProductShowActivity extends AppCompatActivity {
             textViewEan = findViewById(R.id.textViewEan);
             textViewEntsorgung = findViewById(R.id.textViewEntsorgung);
             textViewPackage = findViewById(R.id.textViewPackage);
+
+            noDis = findViewById(R.id.btnnodisposal);
+            noDis.setMovementMethod(LinkMovementMethod.getInstance());
 
             String[] productData = null;
             try {
@@ -155,6 +163,8 @@ public class ProductShowActivity extends AppCompatActivity {
                         imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
                         imageViewPapier.setImageResource(R.drawable.ic_graue_tonne);
 
+                        String recOutput1 = "Wertstofftonne oder Gelber Sack: \n", recOutput2 = "Restmüll: \n",
+                                recOutput3 = "Blaue Tonne: \n", recOutput4 = "Glascontainer: \n", recOutput5 = "Pfandannahmestellen im Handel: \n", recOutput6 = "nicht genau zuordenbar: \n";
                         String recOutput = "";
                         boolean pfand = false;
                         boolean noDisposal = true;
@@ -169,34 +179,34 @@ public class ProductShowActivity extends AppCompatActivity {
                             }
                             switch (reID) {
                                 case "1":
-                                    recOutput = recOutput + finalPackages[i] + "= Wertstofftonne oder Gelber Sack" + "\n";
+                                    recOutput1 = recOutput1 + finalPackages[i] + ", ";
                                     imageViewWert.setImageResource(R.mipmap.ic_wert_2_foreground);
                                     resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "2":
-                                    recOutput = recOutput + finalPackages[i] + "= Schwarze Tonne" + "\n";
+                                    recOutput2 = recOutput2 + finalPackages[i] + ", ";
                                     imageViewRest.setImageResource(R.mipmap.ic_rest_2_foreground);
                                     resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "3":
-                                    recOutput = recOutput + finalPackages[i] + "= Blaue Tonne" + "\n";
+                                    recOutput3 = recOutput3 + finalPackages[i]  + ", ";
                                     imageViewPapier.setImageResource(R.mipmap.ic_papier_2_foreground);
                                     resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "4":
-                                    recOutput = recOutput + finalPackages[i] + "= Glascontainer" + "\n";
+                                    recOutput4 = recOutput4 + finalPackages[i]  + ", ";
                                     if (!pfand) {
                                         imageViewGlas.setImageResource(R.mipmap.ic_glas_2_foreground);
                                     }
                                     resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "5":
-                                    recOutput = recOutput + finalPackages[i] + "= Pfandannahmestellen im Handel" + "\n";
+                                    recOutput5 = recOutput5 + finalPackages[i]  + ", ";
                                     imageViewGlas.setImageResource(R.mipmap.ic_pfand_foreground);
                                     imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
                                     break;
                                 case "6":
-                                    recOutput = recOutput + finalPackages[i] + "= nicht genau zuordenbar" + "\n";
+                                    recOutput6 = recOutput6 + finalPackages[i]  + ", ";
                                     resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 default:
@@ -205,6 +215,31 @@ public class ProductShowActivity extends AppCompatActivity {
                             }
 
                         }
+
+                        if (!recOutput1.equals("Wertstofftonne oder Gelber Sack: \n")){
+                            recOutput1=recOutput1.substring(0, recOutput1.length()-2);
+                            recOutput = recOutput + recOutput1  + "\n";
+                        }
+                        if (!recOutput2.equals("Restmüll: \n")){
+                            recOutput2= recOutput2.substring(0, recOutput2.length()-2);
+                            recOutput = recOutput + recOutput2  + "\n";
+                        }
+                        if (!recOutput3.equals("Blaue Tonne: \n")){
+                            recOutput3= recOutput3.substring(0, recOutput3.length()-2);
+                            recOutput = recOutput + recOutput3  + "\n";
+                        }
+                        if (!recOutput4.equals("Glascontainer: \n")){
+                            recOutput4= recOutput4.substring(0, recOutput4.length()-2);
+                            recOutput = recOutput + recOutput4  + "\n";
+                        }
+                        if (!recOutput5.equals("Pfandannahmestellen im Handel: \n")){
+                            recOutput5= recOutput5.substring(0, recOutput5.length()-2);
+                            recOutput = recOutput + recOutput5  + "\n";
+                        }
+                        if (!recOutput6.equals("nicht genau zuordenbar: \n")){
+                            recOutput = recOutput + recOutput6  + "\n";
+                        }
+
 
                         if (noDisposal) {
                             noDis.setVisibility(View.VISIBLE);
