@@ -21,7 +21,10 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     //Newsfeed Declarations:
     TextView newsTitle, newsMainText;
-    String[] newsArray;
+    //String[] newsArray;
+    String[] newsArrayCenter, newsArrayLeft, newsArrayRight;
+    int newsRowNumber, currentCenterNewsIndex;
+    Newsfeed newsfeedInstance;
 
     //Swipe gesture members
     private float x1,x2;
@@ -90,10 +93,54 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
 
     void newsfeedSetup() {
-        Newsfeed NewsfeedInstance = new Newsfeed();
-        newsArray = NewsfeedInstance.chooseRandomNews();
-        newsTitle.setText(newsArray[0]);
-        newsMainText.setText(newsArray[1]);
+        newsfeedInstance = new Newsfeed();
+        newsRowNumber = newsfeedInstance.getNewsCount();
+        //newsArray = newsfeedInstance.chooseRandomNewsFromArray(); //array version.
+        currentCenterNewsIndex = (int) (System.currentTimeMillis() % newsRowNumber); //first NewsIndex is random.
+        //newsfeedUpdate(newsfeedInstance, randomNewsIndex);
+        newsArrayCenter = newsfeedInstance.getSingleNews(currentCenterNewsIndex); //DB version.
+        newsTitle.setText(newsArrayCenter[0]);
+        newsMainText.setText(newsArrayCenter[1]);
+        if (currentCenterNewsIndex == 0){
+            newsArrayLeft = newsfeedInstance.getSingleNews(newsRowNumber);
+            newsArrayRight = newsfeedInstance.getSingleNews(1);
+        }
+        else if (currentCenterNewsIndex == newsRowNumber - 1){
+            newsArrayLeft = newsfeedInstance.getSingleNews(0);
+            newsArrayRight = newsfeedInstance.getSingleNews(newsRowNumber - 2);
+        }
+        else {
+            newsArrayLeft = newsfeedInstance.getSingleNews(currentCenterNewsIndex - 1);
+            newsArrayRight = newsfeedInstance.getSingleNews(currentCenterNewsIndex + 1);
+        }
+    }
+
+    void newsfeedUpdate(Newsfeed newsfeedInstance, int swipeDirection){
+        if (swipeDirection == -1){ // left swipe
+            newsArrayRight = newsArrayCenter;
+            newsArrayCenter = newsArrayLeft; //DB version.
+            newsTitle.setText(newsArrayCenter[0]);
+            newsMainText.setText(newsArrayCenter[1]);
+            currentCenterNewsIndex -= 1;
+            if (currentCenterNewsIndex == 0){
+                newsArrayLeft = newsfeedInstance.getSingleNews(newsRowNumber);
+            }
+            else {
+                newsArrayLeft = newsfeedInstance.getSingleNews(currentCenterNewsIndex - 1);
+            }
+        }
+        else if (swipeDirection == 1) { // right swipe
+            newsArrayLeft = newsArrayCenter;
+            newsArrayCenter = newsArrayRight; //DB version.
+            newsTitle.setText(newsArrayCenter[0]);
+            newsMainText.setText(newsArrayCenter[1]);
+            currentCenterNewsIndex += 1;
+            if (currentCenterNewsIndex == newsRowNumber - 1) {
+                newsArrayRight = newsfeedInstance.getSingleNews((0));
+            } else {
+                newsArrayRight = newsfeedInstance.getSingleNews(currentCenterNewsIndex + 1);
+            }
+        }
     }
 
     //override on touch event vor swipe gestures
@@ -121,17 +168,21 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     if(x2>x1){
                         //TODO display already loaded newsfeed array index-1
                         //TODO load newsfeed array index-2 from database (on index+1 or shift all before)
+                        //This will be Bens job :DD leftIndex, currentIndex and rightIndex, currentIndex is the
 
                         //toast to see if it works
                         Toast.makeText(this,"Right is swiped",Toast.LENGTH_SHORT).show();
+                        newsfeedUpdate(newsfeedInstance, 1);
                     }
                     else{
                         //detects right to left swipe
                         //TODO display already loaded newsfeed array index+1
                         //TODO load newsfeed array index+2 from database (on index-1 or shift all before)
+                        //This will be Bens job :DD
 
                         //toast to see if it works
                         Toast.makeText(this,"Left is swiped",Toast.LENGTH_SHORT).show();
+                        newsfeedUpdate(newsfeedInstance, -1);
                     }
                 }
                 break;
