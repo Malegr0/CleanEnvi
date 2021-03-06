@@ -152,34 +152,36 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/leftArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
         android:layout_marginStart="200dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="13dp"
         app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
-        app:layout_constraintEnd_toStartOf="@id/middleCircle"
+        app:layout_constraintEnd_toStartOf="@id/leftCircle"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_arrow_left" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/middleCircle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/leftCircle"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
-        app:layout_constraintEnd_toStartOf="@id/rightArrow"
+        app:layout_constraintEnd_toStartOf="@id/middleCircle"
         app:layout_constraintStart_toEndOf="@+id/leftArrow"
         app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/rightArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="3dp"
         android:layout_marginEnd="200dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="13dp"
         app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/middleCircle"
+        app:layout_constraintStart_toEndOf="@+id/rightcircle"
         app:srcCompat="@drawable/ic_arrow_right" />
 
 
@@ -219,6 +221,28 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="48dp" />
+
+    <ImageView
+        android:id="@+id/rightcircle"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintEnd_toStartOf="@id/rightArrow"
+        app:layout_constraintStart_toEndOf="@+id/middleCircle"
+        app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_24" />
+
+    <ImageView
+        android:id="@+id/middleCircle"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsfeed_rectangle3"
+        app:layout_constraintEnd_toStartOf="@id/rightcircle"
+        app:layout_constraintStart_toEndOf="@+id/leftCircle"
+        app:srcCompat="@drawable/ic_baseline_circle_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
