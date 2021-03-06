@@ -4,19 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.BlendMode;
-import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.example.cleanenvi.helpers.ResponseManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
+
 //TODO: add newsfeed handling
 //TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity {
+
+    public static JSONArray allMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSearch = findViewById(R.id.button_search);
         Button buttonCameraSearch = findViewById(R.id.button_camera_search);
         Button buttonMap = findViewById(R.id.button_map);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_main);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_main);
+
+        //Abfrage von Marker-Daten
+        new APICall().execute();
 
         //Button der manuellen Produktsuche
         buttonSearch.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //Verhindern des Layoutflackerns
         bottomNavigationView.getMenu().getItem(0).setEnabled(false);
 
@@ -71,5 +79,19 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    //TODO:Abfrage der Marker-Daten in Splash-Screen
+    //Abfrage aller Daten für die Markierungen der Map
+    private class APICall extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                allMarkers = ResponseManager.getAllMarkers();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

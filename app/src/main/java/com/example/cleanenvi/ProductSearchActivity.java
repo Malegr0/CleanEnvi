@@ -25,7 +25,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
         this.setTitle("Produktsuche");
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_search);
 
         watcher(productSearchEdit, searchBtn);
 
@@ -35,8 +35,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
             }
         });
 
-
-        //Varianten zum Verhindern des Layoutflackerns
+        //Verhindern des Layoutflackerns
         bottomNavigationView.getMenu().getItem(1).setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

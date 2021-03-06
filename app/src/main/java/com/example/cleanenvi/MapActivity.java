@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.MenuItem;
-import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,6 +15,7 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
@@ -25,18 +25,9 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
-//new imports
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
-import com.mapbox.geojson.Point;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
-import android.graphics.BitmapFactory;
-
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -45,10 +36,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
     private MapView mapView;
-
-    private static final String SOURCE_ID = "SOURCE_ID";
-    private static final String ICON_ID = "ICON_ID";
-    private static final String LAYER_ID = "LAYER_ID";
+    private JSONArray allCoordinates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +45,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
         setContentView(R.layout.activity_map);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_map);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_map);
 
-        mapView = (MapView) findViewById(R.id.mapView); //MapView in Klammern weg?
+        allCoordinates = MainActivity.allMarkers;
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-
-        //Varianten zum Verhindern des Layoutflackerns
+        //Verhindern des Layoutflackerns
         bottomNavigationView.getMenu().getItem(3).setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -86,43 +74,49 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(@NonNull MapboxMap mapboxMap) {//all zhis instead of "this"
+    public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         MapActivity.this.mapboxMap = mapboxMap;
-
-        //add Markers specified by coordinates
-        List<Feature> symbolLayerIconFeatureList = new ArrayList<>();
-        symbolLayerIconFeatureList.add(Feature.fromGeometry(
-                Point.fromLngLat(13.56009542942047, 52.44710396127952)));
-        symbolLayerIconFeatureList.add(Feature.fromGeometry(
-                Point.fromLngLat(13.61354112625122, 52.49795902503451)));
-        symbolLayerIconFeatureList.add(Feature.fromGeometry(
-                Point.fromLngLat(13.54821592569351, 52.56220587781658)));
-        symbolLayerIconFeatureList.add(Feature.fromGeometry(
-                Point.fromLngLat(13.491339683532715, 52.497862683758584)));
-        symbolLayerIconFeatureList.add(Feature.fromGeometry(
-                Point.fromLngLat(13.435893058776855, 52.581480840538504)));
-
-        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjf4m44iw0uza2spb3q0a7s41")
-                // Add the SymbolLayer icon image to the map style
-                .withImage(ICON_ID, BitmapFactory.decodeResource(
-                        MapActivity.this.getResources(), R.drawable.mapbox_marker_icon_default))
-                // Adding a GeoJson source for the SymbolLayer icons.
-                .withSource(new GeoJsonSource(SOURCE_ID, FeatureCollection.fromFeatures(symbolLayerIconFeatureList)))
-                .withLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
-                    .withProperties(
-                            iconImage(ICON_ID),
-                            iconAllowOverlap(true),
-                            iconIgnorePlacement(true)
-                    ))
-                , new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
             @Override
-            public void onStyleLoaded(@NonNull Style style) {
-                // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+            public void onStyleLoaded(@NonNull final Style style) {
+                try {
+                    setUpMarker();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 enableLocationComponent(style);
-                
             }
         });
+    }
 
+    //Markierungen mit Info-Fenster erstellen
+    private void setUpMarker() throws JSONException {
+        //Erstellen der Markierungen + Hinterlegen der Infos für das Info-Fenster
+        for(int i = 0; i < allCoordinates.length(); i++) {
+            JSONObject response = allCoordinates.getJSONObject(i);
+             Marker marker = mapboxMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(response.getDouble("longitude"), response.getDouble("latitute")))
+                    .title(response.getString("name"))
+                    .snippet(response.getString("address")));
+        }
+
+        //Anzeige des Info-Fensters wenn Markierung gedrückt wird
+        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull final Marker marker) {
+                mapboxMap.selectMarker(marker);
+
+                //Entferne Info-Fenster wenn auf der Map navigiert wird
+                mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+                    @Override
+                    public void onCameraMove() {
+                        marker.hideInfoWindow();
+                    }
+                });
+                marker.showInfoWindow(mapboxMap, mapView);
+                return true;
+            };
+        });
     }
 
     @SuppressWarnings( {"MissingPermission"})

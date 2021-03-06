@@ -37,7 +37,7 @@ public class CameraMainActivity extends AppCompatActivity {
         this.setTitle("Produktsuche");
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text); //Textfeld für spätere Fehlersuche
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_camera);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_camera);
 
         //Wenn Kameraberechtigung erteilt -> initialisieren des Kamerabilds etc., ansonsten wird User nach Berechtigung gefragt
         if(ActivityCompat.checkSelfPermission(CameraMainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -50,8 +50,7 @@ public class CameraMainActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         }
 
-
-        //Varianten zum Verhindern des Layoutflackerns
+        //Verhindern des Layoutflackerns
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
