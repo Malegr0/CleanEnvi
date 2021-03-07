@@ -50,8 +50,8 @@ public final class ProductSearchActivity extends AppCompatActivity {
         watcher(productSearchEdit, searchBtn);
 
         //fake history
-        HistoryManager.addNewHistory(new History("2003049", "Choco Pouce", "https://static.openfoodfacts.org/images/products/20030049/front_fr.54.400.jpg"));
-        HistoryManager.addNewHistory(new History("1234", "ALFAJOR MIXTOS 18 UNID FIGUERI", "https://static.openfoodfacts.org/images/products/1234/front_en.90.400.jpg"));
+        //HistoryManager.addNewHistory(new History("2003049", "Choco Pouce", "https://static.openfoodfacts.org/images/products/20030049/front_fr.54.400.jpg"));
+        //HistoryManager.addNewHistory(new History("1234", "ALFAJOR MIXTOS 18 UNID FIGUERI", "https://static.openfoodfacts.org/images/products/1234/front_en.90.400.jpg"));
         try {
             HistoryManager.saveHistories(this);
         } catch (IOException e) {

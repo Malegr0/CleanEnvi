@@ -32,22 +32,26 @@ public class URLManager {
     }
 
     public static String getProduct(String ean) throws IOException {
-        URL url = new URL(PRODUCTS_ADDRESS + ean);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        String response = "";
-        if(conn.getResponseCode() == 200) {
-            BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            while((inputLine = bf.readLine()) != null) {
-                response = response + inputLine;
+        if(checkForInteger(ean)) {
+            URL url = new URL(PRODUCTS_ADDRESS + ean);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            String response = "";
+            if(conn.getResponseCode() == 200) {
+                BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                while((inputLine = bf.readLine()) != null) {
+                    response = response + inputLine;
+                }
+                bf.close();
+            } else if(conn.getResponseCode() == 404) {
+                response = null;
             }
-            bf.close();
-        } else if(conn.getResponseCode() == 404) {
-            response = null;
+            conn.disconnect();
+            return response;
+        } else {
+            return null;
         }
-        conn.disconnect();
-        return response;
     }
 
     public static String getNewsfeed(int id) throws IOException {
@@ -86,6 +90,15 @@ public class URLManager {
         }
         conn.disconnect();
         return response;
+    }
+
+    private static boolean checkForInteger(String ean) {
+        try {
+            Integer.parseInt(ean);
+        } catch(NumberFormatException | NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
 }
