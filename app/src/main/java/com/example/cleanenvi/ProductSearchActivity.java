@@ -38,6 +38,8 @@ public final class ProductSearchActivity extends AppCompatActivity {
 
         watcher(productSearchEdit, searchBtn);
 
+        //History loading
+
         // Nutella https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg
         Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro1);
         Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSebbILIsbkl0u52kWQxmBofyJcYhoCWq5_qA&usqp=CAU").into(HisPro2);
