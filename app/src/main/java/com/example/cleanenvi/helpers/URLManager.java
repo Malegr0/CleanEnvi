@@ -93,10 +93,13 @@ public class URLManager {
     }
 
     private static boolean checkForInteger(String ean) {
-        try {
-            Integer.parseInt(ean);
-        } catch(NumberFormatException | NullPointerException e) {
-            return false;
+        if(ean.isEmpty()) return false;
+        for(int i = 0; i < ean.length(); i++) {
+            if(i == 0 && ean.charAt(i) == '-') {
+                if(ean.length() == 1) return false;
+                else continue;
+            }
+            if(Character.digit(ean.charAt(i),10) < 0) return false;
         }
         return true;
     }
