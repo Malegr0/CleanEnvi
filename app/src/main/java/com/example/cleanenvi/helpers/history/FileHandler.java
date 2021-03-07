@@ -4,14 +4,11 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class FileHandler {
 
@@ -25,7 +22,7 @@ public class FileHandler {
     }
 
     //opens file and reads data
-    public static History[] loadData(Context context) throws IOException, ClassNotFoundException {
+    public static History[] loadData(Context context) throws IOException {
         FileInputStream inputStream = context.openFileInput("history");
         InputStreamReader isr = new InputStreamReader(inputStream);
         BufferedReader br = new BufferedReader(isr);
