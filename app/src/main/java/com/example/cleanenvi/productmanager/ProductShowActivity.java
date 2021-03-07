@@ -23,6 +23,8 @@ import com.example.cleanenvi.MapActivity;
 import com.example.cleanenvi.ProductSearchActivity;
 import com.example.cleanenvi.R;
 import com.example.cleanenvi.helpers.ResponseManager;
+import com.example.cleanenvi.helpers.history.History;
+import com.example.cleanenvi.helpers.history.HistoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -131,7 +133,7 @@ public class ProductShowActivity extends AppCompatActivity {
             }
             if (productData != null) {
                 String[] packages;
-                ArrayList<String> recID = new ArrayList<String>();
+                ArrayList<String> recID = new ArrayList<>();
                 if (productData[3] != null) {
                     packages = productData[3].split(",");
                     for (String s : packages) {
@@ -259,8 +261,12 @@ public class ProductShowActivity extends AppCompatActivity {
                         ProductSearchActivity.EAN = null;
                         CameraMainActivity.EAN_CAMERA = null;
                         ean = null;
-
-
+                        HistoryManager.addNewHistory(new History(finalProductData[0], finalProductData[1], finalProductData[2]));
+                        try {
+                            HistoryManager.saveHistories(getApplication().getBaseContext());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             } else {

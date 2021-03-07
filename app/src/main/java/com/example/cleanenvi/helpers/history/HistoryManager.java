@@ -10,6 +10,11 @@ public class HistoryManager {
 
     public static void init() {
         histories = new History[5];
+        histories[0] = new History("", "", "");
+        histories[1] = new History("", "", "");
+        histories[2] = new History("", "", "");
+        histories[3] = new History("", "", "");
+        histories[4] = new History("", "", "");
     }
 
     public static void addNewHistory(History history) {

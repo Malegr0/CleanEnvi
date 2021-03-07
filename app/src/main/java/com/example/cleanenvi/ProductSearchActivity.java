@@ -49,20 +49,23 @@ public final class ProductSearchActivity extends AppCompatActivity {
 
         watcher(productSearchEdit, searchBtn);
 
+        //fake history
+        HistoryManager.addNewHistory(new History("2003049", "Choco Pouce", "https://static.openfoodfacts.org/images/products/20030049/front_fr.54.400.jpg"));
+        HistoryManager.addNewHistory(new History("1234", "ALFAJOR MIXTOS 18 UNID FIGUERI", "https://static.openfoodfacts.org/images/products/1234/front_en.90.400.jpg"));
+        try {
+            HistoryManager.saveHistories(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         //History loading
         try {
             HistoryManager.loadHistories(this);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
-        // Nutella https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(hisPro1);
-        Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSebbILIsbkl0u52kWQxmBofyJcYhoCWq5_qA&usqp=CAU").into(hisPro2);
-        Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Md53AHlyPg5COqwMdgQsDjuVX3ScetOucg&usqp=CAU").into(hisPro3);
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(hisPro4);
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(hisPro5);
+        loadHistoriesIntoLayoutFields(HistoryManager.getHistories());
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
@@ -89,8 +92,25 @@ public final class ProductSearchActivity extends AppCompatActivity {
     }
 
     void loadHistoriesIntoLayoutFields(History[] histories) {
-        if(histories[0].getEan() != null) {
-
+        if (!histories[0].getEan().equals("")) {
+            hisProText1.setText(histories[0].getName());
+            Picasso.get().load(histories[0].getImageUrl()).into(hisPro1);
+            if (!histories[1].getEan().equals("")) {
+                hisProText2.setText(histories[1].getName());
+                Picasso.get().load(histories[1].getImageUrl()).into(hisPro2);
+                if (!histories[2].getEan().equals("")) {
+                    hisProText3.setText(histories[2].getName());
+                    Picasso.get().load(histories[2].getImageUrl()).into(hisPro3);
+                    if (!histories[3].getEan().equals("")) {
+                        hisProText4.setText(histories[3].getName());
+                        Picasso.get().load(histories[3].getImageUrl()).into(hisPro4);
+                        if (!histories[4].getEan().equals("")) {
+                            hisProText5.setText(histories[4].getName());
+                            Picasso.get().load(histories[4].getImageUrl()).into(hisPro5);
+                        }
+                    }
+                }
+            }
         }
     }
 
