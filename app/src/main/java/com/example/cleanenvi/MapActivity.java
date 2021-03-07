@@ -47,7 +47,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_map);
 
-        allCoordinates = MainActivity.allMarkers;
+        allCoordinates = SplashScreenActivity.allMarkers;
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);

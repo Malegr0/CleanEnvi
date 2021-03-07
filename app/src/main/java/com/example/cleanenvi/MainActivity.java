@@ -22,8 +22,6 @@ import java.io.IOException;
 //TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity {
 
-    public static JSONArray allMarkers;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
         Button buttonCameraSearch = findViewById(R.id.button_camera_search);
         Button buttonMap = findViewById(R.id.button_map);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_main);
-
-        //Abfrage von Marker-Daten
-        new APICall().execute();
 
         //Button der manuellen Produktsuche
         buttonSearch.setOnClickListener(new View.OnClickListener() {
@@ -79,19 +74,5 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }
-
-    //TODO:Abfrage der Marker-Daten in Splash-Screen
-    //Abfrage aller Daten für die Markierungen der Map
-    private class APICall extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                allMarkers = ResponseManager.getAllMarkers();
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }
