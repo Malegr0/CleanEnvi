@@ -16,7 +16,6 @@ public class FileHandler {
         ObjectOutputStream out = new ObjectOutputStream(outputStream);
         out.writeObject(histories);
         out.close();
-        outputStream.close();
     }
 
     //opens file and reads data
@@ -25,7 +24,6 @@ public class FileHandler {
         ObjectInputStream in = new ObjectInputStream(inputStream);
         History[] histories = (History[]) in.readObject();
         in.close();
-        inputStream.close();
         return histories;
     }
 

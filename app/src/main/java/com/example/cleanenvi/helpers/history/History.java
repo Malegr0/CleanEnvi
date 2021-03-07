@@ -34,10 +34,14 @@ public class History implements Serializable {
     }
 
     /*private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        while(in.read() != -1) {
+            ean = in.readObject().toString();
+            name = in.readObject().toString();
+            imageUrl = in.readObject().toString();
+        }
     }*/
 
-    private void readObjectNoData() throws ObjectStreamException {
-
-    }
+    /*private void readObjectNoData() throws ObjectStreamException {
+    }*/
 
 }
