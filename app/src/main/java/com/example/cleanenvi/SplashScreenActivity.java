@@ -1,11 +1,9 @@
 package com.example.cleanenvi;
 
 import android.app.Activity;
-import android.app.AsyncNotedAppOp;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.ImageView;
 
 import com.example.cleanenvi.helpers.ResponseManager;
