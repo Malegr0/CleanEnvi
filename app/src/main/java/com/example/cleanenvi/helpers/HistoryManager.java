@@ -1,5 +1,9 @@
 package com.example.cleanenvi.helpers;
 
-public class MemoryManager {
+public class HistoryManager {
+
+
+
+
 
 }
