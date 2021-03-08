@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.cleanenvi.helpers.history.HistoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Random;
+
 //TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
 
@@ -106,14 +109,14 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         newsfeedInstance = new Newsfeed();
         newsRowNumber = newsfeedInstance.getNewsCount();
         //newsArray = newsfeedInstance.chooseRandomNewsFromArray(); //array version.
-        currentCenterNewsIndex = (int) (System.currentTimeMillis() % newsRowNumber); //first NewsIndex is random.
+        currentCenterNewsIndex = new Random().nextInt(newsRowNumber) + 1; //first NewsIndex is random.
         //newsfeedUpdate(newsfeedInstance, randomNewsIndex);
         newsArrayCenter = newsfeedInstance.getSingleNews(currentCenterNewsIndex); //DB version.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                newsTitle.setText("Irgendein Text2");
-                //newsMainText.setText(newsArrayCenter[1]);
+                newsTitle.setText(newsArrayCenter[0]);
+                newsMainText.setText(newsArrayCenter[1]);
             }
         });
         if (currentCenterNewsIndex == 0){
@@ -134,8 +137,13 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         if (swipeDirection == -1){ // left swipe
             newsArrayRight = newsArrayCenter;
             newsArrayCenter = newsArrayLeft; //DB version.
-            newsTitle.setText(newsArrayCenter[0]);
-            newsMainText.setText(newsArrayCenter[1]);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    newsTitle.setText(newsArrayCenter[0]);
+                    newsMainText.setText(newsArrayCenter[1]);
+                }
+            });
             currentCenterNewsIndex -= 1;
             if (currentCenterNewsIndex == 0){
                 newsArrayLeft = newsfeedInstance.getSingleNews(newsRowNumber);
@@ -147,14 +155,28 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         else if (swipeDirection == 1) { // right swipe
             newsArrayLeft = newsArrayCenter;
             newsArrayCenter = newsArrayRight; //DB version.
-            newsTitle.setText(newsArrayCenter[0]);
-            newsMainText.setText(newsArrayCenter[1]);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    newsTitle.setText(newsArrayCenter[0]);
+                    newsMainText.setText(newsArrayCenter[1]);
+                }
+            });
             currentCenterNewsIndex += 1;
             if (currentCenterNewsIndex == newsRowNumber - 1) {
                 newsArrayRight = newsfeedInstance.getSingleNews((0));
             } else {
                 newsArrayRight = newsfeedInstance.getSingleNews(currentCenterNewsIndex + 1);
             }
+        }
+    }
+
+    private class APIUpdate extends AsyncTask<Integer, Void, Void> {
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            int swipeDirection = integers[0];
+            newsfeedUpdate(newsfeedInstance, swipeDirection);
+            return null;
         }
     }
 
@@ -183,21 +205,21 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     if(x2>x1){
                         //TODO display already loaded newsfeed array index-1
                         //TODO load newsfeed array index-2 from database (on index+1 or shift all before)
-                        //This will be Bens job :DD leftIndex, currentIndex and rightIndex, currentIndex is the
 
                         //toast to see if it works
                         Toast.makeText(this,"Right is swiped",Toast.LENGTH_SHORT).show();
-                        newsfeedUpdate(newsfeedInstance, 1);
+                        //newsfeedUpdate(newsfeedInstance, 1);
+                        new APIUpdate().execute(1);
                     }
                     else{
                         //detects right to left swipe
                         //TODO display already loaded newsfeed array index+1
                         //TODO load newsfeed array index+2 from database (on index-1 or shift all before)
-                        //This will be Bens job :DD
 
                         //toast to see if it works
                         Toast.makeText(this,"Left is swiped",Toast.LENGTH_SHORT).show();
-                        newsfeedUpdate(newsfeedInstance, -1);
+                        //newsfeedUpdate(newsfeedInstance, -1);
+                        new APIUpdate().execute(-1);
                     }
                 }
                 break;
