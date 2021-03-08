@@ -61,8 +61,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintTop_toTopOf="@+id/result_disposal"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewBrand"
@@ -87,10 +87,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.467" />
+        app:layout_constraintVertical_bias="0.445" />
 
     <TextView
         android:id="@+id/textViewEan"
@@ -101,10 +101,10 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.412" />
 
     <TextView
         android:id="@+id/textViewProdukt"
@@ -127,10 +127,12 @@
 
         android:text=""
         android:textColor="@color/colorTextBlack"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewWert"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewEntsorgung"
-        app:layout_constraintTop_toTopOf="@+id/textViewEntsorgung"
+        app:layout_constraintTop_toBottomOf="@+id/result_packaging"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -141,7 +143,7 @@
         android:text=""
         android:textColor="@color/colorTextBlack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewPackage"
         app:layout_constraintTop_toTopOf="@+id/textViewPackage"
         tools:ignore="MissingConstraints" />
@@ -149,7 +151,7 @@
     <TextView
         android:id="@+id/result_product"
         android:layout_width="286dp"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:text=""
         android:textColor="@color/colorTextBlack"
 
@@ -167,7 +169,7 @@
         android:text=""
         android:textColor="@color/colorTextBlack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewBrand"
         app:layout_constraintTop_toTopOf="@+id/textViewBrand"
         tools:ignore="MissingConstraints" />
@@ -256,17 +258,18 @@
         android:id="@+id/btnnodisposal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
         android:text="@string/noDisposal"
         android:textColor="@color/colorTextBlack"
         android:textSize="25sp"
         android:visibility="invisible"
-        android:paddingStart="10dp"
-        android:paddingEnd="5dp"
-        android:justificationMode="inter_word"
         app:layout_constraintBottom_toTopOf="@+id/imageViewPapier"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_disposal"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.767" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
