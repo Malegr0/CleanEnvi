@@ -25,8 +25,8 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
-      
-        <activity android:name=".MainActivity" android:configChanges="orientation" android:screenOrientation="portrait">
+
+        <activity android:name=".SplashScreenActivity" android:configChanges="orientation" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,5 +37,6 @@
         <activity android:name=".CameraMainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".MapActivity" android:screenOrientation="portrait"/>
         <activity android:name=".productmanager.ProductShowActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>

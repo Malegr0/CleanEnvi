@@ -49,7 +49,7 @@ public class ProductShowActivity extends AppCompatActivity {
         }
         processingBar = findViewById(R.id.processingBar);
         processingBar.setVisibility(View.VISIBLE);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_show);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_show);
 
         //make api call
         new APICall().execute();
@@ -70,7 +70,6 @@ public class ProductShowActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     //background thread for api call

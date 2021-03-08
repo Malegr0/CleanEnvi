@@ -13,6 +13,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
@@ -22,6 +25,10 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener{
@@ -29,6 +36,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
     private MapView mapView;
+    private JSONArray allCoordinates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +45,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
         setContentView(R.layout.activity_map);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_map);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_map);
 
-        mapView = (MapView) findViewById(R.id.mapView); //MapView in JKlammern weg?
+        allCoordinates = SplashScreenActivity.allMarkers;
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        //Verhindern des Layoutflackerns
+        bottomNavigationView.getMenu().getItem(3).setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.action_home) {
-                    MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class));
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_search) {
-                    MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class));
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, ProductSearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_camera) {
                     MapActivity.this.startActivity(new Intent(MapActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_hofkarte) {
-                    MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class));
+                    MapActivity.this.startActivity(new Intent(MapActivity.this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 }
                 return true;
             }
@@ -62,16 +74,49 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(@NonNull MapboxMap mapboxMap) {//all zhis instead of "this"
+    public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         MapActivity.this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"), new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
             @Override
-            public void onStyleLoaded(@NonNull Style style) {
-                // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+            public void onStyleLoaded(@NonNull final Style style) {
+                try {
+                    setUpMarker();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 enableLocationComponent(style);
             }
         });
+    }
 
+    //Markierungen mit Info-Fenster erstellen
+    private void setUpMarker() throws JSONException {
+        //Erstellen der Markierungen + Hinterlegen der Infos für das Info-Fenster
+        for(int i = 0; i < allCoordinates.length(); i++) {
+            JSONObject response = allCoordinates.getJSONObject(i);
+             Marker marker = mapboxMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(response.getDouble("longitude"), response.getDouble("latitute")))
+                    .title(response.getString("name"))
+                    .snippet(response.getString("address")));
+        }
+
+        //Anzeige des Info-Fensters wenn Markierung gedrückt wird
+        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull final Marker marker) {
+                mapboxMap.selectMarker(marker);
+
+                //Entferne Info-Fenster wenn auf der Map navigiert wird
+                mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+                    @Override
+                    public void onCameraMove() {
+                        marker.hideInfoWindow();
+                    }
+                });
+                marker.showInfoWindow(mapboxMap, mapView);
+                return true;
+            };
+        });
     }
 
     @SuppressWarnings( {"MissingPermission"})
@@ -150,7 +195,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }

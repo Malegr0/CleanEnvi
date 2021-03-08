@@ -36,6 +36,7 @@ dependencies {
     //Mapbox implementation
     implementation 'com.mapbox.mapboxsdk:mapbox-android-core:3.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0'
     
     //Barcode play services implementation
     implementation 'com.google.android.gms:play-services-vision:20.1.3'

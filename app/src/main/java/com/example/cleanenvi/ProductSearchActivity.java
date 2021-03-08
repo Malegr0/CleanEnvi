@@ -25,28 +25,31 @@ public final class ProductSearchActivity extends AppCompatActivity {
         this.setTitle("Produktsuche");
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_search);
 
         watcher(productSearchEdit, searchBtn);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
             }
         });
+
+        //Verhindern des Layoutflackerns
+        bottomNavigationView.getMenu().getItem(1).setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.action_home) {
-                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MainActivity.class));
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_search) {
-                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, ProductSearchActivity.class));
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, ProductSearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if(id == R.id.action_camera) {
                     ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_hofkarte) {
-                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MapActivity.class));
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 }
                 return true;
             }
