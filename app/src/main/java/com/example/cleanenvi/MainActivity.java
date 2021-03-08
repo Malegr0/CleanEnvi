@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     //Newsfeed Declarations:
     TextView newsTitle, newsMainText;
-    //String[] newsArray;
     String[] newsArrayCenter, newsArrayLeft, newsArrayRight;
     int newsRowNumber, currentCenterNewsIndex;
     Newsfeed newsfeedInstance;
@@ -143,18 +142,20 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     newsMainText.setText(newsArrayCenter[1]);
                 }
             });
-            currentCenterNewsIndex += 1;
-            if (currentCenterNewsIndex == newsRowNumber + 1) {
-                //newsArrayRight = newsfeedInstance.getSingleNews(1);
+            if (currentCenterNewsIndex == newsRowNumber){
                 currentCenterNewsIndex = 1;
-            //} else {
-            //    newsArrayRight = newsfeedInstance.getSingleNews(currentCenterNewsIndex + 1);
+            } else {
+                currentCenterNewsIndex += 1;
             }
-            newsArrayRight = newsfeedInstance.getSingleNews(currentCenterNewsIndex);
+            if (currentCenterNewsIndex == newsRowNumber) {
+                newsArrayRight = newsfeedInstance.getSingleNews(1);
+            } else {
+                newsArrayRight = newsfeedInstance.getSingleNews(currentCenterNewsIndex + 1);
+            }
         }
         else if (swipeDirection == 1) { // right swipe
             newsArrayRight = newsArrayCenter;
-            newsArrayCenter = newsArrayLeft; //DB version.
+            newsArrayCenter = newsArrayLeft;
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -162,14 +163,16 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     newsMainText.setText(newsArrayCenter[1]);
                 }
             });
-            currentCenterNewsIndex -= 1;
-            if (currentCenterNewsIndex == 0){
-                //newsArrayLeft = newsfeedInstance.getSingleNews(newsRowNumber);
+            if (currentCenterNewsIndex == 1) {
                 currentCenterNewsIndex = newsRowNumber;
-            //} else {
-            //    newsArrayLeft = newsfeedInstance.getSingleNews(currentCenterNewsIndex - 1);
+            } else {
+                currentCenterNewsIndex -= 1;
             }
-            newsArrayLeft = newsfeedInstance.getSingleNews(currentCenterNewsIndex);
+            if (currentCenterNewsIndex == 1){
+                newsArrayLeft = newsfeedInstance.getSingleNews(newsRowNumber);
+            } else {
+                newsArrayLeft = newsfeedInstance.getSingleNews(currentCenterNewsIndex - 1);
+            }
         }
     }
 
@@ -204,15 +207,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 if(Math.abs(valueX)>minDistance){
 
                     if(x2>x1){
-                        Toast.makeText(this,"Right is swiped",Toast.LENGTH_SHORT).show();
-                        //newsfeedUpdate(newsfeedInstance, 1);
                         new APIUpdate().execute(1);
                     }
                     else{
-
-                        //toast to see if it works
-                        Toast.makeText(this,"Left is swiped",Toast.LENGTH_SHORT).show();
-                        //newsfeedUpdate(newsfeedInstance, -1);
                         new APIUpdate().execute(-1);
                     }
                 }
