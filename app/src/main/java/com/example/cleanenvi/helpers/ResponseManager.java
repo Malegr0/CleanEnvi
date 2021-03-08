@@ -46,6 +46,9 @@ public class ResponseManager {
         String responseStr = URLManager.getNewsfeed(id);
         if(responseStr != null) {
             responseStr = responseStr.replaceAll("[\\[\\]]", "");
+            responseStr = responseStr.replaceAll("[\\\\][\\\\]", "\\\\");
+            System.out.println(responseStr);
+            System.out.println("-------------");
             JSONObject jObj = new JSONObject(responseStr);
             String[] response = new String[2];
             response[0] = jObj.getString("title");
