@@ -2,13 +2,11 @@ package com.example.cleanenvi.productmanager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,16 +21,14 @@ import com.example.cleanenvi.MapActivity;
 import com.example.cleanenvi.ProductSearchActivity;
 import com.example.cleanenvi.R;
 import com.example.cleanenvi.helpers.ResponseManager;
+import com.example.cleanenvi.helpers.history.History;
+import com.example.cleanenvi.helpers.history.HistoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -129,9 +125,10 @@ public class ProductShowActivity extends AppCompatActivity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
+            //TODO: add check for packages which arent in database
             if (productData != null) {
                 String[] packages;
-                ArrayList<String> recID = new ArrayList<String>();
+                ArrayList<String> recID = new ArrayList<>();
                 if (productData[3] != null) {
                     packages = productData[3].split(",");
                     for (String s : packages) {
@@ -259,8 +256,12 @@ public class ProductShowActivity extends AppCompatActivity {
                         ProductSearchActivity.EAN = null;
                         CameraMainActivity.EAN_CAMERA = null;
                         ean = null;
-
-
+                        HistoryManager.addNewHistory(new History(finalProductData[0], finalProductData[1], finalProductData[2]));
+                        try {
+                            HistoryManager.saveHistories(getApplication().getBaseContext());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             } else {
