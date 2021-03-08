@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -86,13 +87,20 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         });
 
         //Newsfeed Initialization:
-        //newsfeedSetup();
+        new APICall().execute();
 
         //Swipe gestures
         //initialise gestureDetector
         this.gestureDetector=new GestureDetector(MainActivity.this,this);
     }
 
+    private class APICall extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            newsfeedSetup();
+            return null;
+        }
+    }
 
     void newsfeedSetup() {
         newsfeedInstance = new Newsfeed();
@@ -101,8 +109,13 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         currentCenterNewsIndex = (int) (System.currentTimeMillis() % newsRowNumber); //first NewsIndex is random.
         //newsfeedUpdate(newsfeedInstance, randomNewsIndex);
         newsArrayCenter = newsfeedInstance.getSingleNews(currentCenterNewsIndex); //DB version.
-        newsTitle.setText(newsArrayCenter[0]);
-        newsMainText.setText(newsArrayCenter[1]);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                newsTitle.setText("Irgendein Text2");
+                //newsMainText.setText(newsArrayCenter[1]);
+            }
+        });
         if (currentCenterNewsIndex == 0){
             newsArrayLeft = newsfeedInstance.getSingleNews(newsRowNumber);
             newsArrayRight = newsfeedInstance.getSingleNews(1);
