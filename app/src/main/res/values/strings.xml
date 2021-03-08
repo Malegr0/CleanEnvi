@@ -27,7 +27,7 @@
     <string name="ean">Hier suchen nach EAN/Produkt</string>
     <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
 
-    <string name="noDisposal">Klicke <a href="https://www.bsr.de/abfall-abc-20563.php">hier</a>, um trotzdem herauszufinden, wie du dein Produkt richtig entsorgst!</string>
+    <string name="noDisposal">Klicke <a href="https://www.bsr.de/abfall-abc-20563.php">hier</a>, um trotzdem herauszufinden,\nwie du dein Produkt richtig entsorgst!\n</string>
     <string name="textview">TextView</string>
     <string name="disposal">Entsorgung:</string>
     <string name="produkt">Produkt:</string>

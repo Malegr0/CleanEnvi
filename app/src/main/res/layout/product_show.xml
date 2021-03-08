@@ -256,7 +256,7 @@
 
     <TextView
         android:id="@+id/btnnodisposal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:justificationMode="inter_word"
         android:paddingStart="10dp"
@@ -270,6 +270,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_disposal"
-        app:layout_constraintVertical_bias="0.767" />
+        app:layout_constraintVertical_bias="0.812" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
