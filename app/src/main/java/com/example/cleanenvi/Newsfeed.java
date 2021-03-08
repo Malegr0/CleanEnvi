@@ -1,5 +1,7 @@
 package com.example.cleanenvi;
 
+import android.os.AsyncTask;
+
 import java.io.IOException;
 import org.json.JSONException;
 import com.example.cleanenvi.helpers.ResponseManager;
@@ -112,12 +114,17 @@ public class Newsfeed {
 
         };
 
+
+
     public String[] chooseRandomNewsFromArray(){
         return NewsInString[(int)(System.currentTimeMillis() % NewsInString.length)];
     }
 
+    public int testFunction(){
+        return 32;
+    }
+
     public int getNewsCount() {
-        // Exceptions IOException und JSONException noch abfangen.
         try {
             newsRowNumber = ResponseManager.getNewsfeedRows();
         } catch (IOException | JSONException e) {
@@ -127,20 +134,12 @@ public class Newsfeed {
         return newsRowNumber;
     }
 
-        public String[] getSingleNews(int newsIndex){ //get rid of that function and bring the randomizer down to MainActivity.java!
+        public String[] getSingleNews(int newsIndex){
         try {
             singleNewsArray  = ResponseManager.getNewsfeedData(newsIndex);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return singleNewsArray;
-    }
-        public String[] chooseParticularNews(int newsIndex){
-            try {
-                singleNewsArray  = ResponseManager.getNewsfeedData(newsIndex);
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return singleNewsArray;
     }
 }

@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         });
 
         //Newsfeed Initialization:
-        newsfeedSetup();
+        //newsfeedSetup();
 
         //Swipe gestures
         //initialise gestureDetector
