@@ -6,7 +6,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,16 +47,6 @@ public final class ProductSearchActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
 
         watcher(productSearchEdit, searchBtn);
-
-        //fake history
-        //HistoryManager.addNewHistory(new History("2003049", "Choco Pouce", "https://static.openfoodfacts.org/images/products/20030049/front_fr.54.400.jpg"));
-        //HistoryManager.addNewHistory(new History("1234", "ALFAJOR MIXTOS 18 UNID FIGUERI", "https://static.openfoodfacts.org/images/products/1234/front_en.90.400.jpg"));
-        try {
-            HistoryManager.saveHistories(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
         //History loading
         try {
