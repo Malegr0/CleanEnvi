@@ -131,6 +131,7 @@ public class ProductShowActivity extends AppCompatActivity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
+            //TODO: add check for packages which arent in database
             if (productData != null) {
                 String[] packages;
                 ArrayList<String> recID = new ArrayList<>();
