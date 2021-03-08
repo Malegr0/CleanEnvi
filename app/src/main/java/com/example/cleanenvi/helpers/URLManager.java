@@ -26,6 +26,8 @@ public class URLManager {
                 response = response + inputLine;
             }
             bf.close();
+        } else if(conn.getResponseCode() == 204) {
+            response = null;
         }
         conn.disconnect();
         return response;
