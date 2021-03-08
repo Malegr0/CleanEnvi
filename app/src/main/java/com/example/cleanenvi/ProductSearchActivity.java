@@ -92,41 +92,56 @@ public final class ProductSearchActivity extends AppCompatActivity {
     }
 
     private void initButtonListener() {
-        hisProBut1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EAN = HistoryManager.getHistories()[0].getEan();
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+        if(!HistoryManager.getHistories()[0].getEan().equals("")) {
+            hisProBut1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EAN = HistoryManager.getHistories()[0].getEan();
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                            com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                }
+            });
+            if(!HistoryManager.getHistories()[1].getEan().equals("")) {
+                hisProBut2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EAN = HistoryManager.getHistories()[1].getEan();
+                        ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                    }
+                });
+                if(!HistoryManager.getHistories()[2].getEan().equals("")) {
+                    hisProBut3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EAN = HistoryManager.getHistories()[2].getEan();
+                            ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                    com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                        }
+                    });
+                    if(!HistoryManager.getHistories()[3].getEan().equals("")) {
+                        hisProBut4.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                EAN = HistoryManager.getHistories()[3].getEan();
+                                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                        com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                            }
+                        });
+                        if(!HistoryManager.getHistories()[4].getEan().equals("")) {
+                            hisProBut5.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    EAN = HistoryManager.getHistories()[4].getEan();
+                                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                            com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                                }
+                            });
+                        }
+                    }
+                }
             }
-        });
-        hisProBut2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EAN = HistoryManager.getHistories()[1].getEan();
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
-            }
-        });
-        hisProBut3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EAN = HistoryManager.getHistories()[2].getEan();
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
-            }
-        });
-        hisProBut4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EAN = HistoryManager.getHistories()[3].getEan();
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
-            }
-        });
-        hisProBut5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EAN = HistoryManager.getHistories()[4].getEan();
-                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
-            }
-        });
+        }
     }
 
     private void loadHistoriesIntoLayoutFields(History[] histories) {
