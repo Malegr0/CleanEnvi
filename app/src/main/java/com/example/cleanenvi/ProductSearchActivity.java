@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,6 +28,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
     ImageButton searchBtn;
     ImageView hisPro1, hisPro2, hisPro3, hisPro4, hisPro5;
     TextView hisProText1, hisProText2, hisProText3, hisProText4, hisProText5;
+    Button hisProBut1, hisProBut2, hisProBut3, hisProBut4, hisProBut5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +38,19 @@ public final class ProductSearchActivity extends AppCompatActivity {
         searchBtn = findViewById(R.id.searchbtn);
         hisPro1 = findViewById(R.id.historyImage1);
         hisProText1 = findViewById(R.id.historyText1);
+        hisProBut1 = findViewById(R.id.historyTextButton1);
         hisPro2 = findViewById(R.id.historyImage2);
         hisProText2 = findViewById(R.id.historyText2);
+        hisProBut2 = findViewById(R.id.historyTextButton2);
         hisPro3 = findViewById(R.id.historyImage3);
         hisProText3 = findViewById(R.id.historyText3);
+        hisProBut3 = findViewById(R.id.historyTextButton3);
         hisPro4 = findViewById(R.id.historyImage4);
         hisProText4 = findViewById(R.id.historyText4);
+        hisProBut4 = findViewById(R.id.historyTextButton4);
         hisPro5 = findViewById(R.id.historyImage5);
         hisProText5 = findViewById(R.id.historyText5);
+        hisProBut5 = findViewById(R.id.historyTextButton5);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
 
         watcher(productSearchEdit, searchBtn);
@@ -56,11 +63,15 @@ public final class ProductSearchActivity extends AppCompatActivity {
         }
         loadHistoriesIntoLayoutFields(HistoryManager.getHistories());
 
+        initButtonListener();
+
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
                 ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
             }
         });
+
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -76,6 +87,44 @@ public final class ProductSearchActivity extends AppCompatActivity {
                     ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, MapActivity.class));
                 }
                 return true;
+            }
+        });
+    }
+
+    void initButtonListener() {
+        hisProBut1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EAN = HistoryManager.getHistories()[0].getEan();
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+            }
+        });
+        hisProBut2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EAN = HistoryManager.getHistories()[1].getEan();
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+            }
+        });
+        hisProBut3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EAN = HistoryManager.getHistories()[2].getEan();
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+            }
+        });
+        hisProBut4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EAN = HistoryManager.getHistories()[3].getEan();
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
+            }
+        });
+        hisProBut5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EAN = HistoryManager.getHistories()[4].getEan();
+                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
             }
         });
     }
