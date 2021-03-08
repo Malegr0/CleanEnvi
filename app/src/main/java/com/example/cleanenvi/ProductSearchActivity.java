@@ -91,7 +91,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
         });
     }
 
-    void initButtonListener() {
+    private void initButtonListener() {
         hisProBut1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +129,7 @@ public final class ProductSearchActivity extends AppCompatActivity {
         });
     }
 
-    void loadHistoriesIntoLayoutFields(History[] histories) {
+    private void loadHistoriesIntoLayoutFields(History[] histories) {
         if (!histories[0].getEan().equals("")) {
             hisProText1.setText(histories[0].getName());
             Picasso.get().load(histories[0].getImageUrl()).into(hisPro1);
