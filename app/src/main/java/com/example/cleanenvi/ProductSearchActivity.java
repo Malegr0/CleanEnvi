@@ -10,18 +10,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cleanenvi.helpers.history.History;
+import com.example.cleanenvi.helpers.history.HistoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public final class ProductSearchActivity extends AppCompatActivity {
     EditText productSearchEdit;
     public static String EAN;
     ImageButton searchBtn;
-    ImageView HisPro1, HisPro2, HisPro3, HisPro4, HisPro5;
+    ImageView hisPro1, hisPro2, hisPro3, hisPro4, hisPro5;
+    TextView hisProText1, hisProText2, hisProText3, hisProText4, hisProText5;
+    Button hisProBut1, hisProBut2, hisProBut3, hisProBut4, hisProBut5;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,27 +36,42 @@ public final class ProductSearchActivity extends AppCompatActivity {
         this.setTitle("Produktsuche");
         productSearchEdit =  findViewById(R.id.productSearchEdit);
         searchBtn = findViewById(R.id.searchbtn);
-        HisPro1 = findViewById(R.id.historyImage1);
-        HisPro2 = findViewById(R.id.historyImage2);
-        HisPro3 = findViewById(R.id.historyImage3);
-        HisPro4 = findViewById(R.id.historyImage4);
-        HisPro5 = findViewById(R.id.historyImage5);
+        hisPro1 = findViewById(R.id.historyImage1);
+        hisProText1 = findViewById(R.id.historyText1);
+        hisProBut1 = findViewById(R.id.historyTextButton1);
+        hisPro2 = findViewById(R.id.historyImage2);
+        hisProText2 = findViewById(R.id.historyText2);
+        hisProBut2 = findViewById(R.id.historyTextButton2);
+        hisPro3 = findViewById(R.id.historyImage3);
+        hisProText3 = findViewById(R.id.historyText3);
+        hisProBut3 = findViewById(R.id.historyTextButton3);
+        hisPro4 = findViewById(R.id.historyImage4);
+        hisProText4 = findViewById(R.id.historyText4);
+        hisProBut4 = findViewById(R.id.historyTextButton4);
+        hisPro5 = findViewById(R.id.historyImage5);
+        hisProText5 = findViewById(R.id.historyText5);
+        hisProBut5 = findViewById(R.id.historyTextButton5);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_search);
 
         watcher(productSearchEdit, searchBtn);
 
-        // Nutella https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro1);
-        Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSebbILIsbkl0u52kWQxmBofyJcYhoCWq5_qA&usqp=CAU").into(HisPro2);
-        Picasso.get().load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Md53AHlyPg5COqwMdgQsDjuVX3ScetOucg&usqp=CAU").into(HisPro3);
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro4);
-        Picasso.get().load("https://www.testberichte.de/imgs/p_imgs_370/11/11709.jpg").into(HisPro5);
+        //History loading
+        try {
+            HistoryManager.loadHistories(this);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        loadHistoriesIntoLayoutFields(HistoryManager.getHistories());
+
+        initButtonListener();
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public final void onClick(View it) {
                 ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class));
             }
         });
+
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -67,6 +89,82 @@ public final class ProductSearchActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void initButtonListener() {
+        if(!HistoryManager.getHistories()[0].getEan().equals("")) {
+            hisProBut1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EAN = HistoryManager.getHistories()[0].getEan();
+                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                            com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                }
+            });
+            if(!HistoryManager.getHistories()[1].getEan().equals("")) {
+                hisProBut2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EAN = HistoryManager.getHistories()[1].getEan();
+                        ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                    }
+                });
+                if(!HistoryManager.getHistories()[2].getEan().equals("")) {
+                    hisProBut3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EAN = HistoryManager.getHistories()[2].getEan();
+                            ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                    com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                        }
+                    });
+                    if(!HistoryManager.getHistories()[3].getEan().equals("")) {
+                        hisProBut4.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                EAN = HistoryManager.getHistories()[3].getEan();
+                                ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                        com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                            }
+                        });
+                        if(!HistoryManager.getHistories()[4].getEan().equals("")) {
+                            hisProBut5.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    EAN = HistoryManager.getHistories()[4].getEan();
+                                    ProductSearchActivity.this.startActivity(new Intent(ProductSearchActivity.this,
+                                            com.example.cleanenvi.productmanager.ProductShowActivity.class));
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void loadHistoriesIntoLayoutFields(History[] histories) {
+        if (!histories[0].getEan().equals("")) {
+            hisProText1.setText(histories[0].getName());
+            Picasso.get().load(histories[0].getImageUrl()).into(hisPro1);
+            if (!histories[1].getEan().equals("")) {
+                hisProText2.setText(histories[1].getName());
+                Picasso.get().load(histories[1].getImageUrl()).into(hisPro2);
+                if (!histories[2].getEan().equals("")) {
+                    hisProText3.setText(histories[2].getName());
+                    Picasso.get().load(histories[2].getImageUrl()).into(hisPro3);
+                    if (!histories[3].getEan().equals("")) {
+                        hisProText4.setText(histories[3].getName());
+                        Picasso.get().load(histories[3].getImageUrl()).into(hisPro4);
+                        if (!histories[4].getEan().equals("")) {
+                            hisProText5.setText(histories[4].getName());
+                            Picasso.get().load(histories[4].getImageUrl()).into(hisPro5);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //Aktiviert Button bei Texteingabe und speichert Eingabe für spätere Verarbeitung

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class URLManager {
@@ -26,28 +25,34 @@ public class URLManager {
                 response = response + inputLine;
             }
             bf.close();
+        } else if(conn.getResponseCode() == 204) {
+            response = null;
         }
         conn.disconnect();
         return response;
     }
 
     public static String getProduct(String ean) throws IOException {
-        URL url = new URL(PRODUCTS_ADDRESS + ean);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        String response = "";
-        if(conn.getResponseCode() == 200) {
-            BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String inputLine;
-            while((inputLine = bf.readLine()) != null) {
-                response = response + inputLine;
+        if(checkForInteger(ean)) {
+            URL url = new URL(PRODUCTS_ADDRESS + ean);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            String response = "";
+            if(conn.getResponseCode() == 200) {
+                BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                while((inputLine = bf.readLine()) != null) {
+                    response = response + inputLine;
+                }
+                bf.close();
+            } else if(conn.getResponseCode() == 404) {
+                response = null;
             }
-            bf.close();
-        } else if(conn.getResponseCode() == 404) {
-            response = null;
+            conn.disconnect();
+            return response;
+        } else {
+            return null;
         }
-        conn.disconnect();
-        return response;
     }
 
     public static String getNewsfeed(int id) throws IOException {
@@ -86,6 +91,18 @@ public class URLManager {
         }
         conn.disconnect();
         return response;
+    }
+
+    private static boolean checkForInteger(String ean) {
+        if(ean.isEmpty()) return false;
+        for(int i = 0; i < ean.length(); i++) {
+            if(i == 0 && ean.charAt(i) == '-') {
+                if(ean.length() == 1) return false;
+                else continue;
+            }
+            if(Character.digit(ean.charAt(i),10) < 0) return false;
+        }
+        return true;
     }
 
 }
