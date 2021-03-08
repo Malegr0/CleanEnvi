@@ -120,9 +120,6 @@ public class Newsfeed {
         return NewsInString[(int)(System.currentTimeMillis() % NewsInString.length)];
     }
 
-    public int testFunction(){
-        return 32;
-    }
 
     public int getNewsCount() {
         try {
@@ -130,7 +127,6 @@ public class Newsfeed {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        System.out.println("newsRowNumber: " + newsRowNumber);
         return newsRowNumber;
     }
 
