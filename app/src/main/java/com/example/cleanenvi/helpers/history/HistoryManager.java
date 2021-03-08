@@ -18,11 +18,20 @@ public class HistoryManager {
     }
 
     public static void addNewHistory(History history) {
-        histories[4] = histories[3];
-        histories[3] = histories[2];
-        histories[2] = histories[1];
-        histories[1] = histories[0];
-        histories[0] = history;
+        boolean productAlreadyInHistory = false;
+        for(History h: histories) {
+            if(h.getEan().equals(history.getEan())) {
+                productAlreadyInHistory = true;
+                break;
+            }
+        }
+        if(!productAlreadyInHistory) {
+            histories[4] = histories[3];
+            histories[3] = histories[2];
+            histories[2] = histories[1];
+            histories[1] = histories[0];
+            histories[0] = history;
+        }
     }
 
     public static History[] getHistories() {
