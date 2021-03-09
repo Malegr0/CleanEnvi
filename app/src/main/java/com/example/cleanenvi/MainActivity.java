@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         }
     }
 
-    void newsfeedSetup() {
+    private void newsfeedSetup() {
         newsfeedInstance = new Newsfeed();
         newsRowNumber = newsfeedInstance.getNewsCount();
         currentCenterNewsIndex = new Random().nextInt(newsRowNumber) + 1; //first NewsIndex is random.
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         }
     }
 
-    void newsfeedUpdate(Newsfeed newsfeedInstance, int swipeDirection){
+    private void newsfeedUpdate(Newsfeed newsfeedInstance, int swipeDirection){
         if (swipeDirection == -1){ // left swipe
             newsArrayLeft = newsArrayCenter;
             newsArrayCenter = newsArrayRight; //DB version.
