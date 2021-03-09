@@ -55,7 +55,7 @@ public class ProductShowActivity extends AppCompatActivity {
         }
         processingBar = findViewById(R.id.processingBar);
         processingBar.setVisibility(View.VISIBLE);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_show);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_show);
 
         //make api call
         new APICall().execute();
@@ -65,13 +65,13 @@ public class ProductShowActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.action_home) {
-                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MainActivity.class));
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_search) {
-                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class));
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_camera) {
                     ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_hofkarte) {
-                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MapActivity.class));
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 }
                 return true;
             }
