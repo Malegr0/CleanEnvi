@@ -57,17 +57,6 @@ public class ProductShowActivity extends AppCompatActivity {
         processingBar.setVisibility(View.VISIBLE);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_show);
 
-        /*noDis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                *//*String url = "http://www.gobloggerslive.com";
-
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);*//*
-            }
-        });*/
-
         //make api call
         new APICall().execute();
 
