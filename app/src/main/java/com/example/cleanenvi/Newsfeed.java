@@ -84,7 +84,6 @@ public class Newsfeed {
                     "-\tBauschutt\n" +
                     "-\tElektroschrott, Batterien, Energiesparlampen\n" +
                     "-\tSperrmüll\n"},
-            //Stichpunkte sind hier Punkte wie sieht das aus
             {"Definition von Sperrmüll:","Abfälle zur Beseitigung aus privaten Haushalten, die\n" +
                     "-\tnicht von der Entsorgung im Holsystem ausgeschlossen sind \n" +
                     "-\tinfolge ihrer Größe oder ihres Gewichts nicht in die zugelassenen Abfallbehältnisse aufgenommen werden können \n" +
