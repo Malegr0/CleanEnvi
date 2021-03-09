@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.cleanenvi.helpers.ResponseManager;
+import com.example.cleanenvi.helpers.history.HistoryManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +38,7 @@ public class SplashScreenActivity extends Activity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
+            HistoryManager.init();
             return null;
         }
 

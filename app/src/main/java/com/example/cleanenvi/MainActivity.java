@@ -47,9 +47,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         newsTitle =  findViewById(R.id.newsTitle);
         newsMainText =  findViewById(R.id.newsMainText);
 
-        //TODO: move init method to splash screen
-        HistoryManager.init();
-
         //Button der manuellen Produktsuche
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
