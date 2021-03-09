@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +30,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-//TODO: delete TextView "Infos zum Produkt"
 public class ProductShowActivity extends AppCompatActivity {
 
     String ean;
@@ -78,9 +75,6 @@ public class ProductShowActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     //background thread for api call
     @SuppressLint("StaticFieldLeak")
     private class APICall extends AsyncTask<Void, Void, Void> {
@@ -112,7 +106,6 @@ public class ProductShowActivity extends AppCompatActivity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            //TODO: add check for packages which arent in database
             if (productData != null) {
                 String[] packages;
                 ArrayList<String> recID = new ArrayList<>();
@@ -197,9 +190,7 @@ public class ProductShowActivity extends AppCompatActivity {
                                     recOutput = "Keine Angaben verfügbar" + "\n";
                                     break;
                             }
-
                         }
-
                         if (!recOutput1.equals("Wertstofftonne oder Gelber Sack: \n")){
                             recOutput1=recOutput1.substring(0, recOutput1.length()-2);
                             recOutput = recOutput + recOutput1  + "\n";
@@ -223,7 +214,6 @@ public class ProductShowActivity extends AppCompatActivity {
                         if (!recOutput6.equals("nicht genau zuordenbar: \n")){
                             recOutput = recOutput + recOutput6  + "\n";
                         }
-
 
                         if (noDisposal) {
                             noDis.setVisibility(View.VISIBLE);
@@ -258,16 +248,11 @@ public class ProductShowActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         noDis.append("Das Produkt ist noch nicht vorhanden, \noder die EAN ist falsch \neingegeben/eingescannt worden.");
-                       // noDis.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch eingegeben/eingescannt worden.");
                         noDis.setVisibility(View.VISIBLE);
-                       // noDis.append();
                     }
                 });
             }
             return null;
         }
     }
-
-
-
 }

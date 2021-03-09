@@ -6,10 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto" >
-    <!--  vorher http://schemas.android.com/tools -->
-
-    <!--tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-106dp"-->
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"

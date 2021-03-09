@@ -12,19 +12,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.cleanenvi.helpers.history.HistoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-//TODO: add newsfeed handling
-
-import java.util.Arrays;
 import java.util.Random;
 
-//TODO: design changes by Christopher need to be added
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
-
     //Newsfeed Declarations:
     TextView newsTitle, newsMainText;
     String[] newsArrayCenter, newsArrayLeft, newsArrayRight;
@@ -229,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public void onShowPress(MotionEvent e) {
-
     }
 
     @Override
@@ -244,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public void onLongPress(MotionEvent e) {
-
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.example.cleanenvi;
 
-import android.os.AsyncTask;
-
 import java.io.IOException;
 import org.json.JSONException;
 import com.example.cleanenvi.helpers.ResponseManager;
@@ -109,16 +107,7 @@ public class Newsfeed {
                     "-\tPlastikbecher und Deckel\n" +
                     "-\tFoliendeckel und Verpackung von Wurst, Käse etc.\n"},
             {"Tipp: Bioabfall in Papiertüten oder Zeitung einwickeln oder sammeln.","Biologisch abbaubare Plastiktüten sollten Sie NICHT verwenden. Diese bauen sich zu langsam ab."}
-
-
-        };
-
-
-
-    public String[] chooseRandomNewsFromArray(){
-        return NewsInString[(int)(System.currentTimeMillis() % NewsInString.length)];
-    }
-
+    };
 
     public int getNewsCount() {
         try {

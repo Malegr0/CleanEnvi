@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +35,6 @@ public class CameraMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.camera_main);
         this.setTitle("Produktsuche");
-
 
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text); //Textfeld für spätere Fehlersuche
@@ -73,8 +71,6 @@ public class CameraMainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     //Initialisierung des BarcodeDetectors
     private void initialiseDetectorsAndSources() {
@@ -128,8 +124,7 @@ public class CameraMainActivity extends AppCompatActivity {
                             EAN_CAM = barcodeData;
                             EAN_CAMERA = EAN_CAM.trim();
                             CameraMainActivity.this.startActivity(new Intent(CameraMainActivity.this, com.example.cleanenvi.productmanager.ProductShowActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-
-                            // Textänderung von BarcodeText, bleibt drin für mögliche spätere Problemänderungen
+                            // Textänderung von BarcodeText, bleibt drin für mögliche spätere Debugoptionen
                             // barcodeText.setText(barcodeData);
                         }
                     });
