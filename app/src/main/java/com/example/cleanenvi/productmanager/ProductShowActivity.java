@@ -117,7 +117,6 @@ public class ProductShowActivity extends AppCompatActivity {
             textViewPackage = findViewById(R.id.textViewPackage);
 
             noDis = findViewById(R.id.btnnodisposal);
-            noDis.setMovementMethod(LinkMovementMethod.getInstance());
 
             String[] productData = null;
             try {
