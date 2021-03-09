@@ -1,47 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/resulttxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Infos zum Produkt: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBackground">
 
     <TextView
         android:id="@+id/showResulttxt"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:text="@string/txt"
+        android:textColor="@color/colorTextBlack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resulttxt"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintEnd_toStartOf="@+id/productImageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewProdukt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.113" />
 
     <ImageView
         android:id="@+id/productImageView"
-        android:layout_width="176dp"
-        android:layout_height="144dp"
+        android:layout_width="190dp"
+        android:layout_height="170dp"
         android:adjustViewBounds="true"
+        android:contentDescription="TODO"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.027"
+        app:layout_constraintVertical_bias="0.031"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,12 +39,208 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@android:color/white"
+        app:itemIconTint="@android:color/black"
         app:itemTextColor="@android:color/white"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="unlabeled"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <TextView
+        android:id="@+id/textViewEntsorgung"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/disposal"
+        android:textColor="@color/colorTextBlack"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/result_disposal"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewBrand"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/brand"
+        android:textColor="@color/colorTextBlack"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379" />
+
+    <TextView
+        android:id="@+id/textViewPackage"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/packung"
+        android:textColor="@color/colorTextBlack"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.445" />
+
+    <TextView
+        android:id="@+id/textViewEan"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tvEAN"
+        android:textColor="@color/colorTextBlack"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412" />
+
+    <TextView
+        android:id="@+id/textViewProdukt"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/produkt"
+        android:textColor="@color/colorTextBlack"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.313" />
+
+    <TextView
+        android:id="@+id/result_disposal"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+
+        android:text=""
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewWert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewEntsorgung"
+        app:layout_constraintTop_toBottomOf="@+id/result_packaging"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_packaging"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+
+        android:text=""
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewPackage"
+        app:layout_constraintTop_toTopOf="@+id/textViewPackage"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_product"
+        android:layout_width="286dp"
+        android:layout_height="40dp"
+        android:text=""
+        android:textColor="@color/colorTextBlack"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewProdukt"
+        app:layout_constraintTop_toTopOf="@+id/textViewProdukt"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_brand"
+        android:layout_width="286dp"
+        android:layout_height="20dp"
+
+        android:text=""
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewBrand"
+        app:layout_constraintTop_toTopOf="@+id/textViewBrand"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/result_EAN"
+        android:layout_width="286dp"
+        android:layout_height="20dp"
+
+        android:text=""
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toEndOf="@+id/textViewEan"
+        app:layout_constraintTop_toTopOf="@+id/textViewEan" />
+
+    <ImageView
+        android:id="@+id/imageViewRest"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewWert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewWert"
+        app:layout_constraintTop_toTopOf="@+id/imageViewWert"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_camera_search_background"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@mipmap/ic_main_foreground" />
+
+    <ImageView
+        android:id="@+id/imageViewGlas"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewPapier"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.883"
+        app:srcCompat="@drawable/ic_camera_search_background"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@mipmap/ic_main_foreground" />
+
+    <ImageView
+        android:id="@+id/imageViewPapier"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewGlas"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewWert"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewGlas"
+        app:layout_constraintTop_toTopOf="@+id/imageViewGlas"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_camera_search_background"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@mipmap/ic_main_foreground" />
+
+    <ImageView
+        android:id="@+id/imageViewWert"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPapier"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewRest"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPapier"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPapier"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_camera_search_background"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@mipmap/ic_main_foreground" />
 
     <ProgressBar
         android:id="@+id/processingBar"
@@ -67,5 +253,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
+
+    <TextView
+        android:id="@+id/btnnodisposal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/noDisposal"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewPapier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/result_disposal"
+        app:layout_constraintVertical_bias="0.812" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

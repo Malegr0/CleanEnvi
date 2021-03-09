@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CleanEnvi</string>
 
     <string name="mapbox_access_token">pk.eyJ1IjoieW9qbyIsImEiOiJja2dtcWhkdWQwOHhsMnRtd2Mya3E4OHpyIn0.mbz4DKZmw8fryWGo2lztHA</string>
@@ -6,15 +6,15 @@
     <string name="user_location_permission_not_granted">Permission not granted</string>
 
     <string name="search_button_bar_name">Suche</string>
-    <string name="camera_button_bar_name">Kamerasuche</string>
+    <string name="camera_button_bar_name">Produktsuche durch Einscannen</string>
     <string name="map_button_bar_name">Recylinghofkarte</string>
     <string name="home_button_bar_name">Home</string>
 
-    <string name="main_menu_button1_name">Suche nach einem Produkt für Entsorgungstipps!</string>
-    <string name="main_menu_button2_name">Nutze die Handykamera für die Produktsuche!</string>
-    <string name="main_menu_button3_name">Finde Recyclinghöfe über die Karte!</string>
+    <string name="main_menu_button1_name">Suche ein Produkt!</string>
+    <string name="main_menu_button2_name">Scanne das Produkt!</string>
+    <string name="main_menu_button3_name">Finde Recyclinghöfe!</string>
 
-    <string name="newsfeed_title">Newsfeed</string>
+    <string name="newsfeed_title">Schon gewusst?</string>
 
     <string name="newsfeed_product_name">Produktname:</string>
     <string name="newsfeed_producer_name">Marke:</string>
@@ -23,4 +23,16 @@
     <string name="newsfeed_additive_name">Zusatzstoffe:</string>
     <string name="newsfeed_nutri_score_name">Nutri-Score:</string>
     <string name="newsfeed_packaging_name">Verpackung:</string>
+    <string name="historie">Dein Sucherverlauf:</string>
+    <string name="ean">Hier suchen nach EAN/Produkt</string>
+    <string name="todo" tools:ignore="DuplicateDefinition">TODO</string>
+
+    <string name="noDisposal">Klicke <a href="https://www.bsr.de/abfall-abc-20563.php">hier</a>, um trotzdem herauszufinden,\nwie du dein Produkt richtig entsorgst!\n</string>
+    <string name="textview">TextView</string>
+    <string name="disposal">Entsorgung:</string>
+    <string name="produkt">Produkt:</string>
+    <string name="tvEAN">EAN:</string>
+    <string name="brand">Marke:</string>
+    <string name="packung">Verpackung:</string>
+    <string name="txt"> </string>
 </resources>

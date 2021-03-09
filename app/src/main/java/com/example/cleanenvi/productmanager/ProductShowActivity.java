@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,8 @@ import com.example.cleanenvi.MapActivity;
 import com.example.cleanenvi.ProductSearchActivity;
 import com.example.cleanenvi.R;
 import com.example.cleanenvi.helpers.ResponseManager;
+import com.example.cleanenvi.helpers.history.History;
+import com.example.cleanenvi.helpers.history.HistoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -28,13 +31,16 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 //TODO: delete TextView "Infos zum Produkt"
 public class ProductShowActivity extends AppCompatActivity {
 
     String ean;
-    TextView resultTxt;
-    ImageView productImageView;
+    TextView resultTxt, result_packaging, result_disposal, result_brand, result_EAN, result_product;
+    TextView textViewProdukt, textViewBrand, textViewEan, textViewPackage, textViewEntsorgung;
+    ImageView productImageView, imageViewRest, imageViewGlas, imageViewWert, imageViewPapier;
     ProgressBar processingBar;
+    TextView noDis;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,9 +48,9 @@ public class ProductShowActivity extends AppCompatActivity {
         this.setContentView(R.layout.product_show);
         this.setTitle("Produktsuche");
         //set ean
-        if(ProductSearchActivity.EAN != null) {
+        if (ProductSearchActivity.EAN != null) {
             ean = ProductSearchActivity.EAN;
-        } else if(CameraMainActivity.EAN_CAMERA != null) {
+        } else if (CameraMainActivity.EAN_CAMERA != null) {
             ean = CameraMainActivity.EAN_CAMERA;
         }
         processingBar = findViewById(R.id.processingBar);
@@ -59,18 +65,21 @@ public class ProductShowActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.action_home) {
-                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MainActivity.class));
-                } else if(id == R.id.action_search) {
-                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class));
-                } else if(id == R.id.action_camera) {
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_search) {
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, ProductSearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                } else if (id == R.id.action_camera) {
                     ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, CameraMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 } else if (id == R.id.action_hofkarte) {
-                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MapActivity.class));
+                    ProductShowActivity.this.startActivity(new Intent(ProductShowActivity.this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 }
                 return true;
             }
         });
     }
+
+
+
 
     //background thread for api call
     @SuppressLint("StaticFieldLeak")
@@ -78,7 +87,24 @@ public class ProductShowActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             productImageView = findViewById(R.id.productImageView);
+            imageViewRest = findViewById(R.id.imageViewRest);
+            imageViewGlas = findViewById(R.id.imageViewGlas);
+            imageViewWert = findViewById(R.id.imageViewWert);
+            imageViewPapier = findViewById(R.id.imageViewPapier);
             resultTxt = findViewById(R.id.showResulttxt);
+            result_packaging = findViewById(R.id.result_packaging);
+            result_brand = findViewById(R.id.result_brand);
+            result_disposal = findViewById(R.id.result_disposal);
+            result_EAN = findViewById(R.id.result_EAN);
+            result_product = findViewById(R.id.result_product);
+            noDis = findViewById(R.id.btnnodisposal);
+            textViewBrand = findViewById(R.id.textViewBrand);
+            textViewProdukt = findViewById(R.id.textViewProdukt);
+            textViewEan = findViewById(R.id.textViewEan);
+            textViewEntsorgung = findViewById(R.id.textViewEntsorgung);
+            textViewPackage = findViewById(R.id.textViewPackage);
+
+            noDis = findViewById(R.id.btnnodisposal);
 
             String[] productData = null;
             try {
@@ -86,10 +112,11 @@ public class ProductShowActivity extends AppCompatActivity {
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
-            if(productData != null) {
+            //TODO: add check for packages which arent in database
+            if (productData != null) {
                 String[] packages;
-                ArrayList<String> recID = new ArrayList<String>();
-                if(productData[3] != null) {
+                ArrayList<String> recID = new ArrayList<>();
+                if (productData[3] != null) {
                     packages = productData[3].split(",");
                     for (String s : packages) {
                         try {
@@ -113,44 +140,115 @@ public class ProductShowActivity extends AppCompatActivity {
                         //render picture
                         Picasso.get().load(finalProductData[2]).into(productImageView);
                         productImageView.setVisibility(View.VISIBLE);
-                        String recOutput = "";
 
-                        for(int i = 0; i < finalPackages.length; i++) {
+                        // ImageView mit "grauer Tonne" starten
+                        imageViewRest.setImageResource(R.drawable.ic_graue_tonne);
+                        imageViewGlas.setImageResource(R.drawable.ic_graue_tonne);
+                        imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
+                        imageViewPapier.setImageResource(R.drawable.ic_graue_tonne);
+
+                        String recOutput1 = "Wertstofftonne oder Gelber Sack: \n", recOutput2 = "Restmüll: \n",
+                                recOutput3 = "Blaue Tonne: \n", recOutput4 = "Glascontainer: \n", recOutput5 = "Pfandannahmestellen im Handel: \n", recOutput6 = "nicht genau zuordenbar: \n";
+                        String recOutput = "";
+                        boolean pfand = false;
+                        boolean noDisposal = true;
+
+                        for (int i = 0; i < finalPackages.length; i++) {
                             String reID = packaging.get(i);
+                            if (reID.equals("5")) {
+                                pfand = true;
+                            }
+                            if (reID.equals("1") || reID.equals("2") || reID.equals("3") || reID.equals("4") || reID.equals("5") ) {
+                                noDisposal = false;
+                            }
                             switch (reID) {
                                 case "1":
-                                    recOutput = recOutput + finalPackages[i] + "= Wertstofftonne oder Gelber Sack" + "\n";
+                                    recOutput1 = recOutput1 + finalPackages[i] + ", ";
+                                    imageViewWert.setImageResource(R.mipmap.ic_wert_2_foreground);
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "2":
-                                    recOutput = recOutput + finalPackages[i] + "= Schwarze Tonne" + "\n";
+                                    recOutput2 = recOutput2 + finalPackages[i] + ", ";
+                                    imageViewRest.setImageResource(R.mipmap.ic_rest_2_foreground);
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "3":
-                                    recOutput = recOutput + finalPackages[i] + "= Blaue Tonne" + "\n";
+                                    recOutput3 = recOutput3 + finalPackages[i]  + ", ";
+                                    imageViewPapier.setImageResource(R.mipmap.ic_papier_2_foreground);
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "4":
-                                    recOutput = recOutput + finalPackages[i] + "= Glascontainer" + "\n";
+                                    recOutput4 = recOutput4 + finalPackages[i]  + ", ";
+                                    if (!pfand) {
+                                        imageViewGlas.setImageResource(R.mipmap.ic_glas_2_foreground);
+                                    }
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 case "5":
-                                    recOutput = recOutput + finalPackages[i] + "= Pfandannahmestellen im Handel" + "\n";
+                                    recOutput5 = recOutput5 + finalPackages[i]  + ", ";
+                                    imageViewGlas.setImageResource(R.mipmap.ic_pfand_foreground);
+                                    imageViewWert.setImageResource(R.drawable.ic_graue_tonne);
                                     break;
                                 case "6":
-                                    recOutput = recOutput + finalPackages[i] + "= nicht genau zuordenbar" + "\n";
+                                    recOutput6 = recOutput6 + finalPackages[i]  + ", ";
+                                    resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!");
                                     break;
                                 default:
                                     recOutput = "Keine Angaben verfügbar" + "\n";
                                     break;
                             }
+
                         }
+
+                        if (!recOutput1.equals("Wertstofftonne oder Gelber Sack: \n")){
+                            recOutput1=recOutput1.substring(0, recOutput1.length()-2);
+                            recOutput = recOutput + recOutput1  + "\n";
+                        }
+                        if (!recOutput2.equals("Restmüll: \n")){
+                            recOutput2= recOutput2.substring(0, recOutput2.length()-2);
+                            recOutput = recOutput + recOutput2  + "\n";
+                        }
+                        if (!recOutput3.equals("Blaue Tonne: \n")){
+                            recOutput3= recOutput3.substring(0, recOutput3.length()-2);
+                            recOutput = recOutput + recOutput3  + "\n";
+                        }
+                        if (!recOutput4.equals("Glascontainer: \n")){
+                            recOutput4= recOutput4.substring(0, recOutput4.length()-2);
+                            recOutput = recOutput + recOutput4  + "\n";
+                        }
+                        if (!recOutput5.equals("Pfandannahmestellen im Handel: \n")){
+                            recOutput5= recOutput5.substring(0, recOutput5.length()-2);
+                            recOutput = recOutput + recOutput5  + "\n";
+                        }
+                        if (!recOutput6.equals("nicht genau zuordenbar: \n")){
+                            recOutput = recOutput + recOutput6  + "\n";
+                        }
+
+
+                        if (noDisposal) {
+                            noDis.setVisibility(View.VISIBLE);
+                        }
+
                         processingBar.setVisibility(View.INVISIBLE);
-                        resultTxt.setText("Bei Flaschen bitte vorher nach Pfand gucken!" + "\n\n"
-                                + "Verpackungen: " + finalProductData[3] + "\n\n"
-                                + "Entsorgung: " + "\n" + recOutput + "\n"
-                                + "EAN-Code: " + finalProductData[0] + "\n\n"
-                                + "Produkt: " + finalProductData[1] + "\n\n"
-                                + "Marke: " + finalProductData[4]);
+                        result_packaging.setText(finalProductData[3]);
+                        textViewPackage.setVisibility(View.VISIBLE);
+                        result_disposal.setText(recOutput);
+                        textViewEntsorgung.setVisibility(View.VISIBLE);
+                        result_brand.setText(finalProductData[4]);
+                        textViewBrand.setVisibility(View.VISIBLE);
+                        result_product.setText(finalProductData[1]);
+                        textViewProdukt.setVisibility(View.VISIBLE);
+                        result_EAN.setText(finalProductData[0]);
+                        textViewEan.setVisibility(View.VISIBLE);
                         ProductSearchActivity.EAN = null;
                         CameraMainActivity.EAN_CAMERA = null;
                         ean = null;
+                        HistoryManager.addNewHistory(new History(finalProductData[0], finalProductData[1], finalProductData[2]));
+                        try {
+                            HistoryManager.saveHistories(getApplication().getBaseContext());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             } else {
@@ -159,11 +257,17 @@ public class ProductShowActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
-                        resultTxt.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch eingegeben/eingescannt worden.");
+                        noDis.append("Das Produkt ist noch nicht vorhanden, \noder die EAN ist falsch \neingegeben/eingescannt worden.");
+                       // noDis.setText("Das Produkt ist noch nicht vorhanden, oder die EAN ist falsch eingegeben/eingescannt worden.");
+                        noDis.setVisibility(View.VISIBLE);
+                       // noDis.append();
                     }
                 });
             }
             return null;
         }
     }
+
+
+
 }

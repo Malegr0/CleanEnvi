@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,8 @@ public class CameraMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.camera_main);
         this.setTitle("Produktsuche");
+
+
         cameraView = findViewById(R.id.camera_view);
         barcodeText = findViewById(R.id.barcode_text); //Textfeld für spätere Fehlersuche
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_camera);
@@ -70,6 +73,8 @@ public class CameraMainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     //Initialisierung des BarcodeDetectors
     private void initialiseDetectorsAndSources() {
