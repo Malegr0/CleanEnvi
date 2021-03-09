@@ -80,7 +80,7 @@ public class Newsfeed {
             {"Definition von Sperrmüll:","Abfälle zur Beseitigung aus privaten Haushalten, die\n" +
                     "-\tnicht von der Entsorgung im Holsystem ausgeschlossen sind \n" +
                     "-\tinfolge ihrer Größe oder ihres Gewichts nicht in die zugelassenen Abfallbehältnisse aufgenommen werden können \n" +
-                    "-\tdas Entleeren der dieser Tonnen/Säcke erschweren \n"},
+                    "-\tdas Entleeren dieser Tonnen/Säcke erschweren \n"},
             //fett machen
             {"Das kommt in den Sperrmüll: ","Metall-Schrott: Fahrrad, Lattenroste mit Metallfedern, Kinderwagen, Ölofen (erkennbar ölfrei), Rasenmäher (Öl-/Benzinfrei), Metallregale\n" +
                     "\n" +
@@ -93,9 +93,9 @@ public class Newsfeed {
             //Mythen
             {"Mythos 1: ","Der in gelbe Tonnen oder Säcke geworfene Hausmüll könne dank innovativer Technik einfach wieder aussortiert werden. \n" +
                     "Dem ist nicht so. \n\n" +
-                    "Mit Störstoffen kontaminierte Leichtverpackungsabfälle sind in den allermeisten Fällen für das Recycling verloren und können nur noch verbrannt werden\n"},
+                    "Mit Störstoffen kontaminierte Leichtverpackungsabfälle sind in den allermeisten Fällen für das Recycling verloren und können nur noch verbrannt werden.\n"},
             //Tipps
-            {"Tipp: Verpackungsteile einzeln wegwerfen","Viele Verpackungsteile sind aus verschiedenen Materialien und können nur getrennt von der Maschine sortiert werden.\n" +
+                {"Tipp: Verpackungsteile einzeln wegwerfen","Viele Verpackungsteile sind aus verschiedenen Materialien und können nur getrennt von der Maschine sortiert werden.\n" +
                     "\n" +
                     "\tz.B.\n" +
                     "-\tTetrapack und Deckel\n" +
