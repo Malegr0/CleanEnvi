@@ -1,8 +1,16 @@
 package com.example.cleanenvi;
 
+import android.os.AsyncTask;
+
+import java.io.IOException;
+import org.json.JSONException;
+import com.example.cleanenvi.helpers.ResponseManager;
+
 public class Newsfeed {
 
-    public String NewsInString[][] = {
+    public int newsRowNumber;
+    public String[] singleNewsArray;
+    public String[][] NewsInString = {
             {"Das gehört in die Papiertonne:", "-\tPapier, Pappe, Kartons\n" +
                     "-\tz.B. Zeitungen, Bücher, Magazine\n" +
                     "\n" +
@@ -106,7 +114,28 @@ public class Newsfeed {
 
         };
 
-    public String[] chooseRandomNews(){
+
+
+    public String[] chooseRandomNewsFromArray(){
         return NewsInString[(int)(System.currentTimeMillis() % NewsInString.length)];
+    }
+
+
+    public int getNewsCount() {
+        try {
+            newsRowNumber = ResponseManager.getNewsfeedRows();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return newsRowNumber;
+    }
+
+        public String[] getSingleNews(int newsIndex){
+        try {
+            singleNewsArray  = ResponseManager.getNewsfeedData(newsIndex);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return singleNewsArray;
     }
 }

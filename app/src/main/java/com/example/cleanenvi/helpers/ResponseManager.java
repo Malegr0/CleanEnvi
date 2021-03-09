@@ -31,15 +31,22 @@ public class ResponseManager {
     }
 
     public static String getRecIDData(String packaging) throws IOException, JSONException {
-        String responseStr = URLManager.getRecID(packaging).replaceAll("[\\[\\]]", "");
-        JSONObject jObj = new JSONObject(responseStr);
-        return jObj.getString("recid");
+        String responseStr = URLManager.getRecID(packaging);
+        if(responseStr != null) {
+            responseStr = responseStr.replaceAll("[\\[\\]]", "");
+            JSONObject jObj = new JSONObject(responseStr);
+            return jObj.getString("recid");
+        } else {
+            return "-1";
+        }
+
     }
 
     public static String[] getNewsfeedData(int id) throws JSONException, IOException {
         String responseStr = URLManager.getNewsfeed(id);
         if(responseStr != null) {
             responseStr = responseStr.replaceAll("[\\[\\]]", "");
+            responseStr = responseStr.replaceAll("[\\\\][\\\\]", "\\\\");
             JSONObject jObj = new JSONObject(responseStr);
             String[] response = new String[2];
             response[0] = jObj.getString("title");
