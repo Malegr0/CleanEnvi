@@ -147,18 +147,28 @@ public final class ProductSearchActivity extends AppCompatActivity {
     private void loadHistoriesIntoLayoutFields(History[] histories) {
         if (!histories[0].getEan().equals("")) {
             hisProText1.setText(histories[0].getName());
+            hisProText1.setVisibility(View.VISIBLE);
+            hisPro1.setVisibility(View.VISIBLE);
             Picasso.get().load(histories[0].getImageUrl()).into(hisPro1);
             if (!histories[1].getEan().equals("")) {
                 hisProText2.setText(histories[1].getName());
+                hisProText2.setVisibility(View.VISIBLE);
+                hisPro2.setVisibility(View.VISIBLE);
                 Picasso.get().load(histories[1].getImageUrl()).into(hisPro2);
                 if (!histories[2].getEan().equals("")) {
                     hisProText3.setText(histories[2].getName());
+                    hisProText3.setVisibility(View.VISIBLE);
+                    hisPro3.setVisibility(View.VISIBLE);
                     Picasso.get().load(histories[2].getImageUrl()).into(hisPro3);
                     if (!histories[3].getEan().equals("")) {
                         hisProText4.setText(histories[3].getName());
+                        hisProText4.setVisibility(View.VISIBLE);
+                        hisPro4.setVisibility(View.VISIBLE);
                         Picasso.get().load(histories[3].getImageUrl()).into(hisPro4);
                         if (!histories[4].getEan().equals("")) {
                             hisProText5.setText(histories[4].getName());
+                            hisProText5.setVisibility(View.VISIBLE);
+                            hisPro5.setVisibility(View.VISIBLE);
                             Picasso.get().load(histories[4].getImageUrl()).into(hisPro5);
                         }
                     }
