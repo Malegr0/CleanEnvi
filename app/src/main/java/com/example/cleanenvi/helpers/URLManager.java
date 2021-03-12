@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class URLManager {
 
-    private static final String SERVER_ADDRESS = "https://b15f6255307e.ngrok.io";
+    private static final String SERVER_ADDRESS = "https://7e8f8b58dcc9.ngrok.io";
     private static final String PRODUCTS_ADDRESS = SERVER_ADDRESS + "/products/";
     private static final String PACKAGES_ADDRESS = SERVER_ADDRESS + "/packages/";
     private static final String NEWSFEED_ADDRESS = SERVER_ADDRESS + "/newsfeed/";
